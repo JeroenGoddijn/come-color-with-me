@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="420" height="80" role="img" aria-label="Come Color With Me logo — white variant">
+
+  <!-- Semi-transparent circle behind icon -->
+  <circle cx="36" cy="40" r="30" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Palette outline in white -->
+  <ellipse cx="36" cy="42" rx="16" ry="14" fill="none" stroke="white" stroke-width="2.5"/>
+  <ellipse cx="43" cy="49" rx="4" ry="3" fill="transparent" stroke="white" stroke-width="2"/>
+  <!-- Paint dots — white with opacity variation -->
+  <circle cx="27" cy="36" r="4" fill="white" opacity="0.9"/>
+  <circle cx="36" cy="30" r="4" fill="white" opacity="0.7"/>
+  <circle cx="45" cy="36" r="4" fill="white" opacity="0.85"/>
+  <circle cx="29" cy="46" r="3.5" fill="white" opacity="0.6"/>
+  <circle cx="40" cy="46" r="3.5" fill="white" opacity="0.75"/>
+
+  <!-- Sparkles -->
+  <circle cx="60" cy="18" r="3" fill="white" opacity="0.6"/>
+  <circle cx="14" cy="62" r="2" fill="white" opacity="0.5"/>
+
+  <!-- Brand name in white -->
+  <text
+    x="78"
+    y="34"
+    font-family="'Bubblegum Sans', 'Fredoka', 'Comic Sans MS', cursive"
+    font-size="26"
+    font-weight="400"
+    fill="white"
+    letter-spacing="0.5"
+  >Come Color</text>
+
+  <text
+    x="78"
+    y="62"
+    font-family="'Bubblegum Sans', 'Fredoka', 'Comic Sans MS', cursive"
+    font-size="26"
+    font-weight="400"
+    fill="rgba(255,255,255,0.85)"
+    letter-spacing="0.5"
+  >With Me</text>
+
+  <!-- Squiggle underline in white -->
+  <path d="M78 67 Q105 73 132 67 Q159 61 186 67" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+
+</svg>

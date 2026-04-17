@@ -1,0 +1,22 @@
+{
+  "name": "come-color-with-me",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "lint": "npm run lint -w frontend && npm run lint -w backend",
+    "typecheck": "npm run typecheck -w frontend && npm run typecheck -w backend",
+    "test": "npm run test -w frontend && npm run test -w backend",
+    "seed": "tsx scripts/seed.ts",
+    "export-schema": "tsx scripts/export-schema.ts",
+    "check-assets": "tsx scripts/check-assets.ts",
+    "docker:up": "docker compose -f docker/docker-compose.yml up -d",
+    "docker:down": "docker compose -f docker/docker-compose.yml down",
+    "docker:reset": "docker compose -f docker/docker-compose.yml down -v && npm run docker:up && sleep 30 && npm run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "tsx": "^4.7.0"
+  }
+}

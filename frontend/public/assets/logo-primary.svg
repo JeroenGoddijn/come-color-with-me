@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="420" height="80" role="img" aria-label="Come Color With Me logo">
+  <defs>
+    <!-- Crayon/pencil decorative gradient -->
+    <linearGradient id="pencilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F472B6"/>
+      <stop offset="50%" style="stop-color:#C4B5FD"/>
+      <stop offset="100%" style="stop-color:#93C5FD"/>
+    </linearGradient>
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FDBA74"/>
+      <stop offset="100%" style="stop-color:#F472B6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Decorative paint splash circle behind icon -->
+  <circle cx="36" cy="40" r="30" fill="#FFF0FA" opacity="0.9"/>
+
+  <!-- Mini palette icon -->
+  <!-- Palette body -->
+  <ellipse cx="36" cy="42" rx="18" ry="16" fill="#9B6FD4" opacity="0.15"/>
+  <ellipse cx="36" cy="42" rx="16" ry="14" fill="none" stroke="#9B6FD4" stroke-width="2.5"/>
+  <!-- Thumb hole -->
+  <ellipse cx="43" cy="49" rx="4" ry="3" fill="white" stroke="#9B6FD4" stroke-width="2"/>
+  <!-- Paint dots on palette -->
+  <circle cx="27" cy="36" r="4" fill="#F472B6"/>
+  <circle cx="36" cy="30" r="4" fill="#9B6FD4"/>
+  <circle cx="45" cy="36" r="4" fill="#6EE7B7"/>
+  <circle cx="29" cy="46" r="3.5" fill="#FDBA74"/>
+  <circle cx="40" cy="46" r="3.5" fill="#93C5FD"/>
+
+  <!-- Sparkle stars -->
+  <g fill="#FDBA74">
+    <!-- Star top-left -->
+    <path d="M12 14 L13.2 17.6 L17 17.6 L14.2 19.8 L15.2 23.5 L12 21.2 L8.8 23.5 L9.8 19.8 L7 17.6 L10.8 17.6 Z" transform="scale(0.6) translate(8,5)"/>
+  </g>
+  <circle cx="60" cy="18" r="3" fill="#F472B6" opacity="0.7"/>
+  <circle cx="14" cy="62" r="2" fill="#93C5FD" opacity="0.7"/>
+
+  <!-- Brand name text -->
+  <!-- "Come Color With Me" in Bubblegum Sans-style, purple -->
+  <text
+    x="78"
+    y="34"
+    font-family="'Bubblegum Sans', 'Fredoka', 'Comic Sans MS', cursive"
+    font-size="26"
+    font-weight="400"
+    fill="#9B6FD4"
+    letter-spacing="0.5"
+  >Come Color</text>
+
+  <text
+    x="78"
+    y="62"
+    font-family="'Bubblegum Sans', 'Fredoka', 'Comic Sans MS', cursive"
+    font-size="26"
+    font-weight="400"
+    fill="#F472B6"
+    letter-spacing="0.5"
+  >With Me</text>
+
+  <!-- Decorative underline squiggle under "With Me" -->
+  <path d="M78 67 Q105 73 132 67 Q159 61 186 67" fill="none" stroke="#C4B5FD" stroke-width="2.5" stroke-linecap="round"/>
+
+</svg>

@@ -1,0 +1,125 @@
+version: '3.8'
+
+services:
+
+  # ── PostgreSQL ─────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: ccwm-postgres
+    environment:
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: directus
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U directus']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Directus CMS ────────────────────────────────────────────────────────────
+  directus:
+    image: directus/directus:latest
+    container_name: ccwm-directus
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      KEY: ${KEY}
+      SECRET: ${SECRET}
+      PUBLIC_URL: ${DIRECTUS_PUBLIC_URL:-http://localhost:8055}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: directus
+      DB_USER: directus
+      DB_PASSWORD: ${DB_PASSWORD}
+      STORAGE_LOCATIONS: local
+      STORAGE_LOCAL_ROOT: /directus/uploads
+      EMAIL_TRANSPORT: sendmail
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'http://localhost:3000,http://localhost:4000'
+    ports:
+      - '8055:8055'
+    volumes:
+      - directus_uploads:/directus/uploads
+      - directus_extensions:/directus/extensions
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:8055/server/health']
+      interval: 15s
+      timeout: 10s
+      retries: 8
+
+  # ── Backend API ─────────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile.dev
+    container_name: ccwm-backend
+    depends_on:
+      directus:
+        condition: service_healthy
+    environment:
+      PORT: 4000
+      NODE_ENV: development
+      DATABASE_URL: postgresql://directus:${DB_PASSWORD}@postgres:5432/ccwm_local
+      DIRECTUS_URL: http://directus:8055
+      DIRECTUS_ADMIN_TOKEN: ${DIRECTUS_ADMIN_TOKEN}
+      CORS_ORIGIN: http://localhost:3000
+      LOG_LEVEL: debug
+      RATE_LIMIT_WINDOW_MS: 60000
+      RATE_LIMIT_MAX_REQUESTS: 1000
+      ENABLE_PREMIUM_PRINTS: 'false'
+      ENABLE_COLORING_CLUB: 'false'
+      ENABLE_ACCOUNT_DOWNLOADS: 'true'
+      ENABLE_NEWSLETTER: 'true'
+      ENABLE_WATERMARKS: 'true'
+      ENABLE_CART: 'false'
+      ENABLE_CHECKOUT: 'false'
+      ENABLE_ARTIST_UPLOADS: 'false'
+      ENABLE_GAMIFICATION: 'false'
+      ENABLE_THEME_PLAYFUL: 'false'
+      ENABLE_THEME_WHIMSICAL: 'true'
+    ports:
+      - '4000:4000'
+    volumes:
+      - ../backend/src:/app/src
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:4000/health']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Frontend ────────────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile.dev
+    container_name: ccwm-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+      API_URL: http://backend:4000
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      NEXT_PUBLIC_DIRECTUS_URL: http://localhost:8055
+      NEXT_PUBLIC_ANALYTICS_ENABLED: 'false'
+      NEXT_PUBLIC_DEFAULT_FLAGS: '{"ENABLE_PREMIUM_PRINTS":false,"ENABLE_COLORING_CLUB":false,"ENABLE_ACCOUNT_DOWNLOADS":true,"ENABLE_NEWSLETTER":true,"ENABLE_WATERMARKS":true,"ENABLE_CART":false,"ENABLE_CHECKOUT":false,"ENABLE_ARTIST_UPLOADS":false,"ENABLE_GAMIFICATION":false,"ENABLE_THEME_PLAYFUL":false,"ENABLE_THEME_WHIMSICAL":true}'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+      - /app/.next
+
+volumes:
+  postgres_data:
+  directus_uploads:
+  directus_extensions:

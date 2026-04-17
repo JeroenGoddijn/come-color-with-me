@@ -1,0 +1,13 @@
+export type FeatureFlags = {
+  ENABLE_PREMIUM_PRINTS: boolean
+  ENABLE_COLORING_CLUB: boolean
+  ENABLE_ACCOUNT_DOWNLOADS: boolean
+  ENABLE_NEWSLETTER: boolean
+  ENABLE_WATERMARKS: boolean
+  ENABLE_CART: boolean
+  ENABLE_CHECKOUT: boolean
+  ENABLE_ARTIST_UPLOADS: boolean
+  ENABLE_GAMIFICATION: boolean
+  ENABLE_THEME_PLAYFUL: boolean
+  ENABLE_THEME_WHIMSICAL: boolean
+}

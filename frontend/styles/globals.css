@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   DESIGN SYSTEM — CSS CUSTOM PROPERTIES
+   ============================================ */
+:root {
+  /* Colors */
+  --color-purple: #9B6FD4;
+  --color-pink: #F472B6;
+  --color-lavender: #C4B5FD;
+  --color-mint: #6EE7B7;
+  --color-peach: #FDBA74;
+  --color-sky: #93C5FD;
+  --color-blush: #FFF6F9;
+  --color-cream: #FDF4EC;
+  --color-plum: #3D1F5C;
+  --color-muted: #8B7BA8;
+  --color-white: #FFFFFF;
+  --color-success: #22C55E;
+  --color-error: #F87171;
+  --color-gold: #F59E0B;
+
+  /* Typography */
+  --font-display: 'Bubblegum Sans', 'Comic Sans MS', cursive;
+  --font-heading: 'Fredoka', 'Trebuchet MS', sans-serif;
+  --font-body: 'Nunito', 'Verdana', sans-serif;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(155,111,212,0.08);
+  --shadow-md: 0 4px 16px rgba(155,111,212,0.12);
+  --shadow-lg: 0 8px 32px rgba(155,111,212,0.18);
+  --shadow-hover: 0 12px 40px rgba(155,111,212,0.24);
+
+  /* Container */
+  --container: 1280px;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-plum);
+  background: var(--color-blush);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================
+   BADGE ANIMATIONS
+   ============================================ */
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(253,186,116,0.4); }
+  50% { box-shadow: 0 2px 16px rgba(253,186,116,0.7); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(6deg); }
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero-bg-gradient {
+  background:
+    radial-gradient(ellipse 700px 500px at 15% 60%, rgba(196,181,253,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 400px at 85% 20%, rgba(249,168,212,0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 300px at 50% 100%, rgba(253,186,116,0.2) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 0% 30%, rgba(110,231,183,0.2) 0%, transparent 70%),
+    radial-gradient(ellipse 350px 280px at 100% 70%, rgba(147,197,253,0.22) 0%, transparent 70%);
+  background-color: #FFF6F9;
+}
+
+.hero-blob-delay-0   { animation-delay: 0s; }
+.hero-blob-delay-1   { animation-delay: 1.5s; }
+.hero-blob-delay-2   { animation-delay: 3s; }
+.hero-blob-delay-3   { animation-delay: 2s; }
+.hero-blob-delay-4   { animation-delay: 4s; }

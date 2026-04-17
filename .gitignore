@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment variables — never commit real secrets
+.env
+.env.local
+.env.docker
+.env.*.local
+
+# Build outputs
+dist/
+.next/
+out/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.DS_Store
+.vscode/settings.json
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+
+# Playwright
+playwright-report/
+test-results/
+
+# CMS schema snapshot IS committed (tracks schema changes)
+# cms/schema/snapshot.json — do NOT ignore this file

@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Artist avatar illustration — child artist with paintbrush">
+  <defs>
+    <clipPath id="avatarCircle">
+      <circle cx="100" cy="100" r="96"/>
+    </clipPath>
+    <radialGradient id="bgCircle" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#FFF0FA"/>
+      <stop offset="100%" style="stop-color:#EDE9FE"/>
+    </radialGradient>
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7C3AED"/>
+      <stop offset="100%" style="stop-color:#4C1D95"/>
+    </linearGradient>
+    <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F9A8D4"/>
+      <stop offset="100%" style="stop-color:#F472B6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Circle background -->
+  <circle cx="100" cy="100" r="96" fill="url(#bgCircle)" stroke="#DDD6FE" stroke-width="4"/>
+
+  <!-- Group clipped to circle -->
+  <g clip-path="url(#avatarCircle)">
+
+    <!-- Body / shirt -->
+    <ellipse cx="100" cy="185" rx="55" ry="35" fill="url(#shirtGrad)"/>
+    <!-- Shirt collar area -->
+    <rect x="75" y="152" width="50" height="40" rx="8" fill="url(#shirtGrad)"/>
+
+    <!-- Neck -->
+    <rect x="90" y="136" width="20" height="22" rx="6" fill="#FDDCB5"/>
+
+    <!-- Head -->
+    <ellipse cx="100" cy="118" rx="44" ry="46" fill="#FDDCB5"/>
+
+    <!-- Hair — back layer -->
+    <ellipse cx="100" cy="95" rx="46" ry="38" fill="url(#hairGrad)" opacity="0.9"/>
+
+    <!-- Hair — side pieces -->
+    <ellipse cx="60" cy="115" rx="14" ry="32" fill="url(#hairGrad)"/>
+    <ellipse cx="140" cy="115" rx="14" ry="32" fill="url(#hairGrad)"/>
+
+    <!-- Hair — pigtail/bun left -->
+    <circle cx="54" cy="88" r="14" fill="url(#hairGrad)"/>
+    <!-- Hair tie -->
+    <circle cx="54" cy="88" r="6" fill="#F472B6"/>
+
+    <!-- Hair — top main -->
+    <ellipse cx="100" cy="80" rx="43" ry="28" fill="url(#hairGrad)"/>
+
+    <!-- Ears -->
+    <ellipse cx="57" cy="120" rx="8" ry="10" fill="#FDDCB5"/>
+    <ellipse cx="143" cy="120" rx="8" ry="10" fill="#FDDCB5"/>
+    <!-- Ear inner -->
+    <ellipse cx="57" cy="120" rx="5" ry="7" fill="#F4B896"/>
+    <ellipse cx="143" cy="120" rx="5" ry="7" fill="#F4B896"/>
+
+    <!-- Face features -->
+
+    <!-- Eyes — wide, friendly, anime-ish -->
+    <!-- Left eye -->
+    <ellipse cx="84" cy="118" rx="9" ry="10" fill="white"/>
+    <ellipse cx="84" cy="119" rx="6" ry="7" fill="#5B21B6"/>
+    <ellipse cx="84" cy="119" rx="3.5" ry="4" fill="#1E1B4B"/>
+    <circle cx="86" cy="116" r="2" fill="white"/>
+    <!-- Eye shine -->
+    <circle cx="87" cy="117" r="1" fill="white" opacity="0.8"/>
+
+    <!-- Right eye -->
+    <ellipse cx="116" cy="118" rx="9" ry="10" fill="white"/>
+    <ellipse cx="116" cy="119" rx="6" ry="7" fill="#5B21B6"/>
+    <ellipse cx="116" cy="119" rx="3.5" ry="4" fill="#1E1B4B"/>
+    <circle cx="118" cy="116" r="2" fill="white"/>
+    <circle cx="119" cy="117" r="1" fill="white" opacity="0.8"/>
+
+    <!-- Eyebrows -->
+    <path d="M76 107 Q84 103 92 107" fill="none" stroke="#4C1D95" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M108 107 Q116 103 124 107" fill="none" stroke="#4C1D95" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Nose — tiny dot -->
+    <circle cx="100" cy="128" r="2.5" fill="#F4B896"/>
+
+    <!-- Smile — big, happy -->
+    <path d="M88 137 Q100 148 112 137" fill="none" stroke="#E07040" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Cheek blush -->
+    <ellipse cx="74" cy="132" rx="10" ry="7" fill="#F9A8D4" opacity="0.5"/>
+    <ellipse cx="126" cy="132" rx="10" ry="7" fill="#F9A8D4" opacity="0.5"/>
+
+    <!-- Paintbrush in right hand -->
+    <!-- Arm -->
+    <path d="M143 156 Q160 145 168 130" fill="none" stroke="#FDDCB5" stroke-width="12" stroke-linecap="round"/>
+    <!-- Brush handle -->
+    <rect x="162" y="110" width="6" height="36" rx="3" fill="#FDBA74" transform="rotate(-35 162 110)"/>
+    <!-- Brush ferrule -->
+    <rect x="162" y="110" width="6" height="8" rx="1" fill="#9B6FD4" transform="rotate(-35 162 110)"/>
+    <!-- Brush tip -->
+    <ellipse cx="157" cy="100" rx="4" ry="8" fill="#9B6FD4" transform="rotate(-35 157 100)"/>
+    <!-- Paint on brush -->
+    <ellipse cx="155" cy="96" rx="3" ry="5" fill="#F472B6" opacity="0.8" transform="rotate(-35 155 96)"/>
+
+    <!-- Paint splatter near brush -->
+    <circle cx="148" cy="88" r="4" fill="#F472B6" opacity="0.7"/>
+    <circle cx="142" cy="80" r="2.5" fill="#9B6FD4" opacity="0.6"/>
+    <circle cx="156" cy="76" r="3" fill="#6EE7B7" opacity="0.7"/>
+    <circle cx="163" cy="86" r="2" fill="#FDBA74" opacity="0.7"/>
+
+  </g>
+
+  <!-- Outer ring decoration — small color dots around circle edge -->
+  <circle cx="100" cy="4" r="4" fill="#9B6FD4"/>
+  <circle cx="154" cy="19" r="3" fill="#F472B6"/>
+  <circle cx="192" cy="65" r="3.5" fill="#6EE7B7"/>
+  <circle cx="196" cy="130" r="3" fill="#FDBA74"/>
+  <circle cx="160" cy="180" r="4" fill="#93C5FD"/>
+  <circle cx="46" cy="182" r="3" fill="#C4B5FD"/>
+  <circle cx="8" cy="130" r="3.5" fill="#F472B6"/>
+  <circle cx="5" cy="65" r="3" fill="#9B6FD4"/>
+  <circle cx="46" cy="19" r="4" fill="#FDBA74"/>
+
+</svg>

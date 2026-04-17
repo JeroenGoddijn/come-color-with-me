@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 600" width="1440" height="600" role="img" aria-label="Hero watercolor background">
+  <defs>
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <filter id="blur2">
+      <feGaussianBlur stdDeviation="60"/>
+    </filter>
+    <filter id="blur3">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+    <filter id="paperTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blend"/>
+      <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="80%">
+      <stop offset="0%" style="stop-color:#FFF0FA"/>
+      <stop offset="100%" style="stop-color:#FDF4EC"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Base background — warm blush white -->
+  <rect width="1440" height="600" fill="url(#bgGrad)"/>
+
+  <!-- Watercolor wash 1 — large lavender blob, top left -->
+  <ellipse cx="200" cy="150" rx="380" ry="280" fill="#C4B5FD" opacity="0.22" filter="url(#blur2)"/>
+
+  <!-- Watercolor wash 2 — pink bloom, top right -->
+  <ellipse cx="1280" cy="120" rx="340" ry="260" fill="#F9A8D4" opacity="0.25" filter="url(#blur2)"/>
+
+  <!-- Watercolor wash 3 — peach center-bottom -->
+  <ellipse cx="720" cy="520" rx="500" ry="200" fill="#FDBA74" opacity="0.18" filter="url(#blur2)"/>
+
+  <!-- Watercolor wash 4 — mint accent, left mid -->
+  <ellipse cx="80" cy="420" rx="220" ry="180" fill="#6EE7B7" opacity="0.16" filter="url(#blur1)"/>
+
+  <!-- Watercolor wash 5 — sky blue, right mid -->
+  <ellipse cx="1380" cy="380" rx="200" ry="160" fill="#93C5FD" opacity="0.2" filter="url(#blur1)"/>
+
+  <!-- Watercolor wash 6 — secondary lavender center -->
+  <ellipse cx="760" cy="280" rx="320" ry="200" fill="#DDD6FE" opacity="0.14" filter="url(#blur2)"/>
+
+  <!-- Watercolor wash 7 — pink small accent, bottom left -->
+  <ellipse cx="300" cy="530" rx="180" ry="120" fill="#F472B6" opacity="0.12" filter="url(#blur1)"/>
+
+  <!-- Watercolor wash 8 — purple top center -->
+  <ellipse cx="680" cy="60" rx="280" ry="140" fill="#9B6FD4" opacity="0.1" filter="url(#blur2)"/>
+
+  <!-- Decorative watercolor splatters — small blobs -->
+  <circle cx="420" cy="80" r="18" fill="#F472B6" opacity="0.18" filter="url(#blur3)"/>
+  <circle cx="1100" cy="50" r="24" fill="#6EE7B7" opacity="0.2" filter="url(#blur3)"/>
+  <circle cx="950" cy="490" r="20" fill="#C4B5FD" opacity="0.22" filter="url(#blur3)"/>
+  <circle cx="160" cy="340" r="14" fill="#FDBA74" opacity="0.25" filter="url(#blur3)"/>
+  <circle cx="1300" cy="540" r="16" fill="#93C5FD" opacity="0.2" filter="url(#blur3)"/>
+
+  <!-- Delicate paper grain overlay — very subtle -->
+  <rect width="1440" height="600" fill="white" opacity="0.08" filter="url(#paperTexture)"/>
+
+  <!-- Soft vignette — edges slightly more opaque to focus center -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" style="stop-color:transparent"/>
+    <stop offset="100%" style="stop-color:#FFF0FA;stop-opacity:0.3"/>
+  </radialGradient>
+  <rect width="1440" height="600" fill="url(#vignette)"/>
+
+</svg>
