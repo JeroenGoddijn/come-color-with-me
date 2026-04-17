@@ -23,12 +23,13 @@ const config: Config = {
         success: '#22C55E',
       },
       fontFamily: {
-        display: ['Bubblegum Sans', 'Comic Sans MS', 'cursive'],
-        heading: ['Fredoka', 'Trebuchet MS', 'sans-serif'],
-        body: ['Nunito', 'Verdana', 'sans-serif'],
-        // Aliases used in components
-        fredoka: ['Fredoka', 'Trebuchet MS', 'sans-serif'],
-        nunito: ['Nunito', 'Verdana', 'sans-serif'],
+        // Use CSS variables set by next/font/google on <html> — locally served, no external request
+        display: ['var(--font-display)', 'Comic Sans MS', 'cursive'],
+        heading: ['var(--font-heading)', 'Trebuchet MS', 'sans-serif'],
+        body: ['var(--font-body)', 'Verdana', 'sans-serif'],
+        // Component aliases
+        fredoka: ['var(--font-heading)', 'Trebuchet MS', 'sans-serif'],
+        nunito: ['var(--font-body)', 'Verdana', 'sans-serif'],
       },
       borderRadius: {
         sm: '8px',

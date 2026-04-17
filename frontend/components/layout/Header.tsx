@@ -1,9 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { useState } from 'react'
-import { ASSETS } from '@/lib/assets'
 import { useAuth } from '@/hooks/useAuth'
 import { cn } from '@/utils/cn'
 
@@ -37,8 +35,8 @@ export function Header() {
         <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-6">
           {/* Logo */}
           <Link href="/" aria-label="Come Color With Me – home" className="flex items-center gap-3 flex-shrink-0">
-            <div className="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm">
-              <Image src={ASSETS.logoIcon} alt="Come Color With Me" width={36} height={36} />
+            <div className="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm text-[1.5rem]">
+              🎨
             </div>
             <span className="font-['Bubblegum_Sans'] text-[1.2rem] text-[#9B6FD4] leading-tight hidden sm:block">
               Come Color<span className="text-[#F472B6] block">With Me</span>

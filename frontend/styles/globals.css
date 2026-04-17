@@ -22,7 +22,8 @@
   --color-error: #F87171;
   --color-gold: #F59E0B;
 
-  /* Typography */
+  /* Typography — CSS vars are set by next/font/google on <html> via className.
+     Fallbacks here are only for environments where next/font hasn't hydrated yet. */
   --font-display: 'Bubblegum Sans', 'Comic Sans MS', cursive;
   --font-heading: 'Fredoka', 'Trebuchet MS', sans-serif;
   --font-body: 'Nunito', 'Verdana', sans-serif;
