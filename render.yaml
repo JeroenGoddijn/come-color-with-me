@@ -12,7 +12,7 @@ services:
     name: ccwm-directus
     runtime: docker
     dockerfilePath: ./docker/Dockerfile.directus
-    plan: starter
+    plan: free
     region: oregon
     envVars:
       - key: KEY
@@ -45,7 +45,7 @@ services:
     name: ccwm-backend
     runtime: node
     region: oregon
-    plan: starter
+    plan: free
     rootDir: .
     buildCommand: npm ci && npm run build -w backend
     startCommand: node backend/dist/index.js
@@ -75,7 +75,7 @@ services:
   ##########################################################################
 databases:
   - name: ccwm-postgres
-    plan: starter
+    plan: free
     region: oregon
     databaseName: ccwm
     user: ccwm
