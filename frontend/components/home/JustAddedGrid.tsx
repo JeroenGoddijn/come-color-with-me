@@ -7,6 +7,8 @@ type Props = {
 }
 
 export function JustAddedGrid({ artworks }: Props) {
+  if (artworks.length === 0) return null
+
   return (
     <section className="py-16" aria-labelledby="just-added-title">
       <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8">

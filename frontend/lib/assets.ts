@@ -1,5 +1,6 @@
 export const ASSETS = {
   logo: '/assets/logo-primary.svg',
+  logoIcon: '/assets/logo-icon.svg',
   logoWhite: '/assets/logo-white.svg',
   heroBg: '/assets/hero-background.svg',
   artistAvatar: '/assets/artist-avatar.svg',
