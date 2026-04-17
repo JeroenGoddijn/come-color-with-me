@@ -1,0 +1,81 @@
+##############################################################################
+# Come Color With Me — Render Blueprint
+# Deploy all services in one click via Render Blueprints:
+# render.com → New → Blueprint → connect JeroenGoddijn/come-color-with-me
+##############################################################################
+
+services:
+  ##########################################################################
+  # DIRECTUS CMS
+  ##########################################################################
+  - type: web
+    name: ccwm-directus
+    runtime: docker
+    dockerfilePath: ./docker/Dockerfile.directus
+    plan: starter
+    region: oregon
+    envVars:
+      - key: KEY
+        generateValue: true
+      - key: SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ccwm-postgres
+          property: connectionString
+      - key: ADMIN_EMAIL
+        sync: false          # set manually in Render dashboard
+      - key: ADMIN_PASSWORD
+        sync: false          # set manually in Render dashboard
+      - key: STORAGE_LOCATIONS
+        value: local
+      - key: STORAGE_LOCAL_ROOT
+        value: /directus/uploads
+      - key: PUBLIC_URL
+        sync: false          # set to your Render service URL after first deploy
+      - key: CORS_ENABLED
+        value: "true"
+      - key: CORS_ORIGIN
+        sync: false          # set to https://comecolorwithme.com (your frontend URL)
+
+  ##########################################################################
+  # BACKEND API
+  ##########################################################################
+  - type: web
+    name: ccwm-backend
+    runtime: node
+    region: oregon
+    plan: starter
+    rootDir: .
+    buildCommand: npm ci && npm run build -w backend
+    startCommand: node backend/dist/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4000"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ccwm-postgres
+          property: connectionString
+      - key: DIRECTUS_URL
+        sync: false          # set to your Directus service URL
+      - key: DIRECTUS_ADMIN_TOKEN
+        sync: false          # generate in Directus → Settings → API Tokens
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        sync: false          # set to https://comecolorwithme.com
+      - key: LOG_LEVEL
+        value: warn
+
+  ##########################################################################
+  # DATABASE
+  ##########################################################################
+databases:
+  - name: ccwm-postgres
+    plan: starter
+    region: oregon
+    databaseName: ccwm
+    user: ccwm

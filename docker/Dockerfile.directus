@@ -1,0 +1,10 @@
+FROM directus/directus:11
+
+# Directus reads all config from environment variables.
+# Set KEY, SECRET, DATABASE_URL, ADMIN_EMAIL, ADMIN_PASSWORD, PUBLIC_URL
+# in the Render dashboard (or render.yaml envVars).
+
+# Persist uploads — mount a Render Disk at /directus/uploads in production
+VOLUME ["/directus/uploads"]
+
+EXPOSE 8055
