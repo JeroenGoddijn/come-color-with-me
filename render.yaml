@@ -47,7 +47,7 @@ services:
     region: oregon
     plan: free
     rootDir: .
-    buildCommand: npm ci && npm run build -w backend
+    buildCommand: npm install --workspace=backend --no-audit --no-fund && npm run build -w backend
     startCommand: node backend/dist/index.js
     healthCheckPath: /health
     envVars:
