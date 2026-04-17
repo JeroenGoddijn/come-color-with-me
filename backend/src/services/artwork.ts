@@ -49,7 +49,7 @@ export class ValidationError extends Error {
 export async function getGallery(
   filters: GalleryFilters
 ): Promise<{ items: ArtworkCard[]; total: number }> {
-  const { page, limit, offset } = parsePagination({
+  const { limit, offset } = parsePagination({
     page: filters.page ?? '',
     limit: filters.limit ?? '',
   })
@@ -99,7 +99,8 @@ export async function getGallery(
       filter,
       limit,
       offset,
-      sort: sortToDirectus(sortKey),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      sort: sortToDirectus(sortKey) as any,
     })
   )
 
