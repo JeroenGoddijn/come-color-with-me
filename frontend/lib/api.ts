@@ -13,10 +13,13 @@ export class ApiError extends Error {
  * Fetches data from the backend API.
  * Prepends NEXT_PUBLIC_API_URL to the path.
  * Throws ApiError if the response is not successful.
+ *
+ * Uses Next.js ISR revalidation (300s) by default for server-side calls.
+ * Pass `cache: 'no-store'` in options to bypass for dynamic routes.
  */
 export async function apiFetch<T>(
   path: string,
-  options?: RequestInit
+  options?: RequestInit & { next?: { revalidate?: number; tags?: string[] } }
 ): Promise<T> {
   const base = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000'
   const url = `${base}${path}`
@@ -26,6 +29,7 @@ export async function apiFetch<T>(
       'Content-Type': 'application/json',
       ...(options?.headers ?? {}),
     },
+    next: { revalidate: 300, ...options?.next },
     ...options,
   })
 
