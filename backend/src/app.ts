@@ -14,8 +14,18 @@ const app = express()
 // Global middleware
 // ---------------------------------------------------------------------------
 
+const rawOrigins = process.env['CORS_ORIGIN'] ?? 'http://localhost:3000'
+const allowedOrigins = rawOrigins.split(',').map((o) => o.trim()).filter(Boolean)
+
 app.use(cors({
-  origin: process.env['CORS_ORIGIN'] ?? 'http://localhost:3000',
+  origin: (requestOrigin, callback) => {
+    // Allow server-to-server requests (no Origin header) and matched origins
+    if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
+      callback(null, true)
+    } else {
+      callback(new Error(`CORS: origin ${requestOrigin} not allowed`))
+    }
+  },
   optionsSuccessStatus: 200,
 }))
 
