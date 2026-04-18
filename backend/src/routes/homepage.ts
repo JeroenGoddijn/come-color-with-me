@@ -8,6 +8,29 @@ import {
 
 const router = Router()
 
+// Featured artwork for homepage grid
+router.get('/featured', async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const featured = await getFeaturedArtwork()
+    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
+    res.json({ success: true, data: featured })
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Just-added artwork for homepage grid
+router.get('/just-added', async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const justAdded = await getJustAddedArtwork()
+    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60')
+    res.json({ success: true, data: justAdded })
+  } catch (err) {
+    next(err)
+  }
+})
+
+// Combined homepage data (settings + all sections)
 router.get('/', async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const [settings, featuredArtwork, justAddedArtwork, artist] = await Promise.all([
