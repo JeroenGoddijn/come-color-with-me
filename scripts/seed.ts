@@ -174,3 +174,4 @@ seed().catch(err => {
   console.error('\n❌ Seed failed:', err.message)
   process.exit(1)
 })
+# last schema fix: 2026-04-18T00:35:31Z
