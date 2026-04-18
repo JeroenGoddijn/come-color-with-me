@@ -8,11 +8,14 @@ const nextConfig = {
         port: '8055',
         pathname: '/assets/**',
       },
-      {
-        protocol: 'https',
-        hostname: process.env.DIRECTUS_HOSTNAME ?? '',
-        pathname: '/assets/**',
-      },
+      // DIRECTUS_HOSTNAME must be set in production; fallback avoids picomatch crash on local builds
+      ...(process.env.DIRECTUS_HOSTNAME
+        ? [{
+            protocol: 'https',
+            hostname: process.env.DIRECTUS_HOSTNAME,
+            pathname: '/assets/**',
+          }]
+        : []),
     ],
   },
   async redirects() {
