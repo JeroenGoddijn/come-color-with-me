@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { ASSETS } from '@/lib/assets'
 import { useFlag } from '@/hooks/useFlags'
