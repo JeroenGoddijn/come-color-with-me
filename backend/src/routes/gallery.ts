@@ -1,5 +1,5 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { getFeaturedArtwork, getJustAddedArtwork } from '../services/directus.js'
+import { getFeaturedArtwork, getJustAddedArtwork, getArtworkBySlug } from '../services/directus.js'
 import { getGallery, getFinishedArtwork, ValidationError } from '../services/artwork.js'
 import { parsePagination } from '../utils/pagination.js'
 import type { GalleryFilters } from '../services/artwork.js'
@@ -97,6 +97,21 @@ router.get('/', async (req: Request, res: Response, next: NextFunction): Promise
       })
       return
     }
+    next(err)
+  }
+})
+
+// GET /api/gallery/:slug — artwork detail by slug (must be after named routes)
+router.get('/:slug', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const artwork = await getArtworkBySlug(req.params['slug'] as string)
+    if (!artwork) {
+      res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Artwork not found' } })
+      return
+    }
+    res.setHeader('Cache-Control', 'public, max-age=300')
+    res.json({ success: true, data: artwork })
+  } catch (err) {
     next(err)
   }
 })

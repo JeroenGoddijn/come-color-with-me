@@ -5,7 +5,7 @@ import {
   readItems,
   readSingleton,
 } from '@directus/sdk'
-import type { ArtworkCard, AgeGroup, ArtworkType } from '../types/artwork.js'
+import type { ArtworkCard, ArtworkDetail, AgeGroup, ArtworkType } from '../types/artwork.js'
 import type { Artist } from '../types/artist.js'
 
 // ---------------------------------------------------------------------------
@@ -114,6 +114,16 @@ function buildDirectusAssetUrl(fileId: string | null | undefined): string {
   return `${base}/assets/${fileId}`
 }
 
+export function mapArtworkDetail(raw: DirectusArtwork): ArtworkDetail {
+  return {
+    ...mapArtworkCard(raw),
+    description: raw.description ?? '',
+    publishedAt: raw.published_at ?? '',
+    seoTitle: raw.seo_title ?? '',
+    seoDescription: raw.seo_description ?? '',
+  }
+}
+
 export function mapArtworkCard(raw: DirectusArtwork): ArtworkCard {
   const directusUrl = process.env['DIRECTUS_URL'] ?? 'http://localhost:8055'
   const thumbnailId = raw.thumbnail_image
@@ -136,7 +146,7 @@ export function mapArtworkCard(raw: DirectusArtwork): ArtworkCard {
     ageGroup: raw.age_group,
     isFeatured: raw.is_featured,
     isNew: raw.is_new,
-    downloadUrl: raw.is_free ? `/api/art/${raw.slug}/download` : null,
+    downloadUrl: raw.is_free ? `/assets/artwork/${raw.slug}-download.pdf` : null,
     productId: null, // resolved by product join in Sprint 2
     shopUrl: raw.is_premium ? `/product/${raw.slug}` : null,
     watermarkEnabled: raw.watermark_enabled,
@@ -219,4 +229,22 @@ export async function getHomepageSettings(): Promise<DirectusHomepageSettings> {
   )
 
   return raw as DirectusHomepageSettings
+}
+
+export async function getArtworkBySlug(slug: string): Promise<ArtworkDetail | null> {
+  const client = getClient()
+  const items = await client.request(
+    readItems('artwork', {
+      filter: {
+        slug: { _eq: slug },
+        status: { _eq: 'published' },
+      },
+      limit: 1,
+    })
+  )
+
+  const raw = (items as DirectusArtwork[])[0]
+  if (!raw) return null
+
+  return mapArtworkDetail(raw)
 }
