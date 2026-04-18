@@ -175,3 +175,7 @@ seed().catch(err => {
   process.exit(1)
 })
 # last schema fix: 2026-04-18T00:35:31Z
+// seed schema v3: all fields aligned with backend Directus service expectations
+// bio_short, bio_long, featured_quote, avatar_image on artist
+// is_new, category, age_group, watermark_enabled, published_at on artwork
+// collection creation now uses schema:{} to force physical PostgreSQL table
