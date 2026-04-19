@@ -2,15 +2,15 @@ import { NextRequest, NextResponse } from 'next/server'
 
 /**
  * POST /api/newsletter
- * Subscribes an email to the Kit (ConvertKit) form.
+ * Subscribes an email to a Kit (formerly ConvertKit) form using the v4 API.
  *
- * Required env vars (set in Vercel):
- *   KIT_API_KEY   — ConvertKit API key (server-only)
- *   KIT_FORM_ID   — Form ID from Kit dashboard (server-only)
+ * Required env vars (set in Vercel — server-only, never exposed to browser):
+ *   KIT_API_KEY   — Kit v4 API key (starts with "kit_")
+ *   KIT_FORM_ID   — Form ID from Kit dashboard
  */
 export async function POST(req: NextRequest) {
-  const apiKey  = process.env['KIT_API_KEY']
-  const formId  = process.env['KIT_FORM_ID']
+  const apiKey = process.env['KIT_API_KEY']
+  const formId = process.env['KIT_FORM_ID']
 
   if (!apiKey || !formId) {
     console.error('Newsletter: KIT_API_KEY or KIT_FORM_ID not set')
@@ -33,12 +33,16 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // Kit v4 API: Bearer token auth, email_address field, /v4/ base URL
     const kitRes = await fetch(
-      `https://api.convertkit.com/v3/forms/${formId}/subscribe`,
+      `https://api.kit.com/v4/forms/${formId}/subscribers`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        body: JSON.stringify({ api_key: apiKey, email }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({ email_address: email }),
       }
     )
 
