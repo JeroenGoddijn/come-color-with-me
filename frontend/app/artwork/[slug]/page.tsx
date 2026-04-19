@@ -6,6 +6,7 @@ import { artworkPreview, artworkZoom, artworkWall } from '@/lib/assets'
 import { Badge } from '@/components/ui/Badge'
 import { ArtworkGallery } from '@/components/artwork/ArtworkGallery'
 import { ArtworkGrid } from '@/components/artwork/ArtworkGrid'
+import { PurchasePanel } from '@/components/artwork/PurchasePanel'
 import type { ArtworkDetail, ArtworkCard } from '@/types/artwork'
 
 type Props = {
@@ -107,114 +108,14 @@ export default async function ArtworkDetailPage({ params }: Props) {
               </p>
             )}
 
-            {/* ── FREE: single download CTA ─────────────────────────────── */}
-            {isFree && (
-              <div className="rounded-[20px] border border-emerald-100 bg-emerald-50 p-6 flex flex-col gap-4">
-                <div className="flex items-start gap-3">
-                  <span className="text-2xl">📥</span>
-                  <div>
-                    <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg">
-                      Free Download
-                    </p>
-                    <p className="font-nunito text-sm text-[#3D1F5C]/70">
-                      Printable PDF · Print at home or at a print shop
-                    </p>
-                  </div>
-                </div>
-                {artwork.downloadUrl && (
-                  <a
-                    href={artwork.downloadUrl}
-                    download
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-emerald-500 hover:bg-emerald-600 text-white font-nunito font-bold text-base transition-colors shadow-sm"
-                  >
-                    ⬇ Download Free — No account needed
-                  </a>
-                )}
-              </div>
-            )}
-
-            {/* ── PREMIUM: two purchase paths ───────────────────────────── */}
-            {isPremium && (
-              <div className="flex flex-col gap-4">
-
-                {/* Path 1 — Digital download */}
-                <div className="rounded-[20px] border border-[#C4B5FD]/40 bg-white p-6 flex flex-col gap-4 shadow-sm">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-start gap-3">
-                      <span className="text-2xl">📥</span>
-                      <div>
-                        <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg">
-                          Digital Download
-                        </p>
-                        <p className="font-nunito text-sm text-[#3D1F5C]/70">
-                          High-res PDF · 300 DPI · Instant delivery
-                        </p>
-                      </div>
-                    </div>
-                    <span className="font-fredoka font-bold text-[#9B6FD4] text-xl whitespace-nowrap">
-                      $2.99
-                    </span>
-                  </div>
-                  <button
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-base transition-colors shadow-sm"
-                  >
-                    📥 Download Now
-                  </button>
-                </div>
-
-                {/* Path 2 — Physical print */}
-                <div className="rounded-[20px] border border-[#F472B6]/30 bg-white p-6 flex flex-col gap-4 shadow-sm">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-start gap-3">
-                      <span className="text-2xl">🖼</span>
-                      <div>
-                        <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg">
-                          Museum-Quality Print
-                        </p>
-                        <p className="font-nunito text-sm text-[#3D1F5C]/70">
-                          Printed locally by Gelato · Ships in 3–5 days
-                        </p>
-                      </div>
-                    </div>
-                    <span className="font-fredoka font-bold text-[#F472B6] text-xl whitespace-nowrap">
-                      from $19.99
-                    </span>
-                  </div>
-                  {/* Size selector */}
-                  <div className="flex gap-2">
-                    {['8×10″', '11×14″', '16×20″'].map((size) => (
-                      <button
-                        key={size}
-                        className="flex-1 py-2 px-3 rounded-xl border-2 border-[#C4B5FD] text-[#9B6FD4] font-nunito font-semibold text-sm hover:bg-[#C4B5FD]/10 transition-colors first:border-[#9B6FD4] first:bg-[#C4B5FD]/15"
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                  <button
-                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-gradient-to-br from-[#9B6FD4] to-[#F472B6] hover:opacity-90 text-white font-nunito font-bold text-base transition-opacity shadow-sm"
-                  >
-                    🖼 Order Print
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Trust badges */}
-            <div className="grid grid-cols-2 gap-3 text-sm font-nunito">
-              <div className="flex items-center gap-2 text-[#3D1F5C]/70">
-                <span>🏠</span> Print at home or shop
-              </div>
-              <div className="flex items-center gap-2 text-[#3D1F5C]/70">
-                <span>📐</span> 300 DPI high-res
-              </div>
-              <div className="flex items-center gap-2 text-[#3D1F5C]/70">
-                <span>📜</span> Personal use license
-              </div>
-              <div className="flex items-center gap-2 text-[#3D1F5C]/70">
-                <span>🌱</span> Carbon neutral print
-              </div>
-            </div>
+            {/* ── Purchase panel (client component — handles Stripe redirect) ── */}
+            <PurchasePanel
+              slug={artwork.slug}
+              title={artwork.title}
+              isFree={isFree}
+              isPremium={isPremium}
+              downloadUrl={artwork.downloadUrl}
+            />
 
           </div>
         </div>

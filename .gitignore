@@ -37,3 +37,4 @@ test-results/
 
 # CMS schema snapshot IS committed (tracks schema changes)
 # cms/schema/snapshot.json — do NOT ignore this file
+.vercel
