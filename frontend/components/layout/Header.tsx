@@ -39,7 +39,7 @@ export function Header() {
               🎨
             </div>
             <span className="font-['Bubblegum_Sans'] text-[1.2rem] text-[#9B6FD4] leading-tight hidden sm:block">
-              Come Color<span className="text-[#F472B6] block">With Me</span>
+              Come Color<span className="text-[#F472B6] block">With Me™</span>
             </span>
           </Link>
 

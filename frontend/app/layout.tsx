@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
   openGraph: {
     type: 'website',
-    siteName: 'Come Color With Me',
+    siteName: 'Come Color With Me™',
     locale: 'en_US',
   },
   twitter: {

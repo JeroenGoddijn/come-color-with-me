@@ -42,7 +42,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <p className="font-['Bubblegum_Sans'] text-[1.3rem] text-white mb-3">
-              Come Color With Me 🎨
+              Come Color With Me™ 🎨
             </p>
             <p className="text-sm leading-relaxed max-w-[240px]">
               Original artwork by a real 8-year-old artist.
@@ -120,7 +120,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-white/10 text-[0.8125rem]">
-          <span>© {year} Come Color With Me. All rights reserved.</span>
+          <span>© {year} Come Color With Me™. All rights reserved.</span>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-[#F472B6] transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-[#F472B6] transition-colors">Terms</Link>
