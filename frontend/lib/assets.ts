@@ -29,3 +29,11 @@ export function artworkZoom(slug: string): string {
 export function artworkWall(slug: string): string {
   return `/assets/artwork/${slug}-wall.jpg`
 }
+
+/**
+ * Child-coloring lifestyle photo — requires a photography session.
+ * Uncomment slot 4 in app/artwork/[slug]/page.tsx once images are shot and added.
+ */
+export function artworkColoring(slug: string): string {
+  return `/assets/artwork/${slug}-coloring.jpg`
+}

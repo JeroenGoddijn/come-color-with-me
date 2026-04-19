@@ -52,10 +52,13 @@ export default async function ArtworkDetailPage({ params }: Props) {
   const isPremium = artwork.isPremium && !artwork.isFree
   const isFree    = artwork.isFree
 
+  // Gallery order: Artwork → Wall (lifestyle/decor) → Zoom (quality) → Coloring photo (when available)
+  // Slot 4 (child coloring example) requires a photography session — hidden until artworkColoring(slug) exists
   const galleryImages = [
-    { src: artworkPreview(artwork.slug), alt: artwork.title,              label: 'Artwork'    },
-    { src: artworkZoom(artwork.slug),    alt: `${artwork.title} — detail`, label: 'Detail'     },
-    { src: artworkWall(artwork.slug),    alt: `${artwork.title} — framed`, label: 'Framed'     },
+    { src: artworkPreview(artwork.slug), alt: artwork.title,               label: 'Artwork' },
+    { src: artworkWall(artwork.slug),    alt: `${artwork.title} — framed`, label: 'Framed'  },
+    { src: artworkZoom(artwork.slug),    alt: `${artwork.title} — detail`, label: 'Detail'  },
+    // { src: artworkColoring(artwork.slug), alt: `Coloring ${artwork.title}`, label: 'In Use' },
   ]
 
   return (
