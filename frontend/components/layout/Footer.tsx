@@ -5,15 +5,34 @@ import { useState } from 'react'
 import { FlagGate } from '@/components/ui/FlagGate'
 
 export function Footer() {
-  const [email, setEmail] = useState('')
+  const [email, setEmail]       = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const [error, setError]       = useState('')
+  const [loading, setLoading]   = useState(false)
   const year = new Date().getFullYear()
 
   async function handleSubscribe(e: React.FormEvent) {
     e.preventDefault()
-    // Newsletter integration: wired in Sprint 2 once provider is confirmed
-    setSubscribed(true)
-    setEmail('')
+    setError('')
+    setLoading(true)
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const json = await res.json()
+      if (json.success) {
+        setSubscribed(true)
+        setEmail('')
+      } else {
+        setError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setError('Network error. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -79,15 +98,20 @@ export function Footer() {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="your@email.com"
                       required
-                      className="flex-1 px-4 py-2.5 rounded-lg bg-white/10 border border-white/15 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#C4B5FD]"
+                      disabled={loading}
+                      className="flex-1 px-4 py-2.5 rounded-lg bg-white/10 border border-white/15 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#C4B5FD] disabled:opacity-50"
                     />
                     <button
                       type="submit"
-                      className="px-5 py-2.5 bg-[#F472B6] hover:bg-[#EC4899] text-white font-nunito font-bold text-sm rounded-lg transition-colors whitespace-nowrap"
+                      disabled={loading}
+                      className="px-5 py-2.5 bg-[#F472B6] hover:bg-[#EC4899] text-white font-nunito font-bold text-sm rounded-lg transition-colors whitespace-nowrap disabled:opacity-60"
                     >
-                      Join
+                      {loading ? '…' : 'Join'}
                     </button>
                   </div>
+                  {error && (
+                    <p className="text-xs text-red-300">{error}</p>
+                  )}
                 </form>
               )}
             </div>
