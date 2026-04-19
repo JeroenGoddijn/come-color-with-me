@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { apiFetch } from '@/lib/api'
-import { artworkThumb } from '@/lib/assets'
+import { artworkPreview, artworkZoom, artworkWall } from '@/lib/assets'
 import { Badge } from '@/components/ui/Badge'
-import type { ArtworkDetail } from '@/types/artwork'
+import { ArtworkGallery } from '@/components/artwork/ArtworkGallery'
+import { ArtworkGrid } from '@/components/artwork/ArtworkGrid'
+import type { ArtworkDetail, ArtworkCard } from '@/types/artwork'
 
 type Props = {
   params: { slug: string }
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArtworkDetailPage({ params }: Props) {
   let artwork: ArtworkDetail
+  let related: ArtworkCard[] = []
 
   try {
     artwork = await apiFetch<ArtworkDetail>(`/api/gallery/${params.slug}`, {
@@ -36,89 +38,212 @@ export default async function ArtworkDetailPage({ params }: Props) {
     notFound()
   }
 
-  const thumb = artworkThumb(artwork.slug)
-  const isColoringPage = artwork.artworkType === 'coloring_page'
+  try {
+    const res = await apiFetch<{ data: ArtworkCard[] }>(
+      `/api/gallery?category=${encodeURIComponent(artwork.category)}&limit=6`,
+      { next: { revalidate: 300 } }
+    )
+    related = (res as unknown as { data: ArtworkCard[] }).data ?? []
+    related = related.filter((a) => a.slug !== artwork.slug).slice(0, 4)
+  } catch {
+    // related artwork is non-critical
+  }
+
+  const isPremium = artwork.isPremium && !artwork.isFree
+  const isFree    = artwork.isFree
+
+  const galleryImages = [
+    { src: artworkPreview(artwork.slug), alt: artwork.title,              label: 'Artwork'    },
+    { src: artworkZoom(artwork.slug),    alt: `${artwork.title} — detail`, label: 'Detail'     },
+    { src: artworkWall(artwork.slug),    alt: `${artwork.title} — framed`, label: 'Framed'     },
+  ]
 
   return (
-    <main className="min-h-screen bg-[#FFF6F9] py-10 px-4">
-      <div className="max-w-4xl mx-auto">
+    <main className="min-h-screen bg-[#FFF6F9]">
+      <div className="max-w-7xl mx-auto px-4 py-8">
 
         {/* Back link */}
         <Link
-          href="/gallery"
+          href={isPremium ? '/shop' : '/coloring-pages'}
           className="inline-flex items-center gap-1.5 text-sm font-nunito font-semibold text-[#9B6FD4] hover:text-[#7c56b0] mb-8 transition-colors"
         >
-          ← Back to Gallery
+          ← {isPremium ? 'Back to Shop' : 'Back to Coloring Pages'}
         </Link>
 
-        <div className="bg-white rounded-[20px] shadow-[0_4px_24px_rgba(155,111,212,0.14)] overflow-hidden">
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10 items-start">
 
-          {/* Image */}
-          <div className="relative aspect-[4/3] w-full bg-[#FFF6F9]">
-            <Image
-              src={thumb}
-              alt={artwork.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 896px"
-              className="object-contain"
-              priority
-            />
-          </div>
+          {/* LEFT — Gallery */}
+          <ArtworkGallery images={galleryImages} title={artwork.title} />
 
-          {/* Content */}
-          <div className="p-6 md:p-10">
+          {/* RIGHT — Purchase panel */}
+          <div className="flex flex-col gap-6">
 
-            {/* Badges */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {artwork.isNew && <Badge variant="pink">✦ NEW</Badge>}
-              {artwork.isFree && <Badge variant="green">✓ Free Download</Badge>}
-              {artwork.isPremium && !artwork.isFree && <Badge variant="purple">★ Premium</Badge>}
-              {isColoringPage && <Badge variant="gray">🖍 Coloring Page</Badge>}
+            {/* Badges + meta */}
+            <div>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {artwork.isNew    && <Badge variant="pink">✦ New</Badge>}
+                {isFree           && <Badge variant="green">✓ Free</Badge>}
+                {isPremium        && <Badge variant="purple">★ Premium</Badge>}
+              </div>
+              <p className="text-xs font-nunito font-semibold text-[#8B7BA8] uppercase tracking-wider mb-1">
+                {artwork.category}
+              </p>
+              <h1 className="font-fredoka font-bold text-[#3D1F5C] text-3xl leading-tight mb-1">
+                {artwork.title}
+              </h1>
+              <p className="font-nunito text-[#8B7BA8] text-sm">
+                by Amalia, age 8
+              </p>
             </div>
 
-            <p className="text-xs font-nunito font-semibold text-[#8B7BA8] uppercase tracking-wider mb-2">
-              {artwork.category}
-            </p>
-
-            <h1 className="font-fredoka font-bold text-[#3D1F5C] text-3xl md:text-4xl mb-4">
-              {artwork.title}
-            </h1>
-
+            {/* Description */}
             {artwork.description && (
-              <p className="font-nunito text-[#3D1F5C]/80 text-base leading-relaxed mb-8 max-w-prose">
+              <p className="font-nunito text-[#3D1F5C]/75 text-base leading-relaxed">
                 {artwork.description}
               </p>
             )}
 
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-3">
-              {artwork.isFree && artwork.downloadUrl && (
-                <a
-                  href={artwork.downloadUrl}
-                  download
-                  className="inline-flex items-center gap-2 py-3 px-8 rounded-[32px] bg-emerald-500 text-white font-nunito font-bold text-base hover:bg-emerald-600 transition-colors shadow-sm"
-                >
-                  ⬇ Download Free
-                </a>
-              )}
-              {artwork.isPremium && !artwork.isFree && artwork.shopUrl && (
-                <Link
-                  href={artwork.shopUrl}
-                  className="inline-flex items-center gap-2 py-3 px-8 rounded-[32px] bg-gradient-to-br from-[#9B6FD4] to-[#F472B6] text-white font-nunito font-bold text-base hover:opacity-90 transition-opacity shadow-sm"
-                >
-                  ★ Order a Print
-                </Link>
-              )}
-              <Link
-                href="/gallery"
-                className="inline-flex items-center gap-2 py-3 px-8 rounded-[32px] border-2 border-[#C4B5FD] text-[#9B6FD4] font-nunito font-bold text-base hover:bg-[#C4B5FD]/10 transition-colors"
-              >
-                Browse More
-              </Link>
+            {/* ── FREE: single download CTA ─────────────────────────────── */}
+            {isFree && (
+              <div className="rounded-[20px] border border-emerald-100 bg-emerald-50 p-6 flex flex-col gap-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">📥</span>
+                  <div>
+                    <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg">
+                      Free Download
+                    </p>
+                    <p className="font-nunito text-sm text-[#3D1F5C]/70">
+                      Printable PDF · Print at home or at a print shop
+                    </p>
+                  </div>
+                </div>
+                {artwork.downloadUrl && (
+                  <a
+                    href={artwork.downloadUrl}
+                    download
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-emerald-500 hover:bg-emerald-600 text-white font-nunito font-bold text-base transition-colors shadow-sm"
+                  >
+                    ⬇ Download Free — No account needed
+                  </a>
+                )}
+              </div>
+            )}
+
+            {/* ── PREMIUM: two purchase paths ───────────────────────────── */}
+            {isPremium && (
+              <div className="flex flex-col gap-4">
+
+                {/* Path 1 — Digital download */}
+                <div className="rounded-[20px] border border-[#C4B5FD]/40 bg-white p-6 flex flex-col gap-4 shadow-sm">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">📥</span>
+                      <div>
+                        <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg">
+                          Digital Download
+                        </p>
+                        <p className="font-nunito text-sm text-[#3D1F5C]/70">
+                          High-res PDF · 300 DPI · Instant delivery
+                        </p>
+                      </div>
+                    </div>
+                    <span className="font-fredoka font-bold text-[#9B6FD4] text-xl whitespace-nowrap">
+                      $2.99
+                    </span>
+                  </div>
+                  <button
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-base transition-colors shadow-sm"
+                  >
+                    📥 Download Now
+                  </button>
+                </div>
+
+                {/* Path 2 — Physical print */}
+                <div className="rounded-[20px] border border-[#F472B6]/30 bg-white p-6 flex flex-col gap-4 shadow-sm">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">🖼</span>
+                      <div>
+                        <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg">
+                          Museum-Quality Print
+                        </p>
+                        <p className="font-nunito text-sm text-[#3D1F5C]/70">
+                          Printed locally by Gelato · Ships in 3–5 days
+                        </p>
+                      </div>
+                    </div>
+                    <span className="font-fredoka font-bold text-[#F472B6] text-xl whitespace-nowrap">
+                      from $19.99
+                    </span>
+                  </div>
+                  {/* Size selector */}
+                  <div className="flex gap-2">
+                    {['8×10″', '11×14″', '16×20″'].map((size) => (
+                      <button
+                        key={size}
+                        className="flex-1 py-2 px-3 rounded-xl border-2 border-[#C4B5FD] text-[#9B6FD4] font-nunito font-semibold text-sm hover:bg-[#C4B5FD]/10 transition-colors first:border-[#9B6FD4] first:bg-[#C4B5FD]/15"
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                  <button
+                    className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-gradient-to-br from-[#9B6FD4] to-[#F472B6] hover:opacity-90 text-white font-nunito font-bold text-base transition-opacity shadow-sm"
+                  >
+                    🖼 Order Print
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Trust badges */}
+            <div className="grid grid-cols-2 gap-3 text-sm font-nunito">
+              <div className="flex items-center gap-2 text-[#3D1F5C]/70">
+                <span>🏠</span> Print at home or shop
+              </div>
+              <div className="flex items-center gap-2 text-[#3D1F5C]/70">
+                <span>📐</span> 300 DPI high-res
+              </div>
+              <div className="flex items-center gap-2 text-[#3D1F5C]/70">
+                <span>📜</span> Personal use license
+              </div>
+              <div className="flex items-center gap-2 text-[#3D1F5C]/70">
+                <span>🌱</span> Carbon neutral print
+              </div>
             </div>
 
           </div>
         </div>
+
+        {/* ── The Story ──────────────────────────────────────────────────── */}
+        {artwork.description && (
+          <section className="mt-16 max-w-2xl">
+            <h2 className="font-fredoka font-bold text-[#3D1F5C] text-2xl mb-3">
+              The Story Behind This Piece
+            </h2>
+            <p className="font-nunito text-[#3D1F5C]/75 text-base leading-relaxed">
+              {artwork.description}
+            </p>
+            <div className="mt-4 flex items-center gap-3">
+              <span className="text-2xl">🎨</span>
+              <p className="font-nunito text-sm text-[#8B7BA8] italic">
+                "Every drawing tells a story." — Amalia, age 8
+              </p>
+            </div>
+          </section>
+        )}
+
+        {/* ── Related artwork ────────────────────────────────────────────── */}
+        {related.length > 0 && (
+          <section className="mt-16">
+            <h2 className="font-fredoka font-bold text-[#3D1F5C] text-2xl mb-6">
+              More by Amalia
+            </h2>
+            <ArtworkGrid artworks={related} />
+          </section>
+        )}
+
       </div>
     </main>
   )

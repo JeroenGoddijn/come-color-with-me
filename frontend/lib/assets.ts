@@ -14,3 +14,18 @@ export const ASSETS = {
 export function artworkThumb(slug: string): string {
   return `/assets/artwork/${slug}-thumb.jpg`
 }
+
+/** Full portrait preview for the detail page */
+export function artworkPreview(slug: string): string {
+  return `/assets/artwork/${slug}-preview.jpg`
+}
+
+/** Zoomed detail crop */
+export function artworkZoom(slug: string): string {
+  return `/assets/artwork/${slug}-zoom.jpg`
+}
+
+/** Framed wall mockup */
+export function artworkWall(slug: string): string {
+  return `/assets/artwork/${slug}-wall.jpg`
+}
