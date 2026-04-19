@@ -18,12 +18,17 @@ const GELATO_API_BASE = 'https://order.api.gelato.com'
  * These are account-specific. Get them from your Gelato product catalog.
  * Example format: "photobook_21x29_pf_170-176pp_ver1"
  *
+ * Env var naming convention: POD_{PARTNER}_{PRODUCT}_{VARIANT}
+ *   - POD_GELATO_PRINT_8X10   → Fine art print 8×10"
+ *   - POD_GELATO_PRINT_11X14  → Fine art print 11×14"
+ *   - POD_GELATO_PRINT_16X20  → Fine art print 16×20"
+ *
  * TODO: Replace placeholders with real Gelato product UIDs once account is set up.
  */
 const GELATO_PRODUCT_UIDS: Record<string, string> = {
-  '8x10':  process.env['GELATO_PRODUCT_8X10']  ?? 'PLACEHOLDER_8X10',
-  '11x14': process.env['GELATO_PRODUCT_11X14'] ?? 'PLACEHOLDER_11X14',
-  '16x20': process.env['GELATO_PRODUCT_16X20'] ?? 'PLACEHOLDER_16X20',
+  '8x10':  process.env['POD_GELATO_PRINT_8X10']  ?? 'PLACEHOLDER_8X10',
+  '11x14': process.env['POD_GELATO_PRINT_11X14'] ?? 'PLACEHOLDER_11X14',
+  '16x20': process.env['POD_GELATO_PRINT_16X20'] ?? 'PLACEHOLDER_16X20',
 }
 
 export interface GelatoAddress {
