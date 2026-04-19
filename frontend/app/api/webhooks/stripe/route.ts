@@ -41,15 +41,22 @@ export async function POST(req: NextRequest) {
   }
 
   if (event.type === 'checkout.session.completed') {
-    const session = event.data.object as Stripe.Checkout.Session
-    const type    = session.metadata?.['type']
-    const slug    = session.metadata?.['slug']   ?? ''
-    const title   = session.metadata?.['title']  ?? ''
+    const session  = event.data.object as Stripe.Checkout.Session
+    const type     = session.metadata?.['type']
+    const slug     = session.metadata?.['slug']   ?? ''
+    const title    = session.metadata?.['title']  ?? ''
+    const livemode = session.livemode
 
     if (type === 'digital') {
       await handleDigitalDownload(session, slug, title)
     } else if (type === 'print') {
-      await handlePrintOrder(session, slug, title)
+      if (!livemode) {
+        // Gelato has no sandbox — skip real order creation in test mode.
+        // The checkout flow (success page, download verify) still works end-to-end.
+        console.log(`[TEST MODE] Skipping Gelato order for "${title}" (${slug}). Switch to live Stripe key to fulfil real orders.`)
+      } else {
+        await handlePrintOrder(session, slug, title)
+      }
     }
   }
 
