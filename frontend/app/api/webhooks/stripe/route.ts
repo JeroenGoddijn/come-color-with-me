@@ -45,18 +45,14 @@ export async function POST(req: NextRequest) {
     const type     = session.metadata?.['type']
     const slug     = session.metadata?.['slug']   ?? ''
     const title    = session.metadata?.['title']  ?? ''
-    const livemode = session.livemode
 
     if (type === 'digital') {
       await handleDigitalDownload(session, slug, title)
     } else if (type === 'print') {
-      if (!livemode) {
-        // Gelato has no sandbox — skip real order creation in test mode.
-        // The checkout flow (success page, download verify) still works end-to-end.
-        console.log(`[TEST MODE] Skipping Gelato order for "${title}" (${slug}). Switch to live Stripe key to fulfil real orders.`)
-      } else {
-        await handlePrintOrder(session, slug, title)
-      }
+      // Pass livemode so Gelato service picks the right API key:
+      // livemode=false → GELATO_API_KEY_TEST (sandbox account, auto-cancelled)
+      // livemode=true  → GELATO_API_KEY (real orders shipped)
+      await handlePrintOrder(session, slug, title, session.livemode)
     }
   }
 

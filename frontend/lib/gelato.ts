@@ -1,12 +1,14 @@
 /**
  * Gelato POD integration — Sprint 2
  *
- * Before this works in production you must:
- *  1. Create a Gelato account at gelato.com
- *  2. Upload Amalia's artwork files to Gelato (or provide a public CDN URL)
- *  3. Create products in the Gelato dashboard and note the productUid for each size
- *  4. Set GELATO_API_KEY in Render (backend) and Vercel (frontend) env vars
- *  5. Replace the placeholder productUids below with real values
+ * Testing (no real charges):
+ *   Option A — Sandbox account: create a second Gelato account with no payment method.
+ *              Set its API key as GELATO_API_KEY_TEST. Orders auto-cancel without payment.
+ *   Option B — API Portal: place manual test orders in the Gelato dashboard; auto-cancelled.
+ *
+ * The webhook uses GELATO_API_KEY_TEST when Stripe is in test mode (livemode=false),
+ * and GELATO_API_KEY for live orders. If GELATO_API_KEY_TEST is not set, test-mode
+ * orders are logged and skipped rather than risking a real order.
  *
  * Gelato API docs: https://dashboard.gelato.com/docs/orders/v4/
  */
@@ -53,11 +55,17 @@ export interface CreatePrintOrderParams {
   quantity:         number
   shippingAddress:  GelatoAddress
   currency:         string
+  livemode?:        boolean  // pass session.livemode from Stripe; selects correct API key
 }
 
 export async function createGelatoPrintOrder(params: CreatePrintOrderParams): Promise<{ id: string }> {
-  const apiKey = process.env['GELATO_API_KEY']
-  if (!apiKey) throw new Error('GELATO_API_KEY is not set')
+  // Use sandbox key for Stripe test-mode orders, live key for real orders.
+  const isLive  = params.livemode !== false
+  const apiKey  = isLive
+    ? process.env['GELATO_API_KEY']
+    : (process.env['GELATO_API_KEY_TEST'] ?? process.env['GELATO_API_KEY'])
+
+  if (!apiKey) throw new Error(isLive ? 'GELATO_API_KEY is not set' : 'GELATO_API_KEY_TEST (or GELATO_API_KEY) is not set')
 
   const productUid = GELATO_PRODUCT_UIDS[params.size]
   if (!productUid || productUid.startsWith('PLACEHOLDER')) {
