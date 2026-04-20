@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: Ping Directus CMS
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://ccwm-directus.onrender.com/server/health)
-          echo "Directus → HTTP $STATUS"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://ccwm-directus.onrender.com/server/health || echo "timeout/error")
+          echo "Directus → $STATUS"
 
       - name: Ping Backend API
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://ccwm-backend.onrender.com/health)
-          echo "Backend → HTTP $STATUS"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://ccwm-backend.onrender.com/health || echo "timeout/error")
+          echo "Backend → $STATUS"
