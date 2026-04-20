@@ -1,0 +1,21 @@
+name: Keepalive — Render free tier
+
+on:
+  schedule:
+    # Every 14 minutes — keeps Render services awake (free tier sleeps at 15 min)
+    - cron: '*/14 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Directus CMS
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://ccwm-directus.onrender.com/server/health)
+          echo "Directus → HTTP $STATUS"
+
+      - name: Ping Backend API
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://ccwm-backend.onrender.com/health)
+          echo "Backend → HTTP $STATUS"
