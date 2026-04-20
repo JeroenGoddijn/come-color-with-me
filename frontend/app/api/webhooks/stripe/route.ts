@@ -82,6 +82,7 @@ async function handlePrintOrder(
   session: Stripe.Checkout.Session,
   slug: string,
   title: string,
+  livemode: boolean,
 ) {
   const size     = session.metadata?.['size'] ?? '8x10'
   // In Stripe API v2026+, shipping address lives in collected_information.shipping_details
@@ -109,6 +110,7 @@ async function handlePrintOrder(
       size:             size as '8x10' | '11x14' | '16x20',
       quantity:         1,
       currency:         session.currency?.toUpperCase() ?? 'USD',
+      livemode,
       shippingAddress: {
         firstName:    customer.name?.split(' ')[0] ?? 'Customer',
         lastName:     customer.name?.split(' ').slice(1).join(' ') ?? '',
