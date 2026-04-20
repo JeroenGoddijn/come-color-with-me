@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/Button'
 
 export default function RegisterPage() {
-  const { signUp } = useAuth()
+  const { user, loading: authLoading, signUp } = useAuth()
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -15,6 +15,14 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.replace('/account')
+    }
+  }, [authLoading, user, router])
+
+  if (authLoading || user) return null
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()

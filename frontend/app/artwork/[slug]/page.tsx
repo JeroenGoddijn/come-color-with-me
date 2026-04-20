@@ -40,12 +40,11 @@ export default async function ArtworkDetailPage({ params }: Props) {
   }
 
   try {
-    const res = await apiFetch<{ data: ArtworkCard[] }>(
+    const res = await apiFetch<ArtworkCard[]>(
       `/api/gallery?category=${encodeURIComponent(artwork.category)}&limit=6`,
       { next: { revalidate: 300 } }
     )
-    related = (res as unknown as { data: ArtworkCard[] }).data ?? []
-    related = related.filter((a) => a.slug !== artwork.slug).slice(0, 4)
+    related = res.filter((a) => a.slug !== artwork.slug).slice(0, 4)
   } catch {
     // related artwork is non-critical
   }

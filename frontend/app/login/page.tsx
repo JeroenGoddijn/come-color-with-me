@@ -1,22 +1,30 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/Button'
-import type { Metadata } from 'next'
 
-// Note: metadata export cannot coexist with 'use client'. Title set via layout.
-// If needed in future, convert to server component with client child.
-
-export default function LoginPage() {
-  const { signIn } = useAuth()
+function LoginForm() {
+  const { user, loading: authLoading, signIn } = useAuth()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirect = searchParams.get('redirect') ?? '/account'
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+
+  // LR-F7: already logged in → go to account (or redirect param)
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.replace(redirect)
+    }
+  }, [authLoading, user, router, redirect])
+
+  if (authLoading || user) return null
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -24,7 +32,7 @@ export default function LoginPage() {
     setLoading(true)
     try {
       await signIn(email, password)
-      router.push('/account')
+      router.push(redirect)
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Sign in failed. Please try again.')
     } finally {
@@ -101,5 +109,13 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   )
 }
