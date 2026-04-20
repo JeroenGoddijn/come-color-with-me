@@ -56,7 +56,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
   // Slot 4 (child coloring example) requires a photography session — hidden until artworkColoring(slug) exists
   const galleryImages = [
     { src: artworkPreview(artwork.slug), alt: artwork.title,               label: 'Artwork' },
-    { src: artworkWall(artwork.slug),    alt: `${artwork.title} — framed`, label: 'Framed'  },
+    { src: artworkPreview(artwork.slug), alt: `${artwork.title} — framed`, label: 'Framed',  framed: true },
     { src: artworkZoom(artwork.slug),    alt: `${artwork.title} — detail`, label: 'Detail'  },
     // { src: artworkColoring(artwork.slug), alt: `Coloring ${artwork.title}`, label: 'In Use' },
   ]
