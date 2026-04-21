@@ -12,26 +12,29 @@ interface Props {
 
 type Room = {
   src: string
-  /** Horizontal CENTER of the frame (percent of the rendered container). */
+  /** Horizontal CENTER of the frame (percent of container width). */
   xPct: number
-  /** Vertical TOP of the frame. Positioned so the bottom sits in clear wall. */
+  /** Vertical TOP of the frame (percent of container height). */
   yPct: number
   /**
-   * Frame HEIGHT as a percent of the container — sized to the actual empty
-   * wall area above the furniture in each photo so the art never floats
-   * over cushions or cuts into a lamp. Width is derived from the artwork's
-   * natural aspect ratio, so portrait and landscape both stay in bounds.
+   * The empty-wall bounding box the frame must fit inside. Frame scales to the
+   * largest size that fits given the artwork's natural aspect ratio, so
+   * landscape art fills width and portrait art fills height — both bounded
+   * above the furniture in each photo.
    */
-  heightPct: number
+  maxWidthPct:  number
+  maxHeightPct: number
 }
 
 const ROOMS: Room[] = [
-  // Empty wall runs 0–37% above the velvet couch. Frame sits 4–30%.
-  { src: '/assets/rooms/room-modern-living.jpg', xPct: 50, yPct: 4,  heightPct: 26 },
-  // Empty wall 0–50% between plant and dresser. Frame hangs 6–34%.
-  { src: '/assets/rooms/room-scandi-minimal.jpg', xPct: 50, yPct: 6,  heightPct: 28 },
-  // Large neutral wall above sofa (sofa top ~65%). Frame hangs 20–56%.
-  { src: '/assets/rooms/room-warm-living.jpg',    xPct: 50, yPct: 20, heightPct: 36 },
+  // Green velvet couch. Sofa top ~37%. yPct 8 gives 7% ceiling clearance;
+  // maxHeight 26 keeps portrait bottoms above the couch (8+26=34 < 37).
+  { src: '/assets/rooms/room-modern-living.jpg', xPct: 50, yPct: 8,  maxWidthPct: 52, maxHeightPct: 26 },
+  // Scandi living room. Plant left, dresser right. yPct 10 clears ceiling;
+  // maxHeight 26 keeps bottom above furniture.
+  { src: '/assets/rooms/room-scandi-minimal.jpg', xPct: 50, yPct: 10, maxWidthPct: 46, maxHeightPct: 26 },
+  // Warm neutral living room. Sofa top ~65%. Large clear wall band.
+  { src: '/assets/rooms/room-warm-living.jpg',    xPct: 50, yPct: 25, maxWidthPct: 50, maxHeightPct: 36 },
 ]
 
 function pickRoom(seed: string): Room {
@@ -54,6 +57,14 @@ export function FramedRoomScene({ src, alt, slug = '' }: Props) {
       setRatio(naturalWidth / naturalHeight)
     }
   }
+
+  // Fit the frame to the wall's bounding box. The 4:3 gallery viewport means
+  // 1% of width ≠ 1% of height, so we convert the width limit into height
+  // units before taking the min. The container aspect is 4:3 (width/height = 1.333).
+  const CONTAINER_ASPECT = 4 / 3
+  // maxWidthPct (of width) → equivalent height percent on the 4:3 container
+  const widthLimitAsHeight = (room.maxWidthPct / ratio) / CONTAINER_ASPECT
+  const frameHeightPct = Math.min(room.maxHeightPct, widthLimitAsHeight)
 
   return (
     <div
@@ -78,7 +89,7 @@ export function FramedRoomScene({ src, alt, slug = '' }: Props) {
           top:       `${room.yPct}%`,
           left:      `${room.xPct}%`,
           transform: 'translateX(-50%)',
-          height:    `${room.heightPct}%`,
+          height:    `${frameHeightPct}%`,
           aspectRatio: String(ratio),
         }}
       >
