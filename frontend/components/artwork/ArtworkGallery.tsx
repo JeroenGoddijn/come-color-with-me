@@ -15,9 +15,11 @@ export type GalleryImage = {
 type Props = {
   images: GalleryImage[]
   title:  string
+  /** Slug is used so each artwork gets a deterministic room scene. */
+  slug?:  string
 }
 
-export function ArtworkGallery({ images, title }: Props) {
+export function ArtworkGallery({ images, title, slug }: Props) {
   const [active, setActive] = useState(0)
   const current = images[active]
 
@@ -26,7 +28,7 @@ export function ArtworkGallery({ images, title }: Props) {
       {/* Main viewer */}
       <div className="relative aspect-[4/3] w-full rounded-[20px] overflow-hidden bg-[#FFF6F9] shadow-[0_4px_24px_rgba(155,111,212,0.14)]">
         {current?.framed ? (
-          <FramedRoomScene src={current.src} alt={current.alt ?? title} />
+          <FramedRoomScene src={current.src} alt={current.alt ?? title} slug={slug} />
         ) : (
           <Image
             key={current?.src}
@@ -58,7 +60,7 @@ export function ArtworkGallery({ images, title }: Props) {
               {img.framed ? (
                 /* Thumbnail for the framed tab — mini room preview */
                 <div className="absolute inset-0">
-                  <FramedRoomScene src={img.src} alt={img.label} />
+                  <FramedRoomScene src={img.src} alt={img.label} slug={slug} />
                 </div>
               ) : (
                 <Image

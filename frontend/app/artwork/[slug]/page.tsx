@@ -77,7 +77,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10 items-start">
 
           {/* LEFT — Gallery */}
-          <ArtworkGallery images={galleryImages} title={artwork.title} />
+          <ArtworkGallery images={galleryImages} title={artwork.title} slug={artwork.slug} />
 
           {/* RIGHT — Purchase panel */}
           <div className="flex flex-col gap-6">
