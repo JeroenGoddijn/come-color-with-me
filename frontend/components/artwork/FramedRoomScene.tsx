@@ -12,21 +12,26 @@ interface Props {
 
 type Room = {
   src: string
-  /** Frame position on the wall (percent of the rendered container). */
+  /** Horizontal CENTER of the frame (percent of the rendered container). */
   xPct: number
+  /** Vertical TOP of the frame. Positioned so the bottom sits in clear wall. */
   yPct: number
+  /**
+   * Frame HEIGHT as a percent of the container — sized to the actual empty
+   * wall area above the furniture in each photo so the art never floats
+   * over cushions or cuts into a lamp. Width is derived from the artwork's
+   * natural aspect ratio, so portrait and landscape both stay in bounds.
+   */
+  heightPct: number
 }
 
-/**
- * Three real interior photos, each with a specific wall anchor where the
- * framed artwork sits naturally (above couch, centered on empty wall, etc).
- * Photos are cropped to cover the 4:3 container, so anchors were chosen to
- * stay stable inside that crop.
- */
 const ROOMS: Room[] = [
-  { src: '/assets/rooms/room-modern-living.jpg', xPct: 50, yPct: 12 },
-  { src: '/assets/rooms/room-scandi-minimal.jpg', xPct: 50, yPct: 8  },
-  { src: '/assets/rooms/room-warm-living.jpg',    xPct: 50, yPct: 18 },
+  // Empty wall runs 0–37% above the velvet couch. Frame sits 4–30%.
+  { src: '/assets/rooms/room-modern-living.jpg', xPct: 50, yPct: 4,  heightPct: 26 },
+  // Empty wall 0–50% between plant and dresser. Frame hangs 6–34%.
+  { src: '/assets/rooms/room-scandi-minimal.jpg', xPct: 50, yPct: 6,  heightPct: 28 },
+  // Large neutral wall above sofa (sofa top ~65%). Frame hangs 20–56%.
+  { src: '/assets/rooms/room-warm-living.jpg',    xPct: 50, yPct: 20, heightPct: 36 },
 ]
 
 function pickRoom(seed: string): Room {
@@ -49,10 +54,6 @@ export function FramedRoomScene({ src, alt, slug = '' }: Props) {
       setRatio(naturalWidth / naturalHeight)
     }
   }
-
-  const isLandscape = ratio > 1.05
-  // Landscape art hangs wider; portrait narrower. Height follows aspectRatio.
-  const frameWidth  = isLandscape ? '44%' : '28%'
 
   return (
     <div
@@ -77,7 +78,7 @@ export function FramedRoomScene({ src, alt, slug = '' }: Props) {
           top:       `${room.yPct}%`,
           left:      `${room.xPct}%`,
           transform: 'translateX(-50%)',
-          width:     frameWidth,
+          height:    `${room.heightPct}%`,
           aspectRatio: String(ratio),
         }}
       >
