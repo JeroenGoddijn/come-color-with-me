@@ -52,17 +52,18 @@ export default async function ArtworkDetailPage({ params }: Props) {
   const isPremium = artwork.isPremium && !artwork.isFree
   const isFree    = artwork.isFree
 
-  // Card products (e.g. Easter Card) sell as printed greeting cards, not
-  // framed wall art — hide the Framed tab for them.
-  const isCardProduct = /(^|-)card(s)?($|-)/i.test(artwork.slug)
+  // Framed room scene only applies to finished artwork (prints for walls).
+  // Coloring pages are downloads for coloring — framing them makes no sense.
+  // Card products (e.g. Easter Card) sell as greeting cards, not framed wall art.
+  const isCardProduct  = /(^|-)card(s)?($|-)/i.test(artwork.slug)
+  const showFramedTab  = artwork.artworkType === 'finished_artwork' && !isCardProduct
 
-  // Gallery order: Artwork → Framed (decor) → Zoom (quality) → Coloring photo (when available)
-  // Slot 4 (child coloring example) requires a photography session — hidden until artworkColoring(slug) exists
+  // Gallery order: Artwork → Framed (finished artwork only) → Zoom → Coloring photo (future)
   const galleryImages = [
     { src: artworkPreview(artwork.slug), alt: artwork.title,               label: 'Artwork' },
-    ...(isCardProduct
-      ? []
-      : [{ src: artworkPreview(artwork.slug), alt: `${artwork.title} — framed`, label: 'Framed', framed: true }]),
+    ...(showFramedTab
+      ? [{ src: artworkPreview(artwork.slug), alt: `${artwork.title} — framed`, label: 'Framed', framed: true }]
+      : []),
     { src: artworkZoom(artwork.slug),    alt: `${artwork.title} — detail`, label: 'Detail'  },
     // { src: artworkColoring(artwork.slug), alt: `Coloring ${artwork.title}`, label: 'In Use' },
   ]
