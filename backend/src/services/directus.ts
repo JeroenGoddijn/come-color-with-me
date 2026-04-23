@@ -20,7 +20,7 @@ type DirectusArtwork = {
   thumbnail_image: string | null
   preview_image: string | null
   download_file: string | null
-  category: string
+  tags: string[] | null
   age_group: AgeGroup
   is_featured: boolean
   is_new: boolean
@@ -142,7 +142,7 @@ export function mapArtworkCard(raw: DirectusArtwork): ArtworkCard {
       : '',
     isFree: raw.is_free,
     isPremium: raw.is_premium,
-    category: raw.category,
+    tags: raw.tags ?? [],
     ageGroup: raw.age_group,
     isFeatured: raw.is_featured,
     isNew: raw.is_new,

@@ -15,7 +15,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
   const {
     slug,
     title,
-    category,
+    tags,
     artworkType,
     isFree,
     isPremium,
@@ -23,6 +23,9 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
     watermarkEnabled,
     downloadUrl,
   } = artwork
+
+  const META_TAGS = new Set(['free', 'premium', 'card'])
+  const categoryLabel = tags.find(t => !META_TAGS.has(t)) ?? ''
 
   const thumb = artworkThumb(slug)
 
@@ -61,7 +64,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
 
       {/* Card body */}
       <div className="p-4 flex flex-col flex-1">
-        <p className="text-xs font-nunito font-semibold text-[#8B7BA8] uppercase tracking-wider mb-1">{category}</p>
+        <p className="text-xs font-nunito font-semibold text-[#8B7BA8] uppercase tracking-wider mb-1">{categoryLabel}</p>
         <h3 className="font-fredoka font-semibold text-[#3D1F5C] text-base mb-3 truncate">{title}</h3>
         <div className={cn('mt-auto flex gap-2', !isFree && !isPremium && 'hidden')}>
           {isFree && downloadUrl && (

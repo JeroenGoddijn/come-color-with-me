@@ -26,8 +26,8 @@ const DEFAULT_CATS: FilterOption[] = [
   { label: 'Animals',   value: 'animals' },
   { label: 'Fantasy',   value: 'fantasy' },
   { label: 'Food',      value: 'food' },
-  { label: 'Holidays',  value: 'holidays' },
-  { label: 'Cards',     value: 'cards' },
+  { label: 'Easter',    value: 'easter' },
+  { label: 'Cards',     value: 'card' },
   { label: 'Buildings', value: 'buildings' },
 ]
 

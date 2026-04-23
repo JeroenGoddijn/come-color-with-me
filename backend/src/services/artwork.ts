@@ -73,7 +73,8 @@ export async function getGallery(
   }
 
   if (filters.category) {
-    filter['category'] = { _eq: filters.category }
+    // `category` URL param filters by tag value — the DB `category` column is unused
+    filter['tags'] = { _contains: filters.category }
   }
   if (filters.ageGroup) {
     filter['age_group'] = { _eq: filters.ageGroup }

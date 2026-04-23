@@ -11,7 +11,7 @@ export type ArtworkCard = {
   previewImage: string
   isFree: boolean
   isPremium: boolean
-  category: string
+  tags: string[]
   ageGroup: AgeGroup
   isFeatured: boolean
   isNew: boolean

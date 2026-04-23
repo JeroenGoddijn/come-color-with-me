@@ -40,8 +40,10 @@ export default async function ArtworkDetailPage({ params }: Props) {
   }
 
   try {
+    // Use first category-like tag to find related work in the same theme
+    const relatedTag = artwork.tags.find(t => !new Set(['free', 'premium', 'card']).has(t)) ?? ''
     const res = await apiFetch<ArtworkCard[]>(
-      `/api/gallery?category=${encodeURIComponent(artwork.category)}&limit=6`,
+      `/api/gallery?category=${encodeURIComponent(relatedTag)}&limit=6`,
       { next: { revalidate: 300 } }
     )
     related = res.filter((a) => a.slug !== artwork.slug).slice(0, 4)
@@ -54,9 +56,13 @@ export default async function ArtworkDetailPage({ params }: Props) {
 
   // Framed room scene only applies to finished artwork (prints for walls).
   // Coloring pages are downloads for coloring — framing them makes no sense.
-  // Card products (e.g. Easter Card) sell as greeting cards, not framed wall art.
-  const isCardProduct  = /(^|-)card(s)?($|-)/i.test(artwork.slug)
+  // Card products (tagged "card") sell as greeting cards, not framed wall art.
+  const isCardProduct  = artwork.tags.includes('card')
   const showFramedTab  = artwork.artworkType === 'finished_artwork' && !isCardProduct
+
+  // Derive a readable category label from tags — first tag that isn't a meta-tag
+  const META_TAGS = new Set(['free', 'premium', 'card'])
+  const categoryLabel = artwork.tags.find(t => !META_TAGS.has(t)) ?? ''
 
   // Gallery order: Artwork → Framed (finished artwork only) → Zoom → Coloring photo (future)
   const galleryImages = [
@@ -97,7 +103,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
                 {isPremium        && <Badge variant="purple">★ Premium</Badge>}
               </div>
               <p className="text-xs font-nunito font-semibold text-[#8B7BA8] uppercase tracking-wider mb-1">
-                {artwork.category}
+                {categoryLabel}
               </p>
               <h1 className="font-fredoka font-bold text-[#3D1F5C] text-3xl leading-tight mb-1">
                 {artwork.title}
@@ -121,7 +127,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
               isFree={isFree}
               isPremium={isPremium}
               downloadUrl={artwork.downloadUrl}
-              category={artwork.category}
+              tags={artwork.tags}
             />
 
           </div>

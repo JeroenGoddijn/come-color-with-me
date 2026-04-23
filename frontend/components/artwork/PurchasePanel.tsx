@@ -22,11 +22,11 @@ interface Props {
   isFree:      boolean
   isPremium:   boolean
   downloadUrl: string | null
-  category?:   string
+  tags?:       string[]
 }
 
-export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, category }: Props) {
-  const isCard = category === 'cards'
+export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tags }: Props) {
+  const isCard = tags?.includes('card') ?? false
 
   const [selectedSize,    setSelectedSize]    = useState<PrintSize>('8x10')
   const [selectedVariant, setSelectedVariant] = useState<CardVariant>('4x6')
