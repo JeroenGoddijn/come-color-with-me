@@ -21,9 +21,11 @@ const GELATO_API_BASE = 'https://order.api.gelato.com'
  * Example format: "photobook_21x29_pf_170-176pp_ver1"
  *
  * Env var naming convention: POD_{PARTNER}_{PRODUCT}_{VARIANT}
- *   - POD_GELATO_PRINT_8X10   → Fine art print 8×10"
- *   - POD_GELATO_PRINT_11X14  → Fine art print 11×14"
- *   - POD_GELATO_PRINT_16X20  → Fine art print 16×20"
+ *   - POD_GELATO_PRINT_8X10          → Fine art print 8×10"
+ *   - POD_GELATO_PRINT_11X14         → Fine art print 11×14"
+ *   - POD_GELATO_PRINT_16X20         → Fine art print 16×20"
+ *   - POD_GELATO_POSTCARD_4X6        → Postcard 4×6" (single)
+ *   - POD_GELATO_POSTCARD_4X6_10PACK → Postcard 4×6" (10-pack uses same UID, qty=10)
  *
  * TODO: Replace placeholders with real Gelato product UIDs once account is set up.
  */
@@ -32,6 +34,10 @@ const GELATO_PRODUCT_UIDS: Record<string, string> = {
   '11x14': process.env['POD_GELATO_PRINT_11X14'] ?? 'PLACEHOLDER_11X14',
   '16x20': process.env['POD_GELATO_PRINT_16X20'] ?? 'PLACEHOLDER_16X20',
 }
+
+// Postcards use the same Gelato productUid for single and 10-pack;
+// quantity is what drives the order size.
+const GELATO_POSTCARD_UID = process.env['POD_GELATO_POSTCARD_4X6'] ?? 'PLACEHOLDER_POSTCARD_4X6'
 
 export interface GelatoAddress {
   firstName:   string
@@ -105,6 +111,75 @@ export async function createGelatoPrintOrder(params: CreatePrintOrderParams): Pr
       'Content-Type': 'application/json',
       'X-API-KEY':    apiKey,
     },
+    body: JSON.stringify(body),
+  })
+
+  if (!res.ok) {
+    const text = await res.text()
+    throw new Error(`Gelato API error ${res.status}: ${text}`)
+  }
+
+  const json = await res.json() as { order: { id: string } }
+  return { id: json.order.id }
+}
+
+// ─── Greeting card / postcard orders ─────────────────────────────────────────
+
+export interface CreateCardOrderParams {
+  orderReferenceId: string
+  artworkSlug:      string
+  artworkTitle:     string
+  artworkFileUrl:   string
+  variant:          '4x6' | '4x6-10pack'
+  shippingAddress:  GelatoAddress
+  currency:         string
+  livemode?:        boolean
+}
+
+export async function createGelatoCardOrder(params: CreateCardOrderParams): Promise<{ id: string }> {
+  const isLive = params.livemode !== false
+  const apiKey = isLive
+    ? process.env['GELATO_API_KEY']
+    : (process.env['GELATO_API_KEY_TEST'] ?? process.env['GELATO_API_KEY'])
+
+  if (!apiKey) throw new Error(isLive ? 'GELATO_API_KEY is not set' : 'GELATO_API_KEY_TEST (or GELATO_API_KEY) is not set')
+
+  if (!GELATO_POSTCARD_UID || GELATO_POSTCARD_UID.startsWith('PLACEHOLDER')) {
+    throw new Error('Gelato postcard productUid not configured. Set POD_GELATO_POSTCARD_4X6 env var.')
+  }
+
+  const quantity = params.variant === '4x6-10pack' ? 10 : 1
+
+  const body = {
+    orderReferenceId:    params.orderReferenceId,
+    customerReferenceId: params.artworkSlug,
+    currency:            params.currency,
+    items: [
+      {
+        itemReferenceId: `${params.artworkSlug}-${params.variant}`,
+        productUid:      GELATO_POSTCARD_UID,
+        files: [{ type: 'default', url: params.artworkFileUrl }],
+        quantity,
+      },
+    ],
+    shippingAddress: {
+      firstName:    params.shippingAddress.firstName,
+      lastName:     params.shippingAddress.lastName,
+      addressLine1: params.shippingAddress.addressLine1,
+      addressLine2: params.shippingAddress.addressLine2 ?? '',
+      city:         params.shippingAddress.city,
+      state:        params.shippingAddress.state,
+      postCode:     params.shippingAddress.postCode,
+      country:      params.shippingAddress.country,
+      email:        params.shippingAddress.email,
+      phone:        params.shippingAddress.phone ?? '',
+    },
+    shipmentMethodUid: 'standard',
+  }
+
+  const res = await fetch(`${GELATO_API_BASE}/orders/v4`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-API-KEY': apiKey },
     body: JSON.stringify(body),
   })
 

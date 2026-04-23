@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getStripe } from '@/lib/stripe'
-import { createGelatoPrintOrder } from '@/lib/gelato'
+import { createGelatoPrintOrder, createGelatoCardOrder } from '@/lib/gelato'
 
 /**
  * POST /api/webhooks/stripe
@@ -49,10 +49,9 @@ export async function POST(req: NextRequest) {
     if (type === 'digital') {
       await handleDigitalDownload(session, slug, title)
     } else if (type === 'print') {
-      // Pass livemode so Gelato service picks the right API key:
-      // livemode=false → GELATO_API_KEY_TEST (sandbox account, auto-cancelled)
-      // livemode=true  → GELATO_API_KEY (real orders shipped)
       await handlePrintOrder(session, slug, title, session.livemode)
+    } else if (type === 'card') {
+      await handleCardOrder(session, slug, title, session.livemode)
     }
   }
 
@@ -126,8 +125,55 @@ async function handlePrintOrder(
     })
     console.log(`Gelato print order created: ${gelatoOrder.id} for session ${session.id}`)
   } catch (err) {
-    // Log but don't fail the webhook — Stripe won't retry if we return 200.
-    // Alert/retry logic should be added in Sprint 3.
-    console.error('Failed to create Gelato order:', err)
+    console.error('Failed to create Gelato print order:', err)
+  }
+}
+
+// ─── Greeting card / postcard order via Gelato ────────────────────────────────
+
+async function handleCardOrder(
+  session: Stripe.Checkout.Session,
+  slug: string,
+  title: string,
+  livemode: boolean,
+) {
+  const variant  = (session.metadata?.['variant'] ?? '4x6') as '4x6' | '4x6-10pack'
+  const shipping = session.collected_information?.shipping_details
+  const customer = session.customer_details
+
+  if (!shipping?.address || !customer?.email) {
+    console.error('Card order missing shipping address or customer email for session', session.id)
+    return
+  }
+
+  const addr    = shipping.address
+  const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'http://localhost:3000'
+  const artworkFileUrl = `${siteUrl}/assets/artwork/${slug}-preview.jpg`
+
+  try {
+    const gelatoOrder = await createGelatoCardOrder({
+      orderReferenceId: session.id,
+      artworkSlug:      slug,
+      artworkTitle:     title,
+      artworkFileUrl,
+      variant,
+      currency:  session.currency?.toUpperCase() ?? 'USD',
+      livemode,
+      shippingAddress: {
+        firstName:    customer.name?.split(' ')[0] ?? 'Customer',
+        lastName:     customer.name?.split(' ').slice(1).join(' ') ?? '',
+        addressLine1: addr.line1 ?? '',
+        addressLine2: addr.line2 ?? undefined,
+        city:         addr.city ?? '',
+        state:        addr.state ?? '',
+        postCode:     addr.postal_code ?? '',
+        country:      addr.country ?? 'US',
+        email:        customer.email,
+        phone:        customer.phone ?? undefined,
+      },
+    })
+    console.log(`Gelato card order created: ${gelatoOrder.id} for session ${session.id}`)
+  } catch (err) {
+    console.error('Failed to create Gelato card order:', err)
   }
 }

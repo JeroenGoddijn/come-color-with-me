@@ -22,5 +22,11 @@ export const PRINT_SIZES: Record<string, { label: string; amount: number }> = {
   '16x20': { label: '16×20″', amount: 3499 },
 }
 
+/** Postcard/greeting-card variant → Stripe unit_amount (cents) + display label */
+export const CARD_VARIANTS: Record<string, { label: string; amount: number; quantity: number }> = {
+  '4x6':        { label: 'Single Postcard (4×6″)',  amount:  499, quantity:  1 },
+  '4x6-10pack': { label: '10-Pack Postcards (4×6″)', amount: 3499, quantity: 10 },
+}
+
 /** Digital download price in cents */
 export const DIGITAL_PRICE_CENTS = 299

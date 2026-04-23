@@ -121,6 +121,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
               isFree={isFree}
               isPremium={isPremium}
               downloadUrl={artwork.downloadUrl}
+              category={artwork.category}
             />
 
           </div>

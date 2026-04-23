@@ -27,6 +27,7 @@ const DEFAULT_CATS: FilterOption[] = [
   { label: 'Fantasy',   value: 'fantasy' },
   { label: 'Food',      value: 'food' },
   { label: 'Holidays',  value: 'holidays' },
+  { label: 'Cards',     value: 'cards' },
   { label: 'Buildings', value: 'buildings' },
 ]
 
@@ -64,6 +65,7 @@ function ChipGroup({
       </span>
       {options.map((opt) => (
         <button
+          type="button"
           key={opt.value}
           onClick={() => onChange(param, opt.value)}
           className={cn(
@@ -135,6 +137,7 @@ export function FilterBar({
       )}
       {hasFilters && (
         <button
+          type="button"
           onClick={() => router.push(pathname)}
           className="self-start text-xs font-nunito font-semibold text-[#8B7BA8] hover:text-[#F472B6] transition-colors underline underline-offset-2"
         >
