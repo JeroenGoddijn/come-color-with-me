@@ -66,16 +66,14 @@ export async function getGallery(
     ? filters.sort
     : 'newest') as SortKey
 
-  // Build Directus filter object
+  // Build Directus filter object.
+  // NOTE: tag filtering is done in JS below — Directus _contains is a string
+  // operator that fails on JSON-typed columns in v11.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const filter: Record<string, any> = {
     status: { _eq: 'published' },
   }
 
-  if (filters.category) {
-    // `category` URL param filters by tag value — the DB `category` column is unused
-    filter['tags'] = { _contains: filters.category }
-  }
   if (filters.ageGroup) {
     filter['age_group'] = { _eq: filters.ageGroup }
   }
@@ -94,30 +92,30 @@ export async function getGallery(
 
   const client = getClient()
 
-  // Fetch page of items
-  const items = await client.request(
-    readItems('artwork', {
-      filter,
-      limit,
-      offset,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      sort: sortToDirectus(sortKey) as any,
-    })
-  )
-
-  // Fetch total count with same filter (no pagination)
-  const allItems = await client.request(
+  // Fetch all DB-filtered items, then apply tag filter + pagination in JS.
+  // Directus _contains fails on JSON columns, so tag matching uses Array.includes.
+  // This is fine: the catalog is small and avoids a second round-trip for count.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let allItems = (await client.request(
     readItems('artwork', {
       filter,
       limit: -1,
-      fields: ['id'],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      sort: sortToDirectus(sortKey) as any,
     })
-  )
+  )) as any[]
 
-  const total = Array.isArray(allItems) ? allItems.length : 0
+  if (filters.category) {
+    const tag = filters.category
+    allItems = allItems.filter(
+      (item) => Array.isArray(item.tags) && item.tags.includes(tag)
+    )
+  }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return { items: (items as any[]).map(mapArtworkCard), total }
+  const total = allItems.length
+  const pageItems = allItems.slice(offset, offset + limit)
+
+  return { items: pageItems.map(mapArtworkCard), total }
 }
 
 // ---------------------------------------------------------------------------

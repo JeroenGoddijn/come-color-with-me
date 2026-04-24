@@ -33,8 +33,9 @@ const ROOMS: Room[] = [
   // the frame above the sofa (not the dresser); yPct 16 closes the gap to sofa.
   { src: '/assets/rooms/room-scandi-minimal.jpg', xPct: 42, yPct: 16, maxWidthPct: 38, maxHeightPct: 26 },
   // Warm earthy room. Cream boucle sofa, tropical plant right, arch left.
-  // Sofa top ~52%. Frame centred over clean plaster wall between arch and plant.
-  { src: '/assets/rooms/room-warm-living.jpg', xPct: 42, yPct: 8, maxWidthPct: 38, maxHeightPct: 38 },
+  // Clean plaster wall: y=20–51%. Panel/outlet at y≈51%. Frame bottom sits
+  // just above the panel; clear of ceiling zone (y<20%) and sofa (y≈60%).
+  { src: '/assets/rooms/room-warm-living.jpg', xPct: 42, yPct: 25, maxWidthPct: 38, maxHeightPct: 24 },
 ]
 
 function pickRoom(seed: string): Room {
