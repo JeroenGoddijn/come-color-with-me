@@ -27,15 +27,12 @@ type Room = {
 }
 
 const ROOMS: Room[] = [
-  // Green velvet sofa. Sofa top ~35%. Clear white wall; frame sits just above sofa.
-  { src: '/assets/rooms/room-modern-living.jpg', xPct: 50, yPct: 8,  maxWidthPct: 52, maxHeightPct: 24 },
-  // Scandi minimal. Plant left, dresser right. Sofa top ~56%. xPct 42 centres
-  // the frame above the sofa (not the dresser); yPct 16 closes the gap to sofa.
-  { src: '/assets/rooms/room-scandi-minimal.jpg', xPct: 42, yPct: 16, maxWidthPct: 38, maxHeightPct: 26 },
-  // Warm earthy room. Cream boucle sofa, tropical plant right, arch left.
-  // Clean plaster wall: y=20–51%. Panel/outlet at y≈51%. Frame bottom sits
-  // just above the panel; clear of ceiling zone (y<20%) and sofa (y≈60%).
-  { src: '/assets/rooms/room-warm-living.jpg', xPct: 42, yPct: 25, maxWidthPct: 38, maxHeightPct: 24 },
+  // White playroom. Rocking horse + book shelf at bottom (y≈62%). Large clear white wall left.
+  { src: '/assets/rooms/room-kids-playroom.jpg', xPct: 22, yPct: 5, maxWidthPct: 36, maxHeightPct: 52 },
+  // Pink kids bedroom. Bunny plushies on bed, desk right. Clear taupe wall centre-left above headboard.
+  { src: '/assets/rooms/room-kids-bedroom.jpg', xPct: 43, yPct: 6, maxWidthPct: 22, maxHeightPct: 38 },
+  // Nordic nursery. Teepee centre, paper lanterns. Clear white wall left of teepee.
+  { src: '/assets/rooms/room-kids-nursery.jpg', xPct: 34, yPct: 4, maxWidthPct: 18, maxHeightPct: 34 },
 ]
 
 function pickRoom(seed: string): Room {

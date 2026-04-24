@@ -11,13 +11,14 @@ function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirect = searchParams.get('redirect') ?? '/account'
+  const resetSuccess = searchParams.get('reset') === 'success'
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
-  // LR-F7: already logged in → go to account (or redirect param)
+  // Already logged in → go to account (or redirect param)
   useEffect(() => {
     if (!authLoading && user) {
       router.replace(redirect)
@@ -58,6 +59,12 @@ function LoginForm() {
           className="bg-white rounded-[20px] shadow-[0_4px_16px_rgba(155,111,212,0.12)] p-8 flex flex-col gap-5"
           noValidate
         >
+          {resetSuccess && (
+            <div role="status" className="bg-green-50 border border-green-200 text-green-700 text-sm font-nunito rounded-lg px-4 py-3">
+              Password updated! Sign in with your new password.
+            </div>
+          )}
+
           {error && (
             <div role="alert" className="bg-red-50 border border-red-200 text-red-700 text-sm font-nunito rounded-lg px-4 py-3">
               {error}
@@ -81,9 +88,17 @@ function LoginForm() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="font-nunito font-semibold text-sm text-[#3D1F5C]">
-              Password
-            </label>
+            <div className="flex items-center justify-between">
+              <label htmlFor="password" className="font-nunito font-semibold text-sm text-[#3D1F5C]">
+                Password
+              </label>
+              <Link
+                href="/auth/forgot-password"
+                className="font-nunito text-xs text-[#9B6FD4] hover:text-[#F472B6] transition-colors"
+              >
+                Forgot password?
+              </Link>
+            </div>
             <input
               id="password"
               type="password"
