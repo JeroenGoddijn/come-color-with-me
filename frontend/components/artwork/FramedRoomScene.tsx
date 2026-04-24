@@ -27,14 +27,14 @@ type Room = {
 }
 
 const ROOMS: Room[] = [
-  // Green velvet couch. Sofa top ~37%. yPct 8 gives 7% ceiling clearance;
-  // maxHeight 26 keeps portrait bottoms above the couch (8+26=34 < 37).
-  { src: '/assets/rooms/room-modern-living.jpg', xPct: 50, yPct: 8,  maxWidthPct: 52, maxHeightPct: 26 },
-  // Scandi living room. Plant left, dresser right. yPct 10 clears ceiling;
-  // maxHeight 26 keeps bottom above furniture.
-  { src: '/assets/rooms/room-scandi-minimal.jpg', xPct: 50, yPct: 10, maxWidthPct: 46, maxHeightPct: 26 },
-  // Warm neutral living room. Sofa top ~65%. Large clear wall band.
-  { src: '/assets/rooms/room-warm-living.jpg',    xPct: 50, yPct: 25, maxWidthPct: 50, maxHeightPct: 36 },
+  // Green velvet sofa. Sofa top ~35%. Clear white wall; frame sits just above sofa.
+  { src: '/assets/rooms/room-modern-living.jpg', xPct: 50, yPct: 8,  maxWidthPct: 52, maxHeightPct: 24 },
+  // Scandi minimal. Plant left, dresser right. Sofa top ~56%. xPct 42 centres
+  // the frame above the sofa (not the dresser); yPct 16 closes the gap to sofa.
+  { src: '/assets/rooms/room-scandi-minimal.jpg', xPct: 42, yPct: 16, maxWidthPct: 38, maxHeightPct: 26 },
+  // Warm earthy room. Cream boucle sofa, tropical plant right, arch left.
+  // Sofa top ~52%. Frame centred over clean plaster wall between arch and plant.
+  { src: '/assets/rooms/room-warm-living.jpg', xPct: 42, yPct: 8, maxWidthPct: 38, maxHeightPct: 38 },
 ]
 
 function pickRoom(seed: string): Room {
