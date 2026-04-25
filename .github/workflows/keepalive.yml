@@ -18,4 +18,15 @@ jobs:
       - name: Ping Backend API
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://ccwm-backend.onrender.com/health || echo "timeout/error")
-          echo "Backend → $STATUS"
+          echo "Backend /health → $STATUS"
+
+      - name: Warm Directus-backed routes
+        # /health doesn't touch Directus. Hit a real artwork route so the
+        # Directus connection pool + query cache stay warm too — otherwise
+        # the first visitor after a 15-min idle window pays the cold-start
+        # cost and the homepage build can race it (see Apr 25 incident).
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://ccwm-backend.onrender.com/api/homepage/featured || echo "timeout/error")
+          echo "Backend /api/homepage/featured → $STATUS"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://ccwm-backend.onrender.com/api/gallery || echo "timeout/error")
+          echo "Backend /api/gallery → $STATUS"
