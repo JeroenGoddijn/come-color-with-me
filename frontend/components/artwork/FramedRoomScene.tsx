@@ -26,14 +26,18 @@ type Room = {
   maxHeightPct: number
 }
 
+// Placements come from the designer handoff package at
+// deliverables/design/ccwm_rooms/placements.json. Do not tweak by eye —
+// update the JSON, re-export annotated PNGs, then sync this array.
+// The bedroom-blue source spec is a perspective quad with ~2% skew; we
+// render it as the quad's bounding box (visually indistinguishable at this
+// scale, single code path).
 const ROOMS: Room[] = [
-  // Playroom: vast empty white wall. Wardrobe-free zone x=0–60%, shelf at y≈61%.
-  // Frame centred at 22%, top 18%, bottom ≤62% (just above shelf).
-  { src: '/assets/rooms/room-kids-playroom.jpg', xPct: 22, yPct: 18, maxWidthPct: 25, maxHeightPct: 44 },
-  // Bedroom: taupe back wall above the bed. Wardrobe ends x≈32%; existing Totoro gallery
-  // starts x≈63%. Headboard top y≈51%. Frame centred x=48%, top y=14%, bottom ≤48%
-  // (3% breathing room above headboard).
-  { src: '/assets/rooms/room-kids-bedroom.jpg',  xPct: 48, yPct: 14, maxWidthPct: 26, maxHeightPct: 34 },
+  { src: '/assets/rooms/room-nursery-crib.jpg',         xPct: 61,   yPct: 24, maxWidthPct: 20, maxHeightPct: 27 },
+  { src: '/assets/rooms/room-kids-bedroom-blue.jpg',    xPct: 24.5, yPct: 16, maxWidthPct: 19, maxHeightPct: 29 },
+  { src: '/assets/rooms/room-kindergarten-floral.jpg',  xPct: 70,   yPct: 13, maxWidthPct: 18, maxHeightPct: 25 },
+  { src: '/assets/rooms/room-classroom-blank-wall.jpg', xPct: 62,   yPct: 37, maxWidthPct: 22, maxHeightPct: 24 },
+  { src: '/assets/rooms/room-playroom-tree.jpg',        xPct: 59,   yPct: 12, maxWidthPct: 16, maxHeightPct: 22 },
 ]
 
 function pickRoom(seed: string): Room {
