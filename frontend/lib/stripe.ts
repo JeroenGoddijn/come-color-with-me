@@ -10,7 +10,10 @@ export function getStripe(): Stripe {
   if (!_stripe) {
     const key = process.env['STRIPE_SECRET_KEY']
     if (!key) throw new Error('STRIPE_SECRET_KEY is not set')
-    _stripe = new Stripe(key, { apiVersion: '2026-03-25.dahlia' })
+    // No apiVersion → Stripe SDK uses its bundled default. Pinning a literal
+    // string breaks builds when fresh npm ci on Vercel resolves a different
+    // stripe@22.x patch whose LatestApiVersion type doesn't include it.
+    _stripe = new Stripe(key)
   }
   return _stripe
 }
