@@ -27,15 +27,13 @@ type Room = {
 }
 
 const ROOMS: Room[] = [
-  // Playroom: vast white wall x=0–55%, shelf+horse at y≈61%. Frame centred at 22% from
-  // left, top at 18% (170px below ceiling). Portrait art fills to y≈59%, just above shelf.
+  // Playroom: vast empty white wall. Wardrobe-free zone x=0–60%, shelf at y≈61%.
+  // Frame centred at 22%, top 18%, bottom ≤62% (just above shelf).
   { src: '/assets/rooms/room-kids-playroom.jpg', xPct: 22, yPct: 18, maxWidthPct: 25, maxHeightPct: 44 },
-  // Bedroom: taupe accent wall between closets (end x≈32%) and existing Totoro gallery
-  // (start x≈71%). Headboard top at y≈43%; frame top at 10%, bottom bounded at 42%.
-  { src: '/assets/rooms/room-kids-bedroom.jpg',  xPct: 46, yPct: 10, maxWidthPct: 24, maxHeightPct: 32 },
-  // Nursery: narrow white main-wall strip between the planked-wall corner (x≈22%) and
-  // the teepee canvas (x≈37%). Lanterns hang at x≈43%+, clear of frame right edge at 39%.
-  { src: '/assets/rooms/room-kids-nursery.jpg',  xPct: 30, yPct: 10, maxWidthPct: 14, maxHeightPct: 50 },
+  // Bedroom: taupe back wall above the bed. Wardrobe ends x≈32%; existing Totoro gallery
+  // starts x≈63%. Headboard top y≈51%. Frame centred x=48%, top y=14%, bottom ≤48%
+  // (3% breathing room above headboard).
+  { src: '/assets/rooms/room-kids-bedroom.jpg',  xPct: 48, yPct: 14, maxWidthPct: 26, maxHeightPct: 34 },
 ]
 
 function pickRoom(seed: string): Room {
