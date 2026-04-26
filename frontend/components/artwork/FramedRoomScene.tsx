@@ -45,10 +45,10 @@ const ROOMS: Room[] = [
     src: '/assets/rooms/room-poster-vines.jpg',
     objectPosition: '0% 50%',
     quad: [
-      { xPct: 19.6, yPct: 40.1 },
-      { xPct: 44.6, yPct: 40.1 },
-      { xPct: 44.6, yPct: 86.7 },
-      { xPct: 19.6, yPct: 86.7 },
+      { xPct: 20.4, yPct: 40.9 },
+      { xPct: 44.1, yPct: 40.9 },
+      { xPct: 44.1, yPct: 86.1 },
+      { xPct: 20.4, yPct: 86.1 },
     ],
   },
   // Landscape canvas: light blue wall — frameless stretched canvas.
