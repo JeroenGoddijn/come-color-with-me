@@ -28,34 +28,38 @@ type Room = {
 // Triangulated against the production 4:3 1600×1200 crops in /public/assets/rooms/.
 // Update placements only after re-measuring against the actual JPG file.
 const ROOMS: Room[] = [
-  // Nursery — left cream picture frame (palm tree painting opening). Landscape ~1.25.
+  // Nursery — left cream frame's MAT OPENING (the white mat's cutout, not the
+  // small painting inside it). Near-square ~1.02 — fits both portrait and
+  // landscape artwork, which fills the mat cutout edge-to-edge.
   {
     src: '/assets/rooms/room-nursery-crib.jpg',
     quad: [
-      { xPct: 72.8, yPct: 30.4 },
-      { xPct: 79.1, yPct: 30.4 },
-      { xPct: 79.1, yPct: 37.1 },
-      { xPct: 72.8, yPct: 37.1 },
+      { xPct: 72.2, yPct: 29.2 },
+      { xPct: 80.0, yPct: 29.6 },
+      { xPct: 79.9, yPct: 39.6 },
+      { xPct: 72.1, yPct: 39.8 },
     ],
   },
-  // Nursery — right cream picture frame (bridge painting opening). Landscape ~1.41.
+  // Nursery — right cream frame's MAT OPENING. Landscape ~1.57 — fits
+  // landscape artwork only.
   {
     src: '/assets/rooms/room-nursery-crib.jpg',
     quad: [
-      { xPct: 85.0, yPct: 27.5 },
-      { xPct: 92.5, yPct: 27.5 },
-      { xPct: 92.5, yPct: 34.6 },
-      { xPct: 85.0, yPct: 34.6 },
+      { xPct: 86.3, yPct: 27.5 },
+      { xPct: 95.6, yPct: 27.5 },
+      { xPct: 95.6, yPct: 35.4 },
+      { xPct: 86.3, yPct: 35.4 },
     ],
   },
-  // Classroom — green chalkboard easel surface, slight back-lean perspective. Portrait ~0.65.
+  // Classroom — green chalkboard easel surface. Portrait ~0.66 with subtle
+  // right-side recession (right edge ~1pp shorter than left).
   {
     src: '/assets/rooms/room-classroom-blank-wall.jpg',
     quad: [
-      { xPct: 54.7, yPct: 52.5 },
-      { xPct: 67.5, yPct: 53.3 },
-      { xPct: 67.8, yPct: 80.0 },
-      { xPct: 54.4, yPct: 79.6 },
+      { xPct: 55.0, yPct: 52.7 },
+      { xPct: 69.4, yPct: 53.5 },
+      { xPct: 69.7, yPct: 82.7 },
+      { xPct: 54.4, yPct: 83.5 },
     ],
   },
 ]
