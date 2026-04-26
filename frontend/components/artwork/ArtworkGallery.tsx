@@ -10,6 +10,9 @@ export type GalleryImage = {
   label:   string
   /** When true, renders a dynamic CSS room scene instead of the static image */
   framed?: boolean
+  /** Override the thumbnail image — useful when the full view is a room scene
+   *  that looks poor at square thumbnail dimensions. */
+  thumb?:  string
 }
 
 type Props = {
@@ -57,20 +60,13 @@ export function ArtworkGallery({ images, title, slug }: Props) {
                   : 'border-transparent opacity-60 hover:opacity-90'
               }`}
             >
-              {img.framed ? (
-                /* Thumbnail for the framed tab — mini room preview */
-                <div className="absolute inset-0">
-                  <FramedRoomScene src={img.src} alt={img.label} slug={slug} />
-                </div>
-              ) : (
-                <Image
-                  src={img.src}
-                  alt={img.label}
-                  fill
-                  sizes="120px"
-                  className="object-cover"
-                />
-              )}
+              <Image
+                src={img.thumb ?? img.src}
+                alt={img.label}
+                fill
+                sizes="120px"
+                className="object-cover"
+              />
               <span className="absolute bottom-0 inset-x-0 bg-black/40 text-white text-[10px] font-nunito font-semibold text-center py-1 leading-tight z-10">
                 {img.label}
               </span>

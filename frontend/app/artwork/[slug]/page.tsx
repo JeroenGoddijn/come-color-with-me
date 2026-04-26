@@ -68,7 +68,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
   const galleryImages = [
     { src: artworkPreview(artwork.slug), alt: artwork.title,               label: 'Artwork' },
     ...(showFramedTab
-      ? [{ src: artworkPreview(artwork.slug), alt: `${artwork.title} — framed`, label: 'Framed', framed: true }]
+      ? [{ src: artworkPreview(artwork.slug), alt: `${artwork.title} — framed`, label: 'Framed', framed: true, thumb: artworkWall(artwork.slug) }]
       : []),
     { src: artworkZoom(artwork.slug),    alt: `${artwork.title} — detail`, label: 'Detail'  },
     // { src: artworkColoring(artwork.slug), alt: `Coloring ${artwork.title}`, label: 'In Use' },
