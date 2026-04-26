@@ -23,43 +23,47 @@ type Room = {
    * No synthetic frame is rendered.
    */
   quad: [Pt, Pt, Pt, Pt]
+  /**
+   * CSS object-position for the background Image. Required when the source
+   * photo must be cropped to 4:3 at a non-default anchor (e.g. 'left center'
+   * or 'center top'). Coordinates in this file were triangulated against the
+   * same crop — see scripts/debug-frame-overlay.sh.
+   */
+  objectPosition?: string
 }
 
-// Triangulated against the production 4:3 1600×1200 crops in /public/assets/rooms/.
-// Update placements only after re-measuring against the actual JPG file.
+// Pixel-perfect corners measured via scripts/debug-frame-overlay.sh against
+// the production 4:3 1600×1200 crops in /public/assets/rooms/.
+// To update: re-run the overlay script on the source file and iterate visually.
 const ROOMS: Room[] = [
-  // Nursery — left cream frame's MAT OPENING (the white mat's cutout, not the
-  // small painting inside it). Near-square ~1.02 — fits both portrait and
-  // landscape artwork, which fills the mat cutout edge-to-edge.
+  // Portrait frame: white wall with vine trellis — black thin-profile frame.
+  // Source: Pexels #587441 (2000×1333) → resize to 1800×1200, left-crop to 1600.
+  // objectPosition 'left center' reproduces that crop in the browser.
+  // Inner art area measured by pixel brightness scan: x=314–713, y=481–1040 (1600×1200).
+  // Pixel aspect ≈ 0.71 (portrait). Fits portrait artworks; rejects landscape.
   {
-    src: '/assets/rooms/room-nursery-crib.jpg',
+    src: '/assets/rooms/room-poster-vines.jpg',
+    objectPosition: '0% 50%',
     quad: [
-      { xPct: 72.2, yPct: 29.2 },
-      { xPct: 80.0, yPct: 29.6 },
-      { xPct: 79.9, yPct: 39.6 },
-      { xPct: 72.1, yPct: 39.8 },
+      { xPct: 19.6, yPct: 40.1 },
+      { xPct: 44.6, yPct: 40.1 },
+      { xPct: 44.6, yPct: 86.7 },
+      { xPct: 19.6, yPct: 86.7 },
     ],
   },
-  // Nursery — right cream frame's MAT OPENING. Landscape ~1.57 — fits
-  // landscape artwork only.
+  // Landscape canvas: light blue wall — frameless stretched canvas.
+  // Source: Pexels #8012234 (2000×3000) → resize to 1600×2400, top-crop to 1200.
+  // objectPosition 'center top' reproduces that crop in the browser.
+  // Canvas surface measured by pixel brightness scan: x=791–1527, y=304–827 (1600×1200).
+  // Pixel aspect ≈ 1.41 (landscape). Fits landscape artworks; rejects portrait.
   {
-    src: '/assets/rooms/room-nursery-crib.jpg',
+    src: '/assets/rooms/room-canvas-blue.jpg',
+    objectPosition: '50% 0%',
     quad: [
-      { xPct: 86.3, yPct: 27.5 },
-      { xPct: 95.6, yPct: 27.5 },
-      { xPct: 95.6, yPct: 35.4 },
-      { xPct: 86.3, yPct: 35.4 },
-    ],
-  },
-  // Classroom — green chalkboard easel surface. Portrait ~0.66 with subtle
-  // right-side recession (right edge ~1pp shorter than left).
-  {
-    src: '/assets/rooms/room-classroom-blank-wall.jpg',
-    quad: [
-      { xPct: 55.0, yPct: 52.7 },
-      { xPct: 69.4, yPct: 53.5 },
-      { xPct: 69.7, yPct: 82.7 },
-      { xPct: 54.4, yPct: 83.5 },
+      { xPct: 49.4, yPct: 25.3 },
+      { xPct: 95.4, yPct: 25.3 },
+      { xPct: 95.4, yPct: 68.9 },
+      { xPct: 49.4, yPct: 68.9 },
     ],
   },
 ]
@@ -237,6 +241,7 @@ export function FramedRoomScene({ src, alt, slug = '' }: Props) {
         fill
         sizes="(max-width: 768px) 100vw, 55vw"
         className="object-cover"
+        style={room.objectPosition ? { objectPosition: room.objectPosition } : undefined}
         priority
       />
       {transform && (
