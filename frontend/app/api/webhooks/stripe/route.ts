@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { getStripe } from '@/lib/stripe'
 import { createGelatoPrintOrder, createGelatoCardOrder } from '@/lib/gelato'
+import { createAdminClient } from '@/lib/supabase-admin'
 
 /**
  * POST /api/webhooks/stripe
@@ -65,14 +66,24 @@ async function handleDigitalDownload(
   slug: string,
   title: string,
 ) {
-  // Record the purchase in Supabase so the account dashboard can show it
-  // and so the download token can be validated against a paid session.
-  //
-  // For Sprint 2 MVP we rely on Stripe session verification at download time
-  // (see /api/downloads/verify) rather than a separate DB record.
-  // Sprint 3 will add: supabase.from('downloads').insert({ ... })
-
   console.log(`Digital download purchased: ${title} (${slug}) — session ${session.id}`)
+
+  const userId = session.metadata?.['userId']
+  if (!userId) return
+
+  const supabase = createAdminClient()
+  if (!supabase) {
+    console.warn('SUPABASE_SERVICE_ROLE_KEY not set — skipping download history write')
+    return
+  }
+
+  const { error } = await supabase.from('downloads').insert({
+    user_id:           userId,
+    stripe_session_id: session.id,
+    artwork_slug:      slug,
+    artwork_title:     title,
+  })
+  if (error) console.error('Failed to record download in Supabase:', error.message)
 }
 
 // ─── Print order via Gelato ───────────────────────────────────────────────────

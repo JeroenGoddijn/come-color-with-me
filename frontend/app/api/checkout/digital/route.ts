@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { getStripe, DIGITAL_PRICE_CENTS } from '@/lib/stripe'
 
 /**
@@ -32,6 +33,27 @@ export async function POST(req: NextRequest) {
 
   const siteUrl = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'http://localhost:3000'
 
+  // Capture the logged-in user's ID so the webhook can associate the download record.
+  // Guest checkouts (no session) are allowed — userId will be omitted from metadata.
+  let userId: string | undefined
+  try {
+    const supabase = createServerClient(
+      process.env['NEXT_PUBLIC_SUPABASE_URL']!,
+      process.env['NEXT_PUBLIC_SUPABASE_ANON_KEY']!,
+      {
+        cookies: {
+          get: (name: string) => req.cookies.get(name)?.value,
+          set: (_name: string, _value: string, _opts: CookieOptions) => {},
+          remove: (_name: string, _opts: CookieOptions) => {},
+        },
+      }
+    )
+    const { data: { user } } = await supabase.auth.getUser()
+    userId = user?.id
+  } catch {
+    // Non-fatal — proceed without associating the download to a user
+  }
+
   try {
     const stripe = getStripe()
     const session = await stripe.checkout.sessions.create({
@@ -55,6 +77,7 @@ export async function POST(req: NextRequest) {
         type:  'digital',
         slug,
         title,
+        ...(userId ? { userId } : {}),
       },
       success_url: `${siteUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}&type=digital&slug=${encodeURIComponent(slug)}`,
       cancel_url:  `${siteUrl}/artwork/${encodeURIComponent(slug)}`,

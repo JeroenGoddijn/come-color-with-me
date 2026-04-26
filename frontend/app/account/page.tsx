@@ -1,7 +1,9 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/useAuth'
+import { createBrowserClient } from '@/lib/auth'
 
 // ─── Unauthenticated state ────────────────────────────────────────────────────
 
@@ -43,9 +45,32 @@ function Loading() {
   )
 }
 
-// ─── Download history empty state ─────────────────────────────────────────────
+// ─── Download history ──────────────────────────────────────────────────────────
+
+type DownloadRecord = {
+  id: string
+  artwork_slug: string
+  artwork_title: string
+  downloaded_at: string
+}
 
 function DownloadHistory() {
+  const [downloads, setDownloads] = useState<DownloadRecord[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const supabase = createBrowserClient()
+    supabase
+      .from('downloads')
+      .select('id, artwork_slug, artwork_title, downloaded_at')
+      .order('downloaded_at', { ascending: false })
+      .limit(20)
+      .then(({ data }) => {
+        setDownloads(data ?? [])
+        setLoading(false)
+      })
+  }, [])
+
   return (
     <div className="bg-white rounded-[20px] p-8 shadow-sm border border-[#C4B5FD]/20">
       <div className="flex items-center justify-between mb-6">
@@ -53,27 +78,58 @@ function DownloadHistory() {
           Download History
         </h2>
         <span className="font-nunito text-xs text-[#8B7BA8] bg-[#F5F3FF] border border-[#C4B5FD]/30 px-3 py-1 rounded-full">
-          0 downloads
+          {loading ? '…' : `${downloads.length} download${downloads.length !== 1 ? 's' : ''}`}
         </span>
       </div>
 
-      {/* Empty state */}
-      <div className="text-center py-10">
-        <p className="text-5xl mb-4" aria-hidden="true">🖍️</p>
-        <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg mb-2">
-          No downloads yet
-        </p>
-        <p className="font-nunito text-[#8B7BA8] text-sm leading-relaxed max-w-xs mx-auto mb-6">
-          Every coloring page you download will appear here so you can
-          find and re-download them any time.
-        </p>
-        <Link
-          href="/coloring-pages"
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors"
-        >
-          Browse Free Coloring Pages
-        </Link>
-      </div>
+      {loading ? (
+        <div className="flex justify-center py-10">
+          <div className="w-7 h-7 border-4 border-[#C4B5FD] border-t-[#9B6FD4] rounded-full animate-spin" />
+        </div>
+      ) : downloads.length === 0 ? (
+        <div className="text-center py-10">
+          <p className="text-5xl mb-4" aria-hidden="true">🖍️</p>
+          <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg mb-2">
+            No downloads yet
+          </p>
+          <p className="font-nunito text-[#8B7BA8] text-sm leading-relaxed max-w-xs mx-auto mb-6">
+            Every coloring page you download will appear here so you can
+            find and re-download them any time.
+          </p>
+          <Link
+            href="/coloring-pages"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors"
+          >
+            Browse Free Coloring Pages
+          </Link>
+        </div>
+      ) : (
+        <ul className="divide-y divide-[#C4B5FD]/20">
+          {downloads.map((d) => (
+            <li key={d.id} className="flex items-center justify-between py-3 gap-4">
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="text-2xl flex-shrink-0" aria-hidden="true">🖍️</span>
+                <div className="min-w-0">
+                  <p className="font-nunito font-semibold text-[#3D1F5C] text-sm truncate">
+                    {d.artwork_title}
+                  </p>
+                  <p className="font-nunito text-[#8B7BA8] text-xs">
+                    {new Date(d.downloaded_at).toLocaleDateString('en-US', {
+                      month: 'short', day: 'numeric', year: 'numeric',
+                    })}
+                  </p>
+                </div>
+              </div>
+              <Link
+                href={`/artwork/${d.artwork_slug}`}
+                className="flex-shrink-0 font-nunito font-bold text-xs text-[#9B6FD4] hover:text-[#7c56b0] transition-colors"
+              >
+                View →
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
@@ -116,7 +172,16 @@ function OrderHistory() {
 // ─── Main signed-in dashboard ─────────────────────────────────────────────────
 
 function Dashboard({ email, onSignOut }: { email: string; onSignOut: () => void }) {
-  // Derive display name from email prefix
+  const [downloadCount, setDownloadCount] = useState<number | null>(null)
+
+  useEffect(() => {
+    const supabase = createBrowserClient()
+    supabase
+      .from('downloads')
+      .select('id', { count: 'exact', head: true })
+      .then(({ count }) => setDownloadCount(count ?? 0))
+  }, [])
+
   const displayName = email.split('@')[0] ?? 'there'
   const formattedName = displayName.charAt(0).toUpperCase() + displayName.slice(1)
 
@@ -139,7 +204,7 @@ function Dashboard({ email, onSignOut }: { email: string; onSignOut: () => void 
         {/* Quick stats */}
         <div className="grid grid-cols-3 gap-4">
           {[
-            { icon: '⬇️', value: '0', label: 'Downloads' },
+            { icon: '⬇️', value: downloadCount === null ? '…' : String(downloadCount), label: 'Downloads' },
             { icon: '🖼️', value: '0', label: 'Orders' },
             { icon: '🎨', value: '0', label: 'Favourites' },
           ].map(({ icon, value, label }) => (

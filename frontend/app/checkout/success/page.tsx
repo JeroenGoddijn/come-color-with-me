@@ -53,7 +53,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
           Please email us and we&apos;ll sort it out immediately.
         </p>
         <a
-          href="mailto:hello@comecolorwithme.com?subject=Download%20issue"
+          href="mailto:hello@comecolorwith.me?subject=Download%20issue"
           className="inline-block mt-2 font-nunito font-bold text-sm text-[#9B6FD4] hover:underline"
         >
           Contact support →
