@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { apiFetch } from '@/lib/api'
-import { artworkPreview, artworkZoom, artworkWall } from '@/lib/assets'
+import { artworkPreview, artworkZoom } from '@/lib/assets'
 import { Badge } from '@/components/ui/Badge'
 import { ArtworkGallery } from '@/components/artwork/ArtworkGallery'
 import { ArtworkGrid } from '@/components/artwork/ArtworkGrid'
@@ -68,7 +68,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
   const galleryImages = [
     { src: artworkPreview(artwork.slug), alt: artwork.title,               label: 'Artwork' },
     ...(showFramedTab
-      ? [{ src: artworkPreview(artwork.slug), alt: `${artwork.title} — framed`, label: 'Framed', framed: true, thumb: artworkWall(artwork.slug) }]
+      ? [{ src: artworkPreview(artwork.slug), alt: `${artwork.title} — framed`, label: 'Framed', framed: true }]
       : []),
     { src: artworkZoom(artwork.slug),    alt: `${artwork.title} — detail`, label: 'Detail'  },
     // { src: artworkColoring(artwork.slug), alt: `Coloring ${artwork.title}`, label: 'In Use' },

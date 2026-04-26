@@ -54,19 +54,23 @@ export function ArtworkGallery({ images, title, slug }: Props) {
               type="button"
               onClick={() => setActive(i)}
               aria-label={`View ${img.label}`}
-              className={`relative flex-1 aspect-square rounded-[12px] overflow-hidden border-2 transition-all duration-150 ${
+              className={`relative flex-1 aspect-[4/3] rounded-[12px] overflow-hidden border-2 transition-all duration-150 ${
                 i === active
                   ? 'border-[#9B6FD4] shadow-[0_0_0_3px_rgba(155,111,212,0.2)]'
                   : 'border-transparent opacity-60 hover:opacity-90'
               }`}
             >
-              <Image
-                src={img.thumb ?? img.src}
-                alt={img.label}
-                fill
-                sizes="120px"
-                className="object-cover"
-              />
+              {img.framed ? (
+                <FramedRoomScene src={img.src} alt={img.label} slug={slug} />
+              ) : (
+                <Image
+                  src={img.thumb ?? img.src}
+                  alt={img.label}
+                  fill
+                  sizes="120px"
+                  className="object-cover"
+                />
+              )}
               <span className="absolute bottom-0 inset-x-0 bg-black/40 text-white text-[10px] font-nunito font-semibold text-center py-1 leading-tight z-10">
                 {img.label}
               </span>
