@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
+import { createBrowserClient } from '@/lib/auth'
 import { Button } from '@/components/ui/Button'
 
 function LoginForm() {
@@ -17,6 +18,8 @@ function LoginForm() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [unconfirmed, setUnconfirmed] = useState(false)
+  const [resendState, setResendState] = useState<'idle' | 'sending' | 'sent'>('idle')
 
   // Already logged in → go to account (or redirect param)
   useEffect(() => {
@@ -30,14 +33,33 @@ function LoginForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
+    setUnconfirmed(false)
+    setResendState('idle')
     setLoading(true)
     try {
       await signIn(email, password)
       router.push(redirect)
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Sign in failed. Please try again.')
+      const msg = err instanceof Error ? err.message : 'Sign in failed. Please try again.'
+      if (msg.toLowerCase().includes('email not confirmed')) {
+        setUnconfirmed(true)
+        setError('Your email address hasn\'t been confirmed yet.')
+      } else {
+        setError(msg)
+      }
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function handleResend() {
+    setResendState('sending')
+    try {
+      const supabase = createBrowserClient()
+      await supabase.auth.resend({ type: 'signup', email })
+      setResendState('sent')
+    } catch {
+      setResendState('idle')
     }
   }
 
@@ -66,8 +88,24 @@ function LoginForm() {
           )}
 
           {error && (
-            <div role="alert" className="bg-red-50 border border-red-200 text-red-700 text-sm font-nunito rounded-lg px-4 py-3">
-              {error}
+            <div role="alert" className="bg-red-50 border border-red-200 text-red-700 text-sm font-nunito rounded-lg px-4 py-3 space-y-2">
+              <p>{error}</p>
+              {unconfirmed && (
+                resendState === 'sent' ? (
+                  <p role="status" className="text-emerald-600 font-semibold">
+                    ✓ Confirmation email resent — check your inbox.
+                  </p>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleResend}
+                    disabled={resendState === 'sending'}
+                    className="underline font-semibold hover:text-red-900 transition-colors disabled:opacity-50"
+                  >
+                    {resendState === 'sending' ? 'Sending…' : 'Resend confirmation email'}
+                  </button>
+                )
+              )}
             </div>
           )}
 

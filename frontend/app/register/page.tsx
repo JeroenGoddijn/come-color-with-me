@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
+import { createBrowserClient } from '@/lib/auth'
 import { Button } from '@/components/ui/Button'
 
 export default function RegisterPage() {
@@ -15,6 +16,7 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
+  const [resendState, setResendState] = useState<'idle' | 'sending' | 'sent'>('idle')
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -48,6 +50,17 @@ export default function RegisterPage() {
     }
   }
 
+  async function handleResend() {
+    setResendState('sending')
+    try {
+      const supabase = createBrowserClient()
+      await supabase.auth.resend({ type: 'signup', email })
+      setResendState('sent')
+    } catch {
+      setResendState('idle')
+    }
+  }
+
   if (done) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-4 py-16">
@@ -60,7 +73,26 @@ export default function RegisterPage() {
             We sent a confirmation link to <strong>{email}</strong>.
             Click it to activate your account, then log in.
           </p>
-          <div className="mt-8">
+
+          {resendState === 'sent' ? (
+            <p role="status" className="mt-6 font-nunito text-sm text-emerald-600">
+              ✓ Confirmation email resent — check your inbox.
+            </p>
+          ) : (
+            <p className="mt-6 font-nunito text-sm text-[#8B7BA8]">
+              Didn&apos;t receive it?{' '}
+              <button
+                type="button"
+                onClick={handleResend}
+                disabled={resendState === 'sending'}
+                className="text-[#9B6FD4] font-semibold hover:text-[#F472B6] transition-colors disabled:opacity-50"
+              >
+                {resendState === 'sending' ? 'Sending…' : 'Resend confirmation email'}
+              </button>
+            </p>
+          )}
+
+          <div className="mt-6">
             <Link href="/login">
               <Button variant="primary">Go to Login</Button>
             </Link>
