@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { existsSync } from 'fs'
+import { join } from 'path'
 import { getStripe } from '@/lib/stripe'
 
 /**
@@ -49,17 +51,27 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Not a digital download purchase' }, { status: 400 })
     }
 
-    // Return the download URL.
-    // Sprint 2: serves the PDF from public assets (fine for launch).
-    // Sprint 3: upgrade to Supabase Storage private bucket + signed URL.
-    const siteUrl    = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'http://localhost:3000'
-    const downloadUrl = `${siteUrl}/assets/artwork/${slug}-download.pdf`
+    // Resolve download file: prefer -download.pdf, fall back to -preview.jpg
+    // (finished artwork has no separate PDF — the preview image is the deliverable).
+    // Sprint 3: replace with Supabase Storage signed URL.
+    const siteUrl  = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'http://localhost:3000'
+    const publicDir = join(process.cwd(), 'public')
+    const candidates = [
+      `assets/artwork/${slug}-download.pdf`,
+      `assets/artwork/${slug}-preview.jpg`,
+    ]
+    const fileRelative = candidates.find((f) => existsSync(join(publicDir, f)))
+
+    if (!fileRelative) {
+      console.error(`No download file found for slug: ${slug}`)
+      return NextResponse.json({ error: 'Download file not available' }, { status: 404 })
+    }
 
     return NextResponse.json({
       success:     true,
       slug,
       title:       session.metadata?.['title'] ?? slug,
-      downloadUrl,
+      downloadUrl: `${siteUrl}/${fileRelative}`,
     })
   } catch (err) {
     console.error('Download verify error:', err)

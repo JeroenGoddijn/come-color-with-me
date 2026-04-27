@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Come Color With Me">
+  <defs>
+    <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9B6FD4"/>
+      <stop offset="100%" stop-color="#F472B6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: brand gradient circle -->
+  <circle cx="16" cy="16" r="16" fill="url(#fg)"/>
+
+  <!-- Palette body (simplified, no stroke needed at small size) -->
+  <path d="M 5 17 C 4 11 9 5 16 5 C 23 4 28 9 28 16 C 28 22 23 27 16 27 C 9 27 5 23 5 17 Z"
+        fill="white" opacity="0.95"/>
+
+  <!-- Thumb hole -->
+  <ellipse cx="21" cy="23" rx="3.5" ry="3" fill="url(#fg)"/>
+
+  <!-- 3 bold paint blobs (readable at 16px) -->
+  <circle cx="10" cy="12" r="3.5" fill="#F472B6"/>
+  <circle cx="17" cy="8"  r="3"   fill="#9B6FD4"/>
+  <circle cx="24" cy="12" r="3"   fill="#C4B5FD"/>
+</svg>

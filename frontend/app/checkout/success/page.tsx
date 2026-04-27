@@ -78,7 +78,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
         download
         className="inline-flex items-center gap-2 px-8 py-3.5 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-base transition-colors shadow-sm"
       >
-        ⬇ Download Your PDF
+        ⬇ Download Your File
       </a>
       <p className="font-nunito text-[#8B7BA8] text-xs">
         If the download doesn&apos;t start, <a href={result?.downloadUrl} className="underline">click here</a>.

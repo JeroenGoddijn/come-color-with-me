@@ -59,6 +59,10 @@ export const metadata: Metadata = {
       'Free coloring pages and premium art prints by Amalia, age 8.',
     images: ['/assets/artwork/colorful-cupcakes-preview.jpg'],
   },
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    apple: { url: '/assets/brand/logo-icon.svg' },
+  },
   robots: {
     index: true,
     follow: true,

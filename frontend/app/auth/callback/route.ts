@@ -44,7 +44,11 @@ export async function GET(request: NextRequest) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+      // Append ?confirmed=true for email confirmations (not password resets)
+      // so the account page can show a one-time confirmation banner.
+      const isEmailConfirmation = next === '/account' || next === '/'
+      const destination = isEmailConfirmation ? `${origin}${next}?confirmed=true` : `${origin}${next}`
+      return NextResponse.redirect(destination)
     }
   }
 

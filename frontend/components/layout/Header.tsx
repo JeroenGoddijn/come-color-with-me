@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { cn } from '@/utils/cn'
@@ -35,9 +36,13 @@ export function Header() {
         <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-6">
           {/* Logo */}
           <Link href="/" aria-label="Come Color With Me – home" className="flex items-center gap-3 flex-shrink-0">
-            <div className="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm text-[1.5rem]">
-              🎨
-            </div>
+            <Image
+              src="/assets/brand/logo-icon.svg"
+              alt=""
+              width={44}
+              height={44}
+              priority
+            />
             <span className="font-['Bubblegum_Sans'] text-[1.2rem] text-[#9B6FD4] leading-tight hidden sm:block">
               Come Color<span className="text-[#F472B6] block">With Me™</span>
             </span>
@@ -60,6 +65,7 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-3">
             {user ? (
               <button
+                type="button"
                 onClick={() => signOut()}
                 className="font-nunito font-bold text-sm text-[#9B6FD4] border-2 border-[#C4B5FD] rounded-full px-5 py-2 transition-all hover:bg-[#C4B5FD] hover:text-[#3D1F5C]"
               >
@@ -80,7 +86,7 @@ export function Header() {
             type="button"
             className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded-lg hover:bg-[#C4B5FD]/20 transition-colors"
             aria-label="Open menu"
-            aria-expanded={drawerOpen}
+            aria-expanded={drawerOpen ? 'true' : 'false'}
             aria-controls="mobile-drawer"
             onClick={() => setDrawerOpen(true)}
           >
@@ -97,7 +103,7 @@ export function Header() {
           'fixed inset-0 z-[200] bg-black/40 transition-opacity duration-300 lg:hidden',
           drawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
-        aria-hidden={!drawerOpen}
+        aria-hidden={drawerOpen ? 'false' : 'true'}
         onClick={closeDrawer}
       />
 
@@ -109,12 +115,17 @@ export function Header() {
           drawerOpen ? 'translate-x-0' : 'translate-x-full'
         )}
         aria-label="Mobile navigation"
-        aria-hidden={!drawerOpen}
+        aria-hidden={drawerOpen ? 'false' : 'true'}
       >
         {/* Drawer header */}
         <div className="flex items-center justify-between p-5 border-b border-[#C4B5FD]/30">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#FFF6F9] rounded-full flex items-center justify-center text-xl">🎨</div>
+            <Image
+              src="/assets/brand/logo-icon.svg"
+              alt=""
+              width={40}
+              height={40}
+            />
             <div>
               <p className="font-['Bubblegum_Sans'] text-[#9B6FD4] text-base leading-tight">Hi there!</p>
               <span className="text-[#8B7BA8] text-xs font-nunito">Amalia&apos;s Art Studio</span>
@@ -160,6 +171,7 @@ export function Header() {
         <div className="p-5 border-t border-[#C4B5FD]/30">
           {user ? (
             <button
+              type="button"
               onClick={() => { signOut(); closeDrawer() }}
               className="w-full font-nunito font-bold text-white bg-[#9B6FD4] hover:bg-[#8B5CF6] rounded-full py-3 transition-all"
             >

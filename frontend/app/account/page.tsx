@@ -1,9 +1,39 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { createBrowserClient } from '@/lib/auth'
+
+// ─── Email confirmed banner ───────────────────────────────────────────────────
+
+function ConfirmedBanner({ onDismiss }: { onDismiss: () => void }) {
+  return (
+    <div
+      role="status"
+      className="bg-emerald-50 border border-emerald-200 rounded-[16px] px-5 py-4 flex items-start gap-3"
+    >
+      <span className="text-2xl flex-shrink-0" aria-hidden="true">✅</span>
+      <div className="flex-1 min-w-0">
+        <p className="font-fredoka font-semibold text-emerald-800 text-base leading-snug">
+          Email confirmed — welcome to the family!
+        </p>
+        <p className="font-nunito text-emerald-700 text-sm mt-0.5">
+          Your account is active. Browse the gallery, grab a free coloring page, or pick up a premium print.
+        </p>
+      </div>
+      <button
+        type="button"
+        onClick={onDismiss}
+        aria-label="Dismiss"
+        className="flex-shrink-0 text-emerald-500 hover:text-emerald-700 transition-colors text-lg leading-none mt-0.5"
+      >
+        ×
+      </button>
+    </div>
+  )
+}
 
 // ─── Unauthenticated state ────────────────────────────────────────────────────
 
@@ -52,17 +82,19 @@ type DownloadRecord = {
   artwork_slug: string
   artwork_title: string
   downloaded_at: string
+  stripe_session_id: string
 }
 
 function DownloadHistory() {
   const [downloads, setDownloads] = useState<DownloadRecord[]>([])
   const [loading, setLoading] = useState(true)
+  const [downloading, setDownloading] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     const supabase = createBrowserClient()
     supabase
       .from('downloads')
-      .select('id, artwork_slug, artwork_title, downloaded_at')
+      .select('id, artwork_slug, artwork_title, downloaded_at, stripe_session_id')
       .order('downloaded_at', { ascending: false })
       .limit(20)
       .then(({ data }) => {
@@ -70,6 +102,35 @@ function DownloadHistory() {
         setLoading(false)
       })
   }, [])
+
+  async function handleRedownload(record: DownloadRecord) {
+    setDownloading((prev) => new Set(prev).add(record.id))
+    try {
+      const res = await fetch(`/api/downloads/redownload?id=${encodeURIComponent(record.id)}`)
+      const data = await res.json() as { downloadUrl?: string; error?: string }
+      if (!data.downloadUrl) throw new Error(data.error ?? 'No download URL')
+      // Trigger browser download via temporary anchor
+      const a = document.createElement('a')
+      a.href = data.downloadUrl
+      a.download = `${record.artwork_slug}.${data.downloadUrl.endsWith('.pdf') ? 'pdf' : 'jpg'}`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+    } catch (err) {
+      console.error('Re-download failed:', err)
+      alert('Download failed — please try again or contact support.')
+    } finally {
+      setDownloading((prev) => {
+        const next = new Set(prev)
+        next.delete(record.id)
+        return next
+      })
+    }
+  }
+
+  function orderRef(record: DownloadRecord) {
+    return '#' + record.id.replace(/-/g, '').slice(0, 8).toUpperCase()
+  }
 
   return (
     <div className="bg-white rounded-[20px] p-8 shadow-sm border border-[#C4B5FD]/20">
@@ -106,26 +167,43 @@ function DownloadHistory() {
       ) : (
         <ul className="divide-y divide-[#C4B5FD]/20">
           {downloads.map((d) => (
-            <li key={d.id} className="flex items-center justify-between py-3 gap-4">
-              <div className="flex items-center gap-3 min-w-0">
-                <span className="text-2xl flex-shrink-0" aria-hidden="true">🖍️</span>
+            <li key={d.id} className="flex items-start justify-between py-4 gap-4">
+              <div className="flex items-start gap-3 min-w-0">
+                <span className="text-2xl flex-shrink-0 mt-0.5" aria-hidden="true">🖍️</span>
                 <div className="min-w-0">
                   <p className="font-nunito font-semibold text-[#3D1F5C] text-sm truncate">
                     {d.artwork_title}
                   </p>
-                  <p className="font-nunito text-[#8B7BA8] text-xs">
+                  <p className="font-nunito text-[#8B7BA8] text-xs mt-0.5">
                     {new Date(d.downloaded_at).toLocaleDateString('en-US', {
                       month: 'short', day: 'numeric', year: 'numeric',
                     })}
+                    {' · '}
+                    <span className="font-mono tracking-wide">{orderRef(d)}</span>
                   </p>
                 </div>
               </div>
-              <Link
-                href={`/artwork/${d.artwork_slug}`}
-                className="flex-shrink-0 font-nunito font-bold text-xs text-[#9B6FD4] hover:text-[#7c56b0] transition-colors"
-              >
-                View →
-              </Link>
+              <div className="flex items-center gap-3 flex-shrink-0">
+                <button
+                  type="button"
+                  disabled={downloading.has(d.id)}
+                  onClick={() => handleRedownload(d)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-xs transition-colors disabled:opacity-50 disabled:cursor-wait"
+                >
+                  {downloading.has(d.id) ? (
+                    <span className="w-3 h-3 border-2 border-white/40 border-t-white rounded-full animate-spin inline-block" />
+                  ) : (
+                    '⬇'
+                  )}
+                  {downloading.has(d.id) ? 'Downloading…' : 'Download'}
+                </button>
+                <Link
+                  href={`/artwork/${d.artwork_slug}`}
+                  className="font-nunito font-bold text-xs text-[#9B6FD4] hover:text-[#7c56b0] transition-colors"
+                >
+                  View →
+                </Link>
+              </div>
             </li>
           ))}
         </ul>
@@ -148,7 +226,6 @@ function OrderHistory() {
         </span>
       </div>
 
-      {/* Empty state */}
       <div className="text-center py-10">
         <p className="text-5xl mb-4" aria-hidden="true">🖼️</p>
         <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg mb-2">
@@ -169,9 +246,80 @@ function OrderHistory() {
   )
 }
 
+// ─── Onboarding guide for new users with zero downloads ──────────────────────
+
+function OnboardingGuide() {
+  const steps = [
+    {
+      icon: '🖍️',
+      title: 'Grab a free coloring page',
+      body: 'All of Amalia\'s coloring pages are free to download and print at home.',
+      href: '/coloring-pages',
+      cta: 'Browse Coloring Pages',
+    },
+    {
+      icon: '🖼️',
+      title: 'Shop premium art prints',
+      body: 'Museum-quality prints shipped to your door — perfect for a kids\' bedroom.',
+      href: '/shop',
+      cta: 'See the Shop',
+    },
+    {
+      icon: '🎨',
+      title: 'Explore the full gallery',
+      body: 'See all of Amalia\'s artwork in one place and find your favourites.',
+      href: '/gallery',
+      cta: 'Open Gallery',
+    },
+  ]
+
+  return (
+    <div className="bg-gradient-to-br from-[#9B6FD4]/5 to-[#F472B6]/5 rounded-[20px] p-8 border border-[#C4B5FD]/20">
+      <h2 className="font-fredoka font-bold text-xl text-[#3D1F5C] mb-1">
+        Get started
+      </h2>
+      <p className="font-nunito text-[#8B7BA8] text-sm mb-6">
+        Here&apos;s what you can do on Come Color With Me.
+      </p>
+      <div className="grid gap-4 sm:grid-cols-3">
+        {steps.map((s) => (
+          <Link
+            key={s.href}
+            href={s.href}
+            className="group bg-white rounded-[16px] p-5 border border-[#C4B5FD]/20 shadow-sm hover:shadow-md hover:border-[#9B6FD4]/30 transition-all flex flex-col gap-3"
+          >
+            <span className="text-3xl">{s.icon}</span>
+            <div>
+              <p className="font-fredoka font-semibold text-[#3D1F5C] text-base leading-snug mb-1">
+                {s.title}
+              </p>
+              <p className="font-nunito text-[#8B7BA8] text-xs leading-relaxed">
+                {s.body}
+              </p>
+            </div>
+            <span className="font-nunito font-bold text-xs text-[#9B6FD4] group-hover:text-[#F472B6] transition-colors mt-auto">
+              {s.cta} →
+            </span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // ─── Main signed-in dashboard ─────────────────────────────────────────────────
 
-function Dashboard({ email, onSignOut }: { email: string; onSignOut: () => void }) {
+function Dashboard({
+  email,
+  onSignOut,
+  showConfirmed,
+}: {
+  email: string
+  onSignOut: () => void
+  showConfirmed: boolean
+}) {
+  const router = useRouter()
+  const [confirmed, setConfirmed] = useState(showConfirmed)
   const [downloadCount, setDownloadCount] = useState<number | null>(null)
 
   useEffect(() => {
@@ -182,8 +330,15 @@ function Dashboard({ email, onSignOut }: { email: string; onSignOut: () => void 
       .then(({ count }) => setDownloadCount(count ?? 0))
   }, [])
 
+  function dismissConfirmed() {
+    setConfirmed(false)
+    // Remove the query param so a refresh doesn't re-show the banner
+    router.replace('/account', { scroll: false })
+  }
+
   const displayName = email.split('@')[0] ?? 'there'
   const formattedName = displayName.charAt(0).toUpperCase() + displayName.slice(1)
+  const isNewUser = downloadCount === 0
 
   return (
     <main className="min-h-screen bg-[#FFF6F9]">
@@ -200,6 +355,9 @@ function Dashboard({ email, onSignOut }: { email: string; onSignOut: () => void 
       </section>
 
       <div className="max-w-3xl mx-auto px-4 py-10 space-y-6">
+
+        {/* Email confirmed banner */}
+        {confirmed && <ConfirmedBanner onDismiss={dismissConfirmed} />}
 
         {/* Quick stats */}
         <div className="grid grid-cols-3 gap-4">
@@ -219,8 +377,15 @@ function Dashboard({ email, onSignOut }: { email: string; onSignOut: () => void 
           ))}
         </div>
 
-        {/* Download history */}
-        <DownloadHistory />
+        {/* Onboarding guide for new users, download history for returning users */}
+        {isNewUser && downloadCount !== null ? (
+          <>
+            <OnboardingGuide />
+            <DownloadHistory />
+          </>
+        ) : (
+          <DownloadHistory />
+        )}
 
         {/* Order history */}
         <OrderHistory />
@@ -245,10 +410,12 @@ function Dashboard({ email, onSignOut }: { email: string; onSignOut: () => void 
   )
 }
 
-// ─── Page entry point ─────────────────────────────────────────────────────────
+// ─── Inner component that reads search params ─────────────────────────────────
 
-export default function AccountPage() {
+function AccountInner() {
   const { user, loading, signOut } = useAuth()
+  const searchParams = useSearchParams()
+  const showConfirmed = searchParams.get('confirmed') === 'true'
 
   if (loading) return <Loading />
   if (!user)   return <SignedOut />
@@ -257,6 +424,17 @@ export default function AccountPage() {
     <Dashboard
       email={user.email ?? ''}
       onSignOut={() => void signOut()}
+      showConfirmed={showConfirmed}
     />
+  )
+}
+
+// ─── Page entry point ─────────────────────────────────────────────────────────
+
+export default function AccountPage() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <AccountInner />
+    </Suspense>
   )
 }

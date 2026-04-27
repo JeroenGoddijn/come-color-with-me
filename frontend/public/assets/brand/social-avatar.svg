@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Come Color With Me — social profile">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9B6FD4"/>
+      <stop offset="100%" stop-color="#F472B6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Brand gradient background (circle-crop safe) -->
+  <circle cx="200" cy="200" r="200" fill="url(#bg)"/>
+
+  <!-- Palette mark at ~4.5× (fits ~250px, centered) -->
+  <!-- Icon visual center ≈ (33,33) in 64×64 → at 4.5×: (148,148) → translate(52,52) centers it -->
+  <g transform="translate(52,52) scale(4.5)">
+    <!-- Palette body — white, no stroke at avatar scale -->
+    <path d="M 11 36 C 10 23 19 11 33 11 C 47 10 57 20 56 33 C 55 44 47 54 33 54 C 20 54 12 46 11 36 Z"
+          fill="rgba(255,255,255,0.96)"/>
+    <!-- Thumb hole -->
+    <ellipse cx="42" cy="46" rx="6" ry="5" fill="#B57BDE"/>
+    <!-- Paint blobs -->
+    <circle cx="22" cy="28" r="5.5" fill="#F472B6"/>
+    <circle cx="33" cy="20" r="5"   fill="#7C3AED"/>
+    <circle cx="44" cy="27" r="4.5" fill="#60A5FA"/>
+    <circle cx="25" cy="40" r="4"   fill="#FBBF24"/>
+    <!-- Star sparkle -->
+    <path d="M 54 9 L 55.5 12.5 L 59 14 L 55.5 15.5 L 54 19 L 52.5 15.5 L 49 14 L 52.5 12.5 Z"
+          fill="white"/>
+    <!-- Dot accent -->
+    <circle cx="9" cy="50" r="2.5" fill="rgba(255,255,255,0.55)"/>
+  </g>
+
+  <!-- Decorative floating dots (circle-crop safe, stay inside r=200) -->
+  <circle cx="68"  cy="88"  r="13" fill="rgba(255,255,255,0.18)"/>
+  <circle cx="338" cy="82"  r="9"  fill="rgba(255,255,255,0.22)"/>
+  <circle cx="55"  cy="308" r="8"  fill="rgba(255,255,255,0.18)"/>
+  <circle cx="344" cy="318" r="11" fill="rgba(255,255,255,0.18)"/>
+  <circle cx="312" cy="352" r="5"  fill="rgba(255,255,255,0.28)"/>
+  <circle cx="90"  cy="345" r="6"  fill="rgba(255,255,255,0.22)"/>
+
+  <!-- Large 4-point sparkle — top-right -->
+  <path d="M 330 55 L 333 67 L 345 70 L 333 73 L 330 85 L 327 73 L 315 70 L 327 67 Z"
+        fill="rgba(255,255,255,0.72)"/>
+  <!-- Small sparkle — bottom-left -->
+  <path d="M 74 332 L 76 340 L 84 342 L 76 344 L 74 352 L 72 344 L 64 342 L 72 340 Z"
+        fill="rgba(255,255,255,0.52)"/>
+</svg>

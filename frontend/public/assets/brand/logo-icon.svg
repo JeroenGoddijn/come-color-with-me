@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Come Color With Me">
+  <defs>
+    <linearGradient id="iconBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE9FE"/>
+      <stop offset="100%" stop-color="#FCE7F3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Badge background -->
+  <circle cx="32" cy="32" r="32" fill="url(#iconBg)"/>
+
+  <!-- Palette body — organic kidney-bean path -->
+  <path d="M 11 36 C 10 23 19 11 33 11 C 47 10 57 20 56 33 C 55 44 47 54 33 54 C 20 54 12 46 11 36 Z"
+        fill="white" stroke="#9B6FD4" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Thumb hole (shows background through) -->
+  <ellipse cx="42" cy="46" rx="6" ry="5" fill="url(#iconBg)" stroke="#9B6FD4" stroke-width="2"/>
+
+  <!-- Paint blobs -->
+  <circle cx="22" cy="28" r="5.5" fill="#F472B6"/>
+  <circle cx="33" cy="20" r="5"   fill="#9B6FD4"/>
+  <circle cx="44" cy="27" r="4.5" fill="#93C5FD"/>
+  <circle cx="25" cy="40" r="4"   fill="#FDBA74"/>
+
+  <!-- 4-point star sparkle (top-right) -->
+  <path d="M 54 9 L 55.5 12.5 L 59 14 L 55.5 15.5 L 54 19 L 52.5 15.5 L 49 14 L 52.5 12.5 Z"
+        fill="#F472B6"/>
+
+  <!-- Small dot accent (bottom-left) -->
+  <circle cx="9" cy="50" r="2.5" fill="#C4B5FD" opacity="0.8"/>
+</svg>
