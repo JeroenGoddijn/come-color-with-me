@@ -45,10 +45,10 @@ export const metadata: Metadata = {
       'Free coloring pages and premium art prints by Amalia, age 8. Download, color, and enjoy original hand-drawn artwork.',
     images: [
       {
-        url: '/assets/artwork/colorful-cupcakes-preview.jpg',
-        width: 900,
-        height: 1125,
-        alt: 'Colorful Cupcakes — original artwork by Amalia, age 8',
+        url: '/assets/brand/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Come Color With Me — Free coloring pages and premium art prints by Amalia, age 8',
       },
     ],
   },
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     title: 'Come Color With Me — Free Coloring Pages by Amalia',
     description:
       'Free coloring pages and premium art prints by Amalia, age 8.',
-    images: ['/assets/artwork/colorful-cupcakes-preview.jpg'],
+    images: ['/assets/brand/og-image.png'],
   },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
