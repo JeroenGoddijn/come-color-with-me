@@ -48,20 +48,20 @@ export function ArtistIntro({ artist }: Props) {
             </Link>
 
             {/* Stats — illustrative placeholders, wired to CMS in Sprint 2 */}
-            <div role="list" className="flex gap-8 mt-6 justify-center sm:justify-start">
-              <div role="listitem" className="text-center">
+            <ul className="list-none p-0 m-0 flex gap-8 mt-6 justify-center sm:justify-start">
+              <li className="text-center">
                 <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">47+</p>
                 <p className="text-[0.75rem] text-[#8B7BA8] mt-0.5">Drawings</p>
-              </div>
-              <div role="listitem" className="text-center">
+              </li>
+              <li className="text-center">
                 <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">2.4k</p>
                 <p className="text-[0.75rem] text-[#8B7BA8] mt-0.5">Downloads</p>
-              </div>
-              <div role="listitem" className="text-center">
+              </li>
+              <li className="text-center">
                 <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">12</p>
                 <p className="text-[0.75rem] text-[#8B7BA8] mt-0.5">Categories</p>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

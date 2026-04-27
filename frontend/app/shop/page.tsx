@@ -7,6 +7,7 @@ import type { ArtworkCard } from '@/types/artwork'
 export const metadata: Metadata = {
   title: 'Shop — Come Color With Me',
   description: "Order museum-quality prints of Amalia's original artwork. Printed locally, ships worldwide.",
+  alternates: { canonical: '/shop' },
 }
 
 type SearchParams = { category?: string; sort?: string; page?: string }

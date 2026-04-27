@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: 'Come Color With Me — Free Coloring Pages by Amalia',
   description:
     'Discover free coloring pages and premium prints by Amalia, age 8. Download and color original hand-drawn artwork created with love.',
+  alternates: { canonical: '/' },
 }
 
 // Revalidate every 5 minutes

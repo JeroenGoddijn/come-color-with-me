@@ -62,14 +62,11 @@ export function Hero() {
           </div>
 
           {/* Trust signals */}
-          <div
-            role="list"
-            className="flex items-center justify-center gap-5 mt-6 text-[0.8125rem] text-[#8B7BA8] font-nunito font-semibold flex-wrap"
-          >
-            <span role="listitem">✅ Free downloads, no signup</span>
-            <span role="listitem">🔒 Safe for kids</span>
-            <span role="listitem">🎨 100% hand-drawn</span>
-          </div>
+          <ul className="list-none p-0 m-0 flex items-center justify-center gap-5 mt-6 text-[0.8125rem] text-[#8B7BA8] font-nunito font-semibold flex-wrap">
+            <li>✅ Free downloads, no signup</li>
+            <li>🔒 Safe for kids</li>
+            <li>🎨 100% hand-drawn</li>
+          </ul>
         </div>
       </div>
     </section>

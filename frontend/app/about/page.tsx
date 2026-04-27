@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'About Amalia — Come Color With Me',
   description:
     "Meet Amalia, the 8-year-old artist behind Come Color With Me. Original drawings, free coloring pages, and premium art prints — all made by a real kid who loves to create.",
+  alternates: { canonical: '/about' },
 }
 
 const FAVOURITES = [

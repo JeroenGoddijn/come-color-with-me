@@ -80,6 +80,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <FlagsProvider>
             <CartProvider>
               <div className="flex flex-col min-h-screen">
+                <a
+                  href="#main-content"
+                  className="sr-only focus:not-sr-only focus:absolute focus:z-[999] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#9B6FD4] focus:text-white focus:font-nunito focus:font-bold focus:text-sm focus:shadow-lg"
+                >
+                  Skip to main content
+                </a>
                 <Header />
                 <main id="main-content" className="flex-1">
                   {children}

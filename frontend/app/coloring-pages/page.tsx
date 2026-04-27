@@ -7,6 +7,7 @@ import type { ArtworkCard } from '@/types/artwork'
 export const metadata: Metadata = {
   title: 'Free Coloring Pages — Come Color With Me',
   description: "Download free printable coloring pages by Amalia, age 8. Print at home, color with crayons or markers. New pages added regularly.",
+  alternates: { canonical: '/coloring-pages' },
 }
 
 type SearchParams = { category?: string; age?: string; sort?: string; page?: string }
