@@ -1,7 +1,10 @@
 {
   "name": "come-color-with-me",
   "private": true,
-  "workspaces": ["frontend", "backend"],
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\"",
     "build": "npm run build -w backend && npm run build -w frontend",
@@ -11,12 +14,16 @@
     "seed": "tsx scripts/seed.ts",
     "export-schema": "tsx scripts/export-schema.ts",
     "check-assets": "tsx scripts/check-assets.ts",
+    "add-artwork": "tsx scripts/add-artwork.ts",
     "docker:up": "docker-compose -f docker/docker-compose.yml --env-file docker/.env.docker up -d",
     "docker:down": "docker-compose -f docker/docker-compose.yml --env-file docker/.env.docker down",
     "docker:reset": "docker-compose -f docker/docker-compose.yml --env-file docker/.env.docker down -v && npm run docker:up && sleep 30 && npm run seed"
   },
   "devDependencies": {
+    "@types/pdfkit": "^0.17.6",
     "concurrently": "^8.2.2",
+    "pdfkit": "^0.18.0",
+    "sharp": "^0.34.5",
     "tsx": "^4.7.0"
   }
 }
