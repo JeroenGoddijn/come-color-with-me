@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
     // Resolve download file: prefer -download.pdf, fall back to -preview.jpg
     // (finished artwork has no separate PDF — the preview image is the deliverable).
     // Sprint 3: replace with Supabase Storage signed URL.
-    const siteUrl  = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'http://localhost:3000'
+    const siteUrl   = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'http://localhost:3000'
     const publicDir = join(process.cwd(), 'public')
     const candidates = [
       `assets/artwork/${slug}-download.pdf`,
@@ -67,11 +67,19 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Download file not available' }, { status: 404 })
     }
 
+    const artworkTitle = session.metadata?.['title'] ?? slug
+    const ext          = fileRelative.endsWith('.pdf') ? 'pdf' : 'jpg'
+    const filename     = `Come Color With Me - ${artworkTitle}.${ext}`
+    // Consistent order ref: last 8 chars of session ID after stripping cs_test_/cs_live_ prefix
+    const orderRef     = '#' + sessionId.replace(/^cs_(test|live)_/, '').slice(-8).toUpperCase()
+
     return NextResponse.json({
       success:     true,
       slug,
-      title:       session.metadata?.['title'] ?? slug,
+      title:       artworkTitle,
       downloadUrl: `${siteUrl}/${fileRelative}`,
+      filename,
+      orderRef,
     })
   } catch (err) {
     console.error('Download verify error:', err)

@@ -74,12 +74,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'File not available' }, { status: 404 })
   }
 
-  // Order reference: first 8 hex chars of the UUID (display-safe, stable)
-  const orderRef = '#' + id.replace(/-/g, '').slice(0, 8).toUpperCase()
+  // Professional download filename — matches what the success page delivered at purchase
+  const ext      = fileRelative.endsWith('.pdf') ? 'pdf' : 'jpg'
+  const filename = `Come Color With Me - ${record.artwork_title}.${ext}`
+
+  // Consistent order ref: last 8 chars of Stripe session ID (matches success page)
+  const sid      = record.stripe_session_id
+  const orderRef = '#' + sid.replace(/^cs_(test|live)_/, '').slice(-8).toUpperCase()
 
   return NextResponse.json({
     downloadUrl: `${siteUrl}/${fileRelative}`,
     title:       record.artwork_title,
+    filename,
     orderRef,
   })
 }

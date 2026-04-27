@@ -106,19 +106,19 @@ function DownloadHistory() {
   async function handleRedownload(record: DownloadRecord) {
     setDownloading((prev) => new Set(prev).add(record.id))
     try {
-      const res = await fetch(`/api/downloads/redownload?id=${encodeURIComponent(record.id)}`)
-      const data = await res.json() as { downloadUrl?: string; error?: string }
+      const res  = await fetch(`/api/downloads/redownload?id=${encodeURIComponent(record.id)}`)
+      const data = await res.json() as { downloadUrl?: string; filename?: string; error?: string }
       if (!data.downloadUrl) throw new Error(data.error ?? 'No download URL')
-      // Trigger browser download via temporary anchor
+      // Trigger browser download via temporary anchor — uses professional filename from API
       const a = document.createElement('a')
-      a.href = data.downloadUrl
-      a.download = `${record.artwork_slug}.${data.downloadUrl.endsWith('.pdf') ? 'pdf' : 'jpg'}`
+      a.href     = data.downloadUrl
+      a.download = data.filename ?? `Come Color With Me - ${record.artwork_title}.jpg`
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
     } catch (err) {
       console.error('Re-download failed:', err)
-      alert('Download failed — please try again or contact support.')
+      alert('Download failed — please try again or contact hello@comecolorwith.me')
     } finally {
       setDownloading((prev) => {
         const next = new Set(prev)
@@ -128,8 +128,10 @@ function DownloadHistory() {
     }
   }
 
+  // Order ref matches the success page: last 8 chars of Stripe session ID
   function orderRef(record: DownloadRecord) {
-    return '#' + record.id.replace(/-/g, '').slice(0, 8).toUpperCase()
+    const sid = record.stripe_session_id
+    return '#' + sid.replace(/^cs_(test|live)_/, '').slice(-8).toUpperCase()
   }
 
   return (
@@ -167,39 +169,47 @@ function DownloadHistory() {
       ) : (
         <ul className="divide-y divide-[#C4B5FD]/20">
           {downloads.map((d) => (
-            <li key={d.id} className="flex items-start justify-between py-4 gap-4">
-              <div className="flex items-start gap-3 min-w-0">
-                <span className="text-2xl flex-shrink-0 mt-0.5" aria-hidden="true">🖍️</span>
-                <div className="min-w-0">
-                  <p className="font-nunito font-semibold text-[#3D1F5C] text-sm truncate">
-                    {d.artwork_title}
-                  </p>
-                  <p className="font-nunito text-[#8B7BA8] text-xs mt-0.5">
-                    {new Date(d.downloaded_at).toLocaleDateString('en-US', {
-                      month: 'short', day: 'numeric', year: 'numeric',
-                    })}
-                    {' · '}
-                    <span className="font-mono tracking-wide">{orderRef(d)}</span>
-                  </p>
-                </div>
+            <li key={d.id} className="flex items-center gap-3 py-4">
+              {/* Artwork thumbnail */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/assets/artwork/${d.artwork_slug}-thumb.jpg`}
+                alt=""
+                width={52}
+                height={52}
+                className="w-[52px] h-[52px] rounded-[10px] object-cover flex-shrink-0 bg-[#F5F3FF]"
+              />
+
+              {/* Title + meta */}
+              <div className="flex-1 min-w-0">
+                <p className="font-nunito font-semibold text-[#3D1F5C] text-sm truncate">
+                  {d.artwork_title}
+                </p>
+                <p className="font-nunito text-[#8B7BA8] text-xs mt-0.5">
+                  {new Date(d.downloaded_at).toLocaleDateString('en-US', {
+                    month: 'short', day: 'numeric', year: 'numeric',
+                  })}
+                  {' · '}
+                  <span className="font-mono tracking-wide">{orderRef(d)}</span>
+                </p>
               </div>
-              <div className="flex items-center gap-3 flex-shrink-0">
+
+              {/* Actions */}
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <button
                   type="button"
                   disabled={downloading.has(d.id)}
                   onClick={() => handleRedownload(d)}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-xs transition-colors disabled:opacity-50 disabled:cursor-wait"
                 >
-                  {downloading.has(d.id) ? (
-                    <span className="w-3 h-3 border-2 border-white/40 border-t-white rounded-full animate-spin inline-block" />
-                  ) : (
-                    '⬇'
-                  )}
-                  {downloading.has(d.id) ? 'Downloading…' : 'Download'}
+                  {downloading.has(d.id)
+                    ? <span className="w-3 h-3 border-2 border-white/40 border-t-white rounded-full animate-spin inline-block" />
+                    : '⬇'}
+                  {downloading.has(d.id) ? 'Saving…' : 'Download'}
                 </button>
                 <Link
                   href={`/artwork/${d.artwork_slug}`}
-                  className="font-nunito font-bold text-xs text-[#9B6FD4] hover:text-[#7c56b0] transition-colors"
+                  className="font-nunito font-bold text-xs text-[#9B6FD4] hover:text-[#7c56b0] transition-colors whitespace-nowrap"
                 >
                   View →
                 </Link>
