@@ -47,7 +47,7 @@ export default async function ColoringPagesPage({ searchParams }: { searchParams
 
         {/* How it works */}
         <div className="inline-flex flex-wrap justify-center gap-6 bg-white/80 rounded-2xl px-8 py-4 text-sm font-nunito text-[#3D1F5C]/75 shadow-sm border border-emerald-100">
-          <span>⬇ Download the PDF</span>
+          <span>⬇ Download the File</span>
           <span className="text-[#C4B5FD]">·</span>
           <span>🖨 Print on any paper</span>
           <span className="text-[#C4B5FD]">·</span>
