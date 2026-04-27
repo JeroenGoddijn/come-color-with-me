@@ -109,13 +109,17 @@ function DownloadHistory() {
       const res  = await fetch(`/api/downloads/redownload?id=${encodeURIComponent(record.id)}`)
       const data = await res.json() as { downloadUrl?: string; filename?: string; error?: string }
       if (!data.downloadUrl) throw new Error(data.error ?? 'No download URL')
-      // Trigger browser download via temporary anchor — uses professional filename from API
-      const a = document.createElement('a')
-      a.href     = data.downloadUrl
-      a.download = data.filename ?? `Come Color With Me - ${record.artwork_title}.jpg`
+      // Fetch as blob so browser respects the filename regardless of the URL path
+      const fileRes = await fetch(data.downloadUrl)
+      const blob    = await fileRes.blob()
+      const blobUrl = URL.createObjectURL(blob)
+      const a       = document.createElement('a')
+      a.href        = blobUrl
+      a.download    = data.filename ?? `Come Color With Me - ${record.artwork_title}.jpg`
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000)
     } catch (err) {
       console.error('Re-download failed:', err)
       alert('Download failed — please try again or contact hello@comecolorwith.me')

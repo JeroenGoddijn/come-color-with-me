@@ -86,7 +86,7 @@ export function Header() {
             type="button"
             className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded-lg hover:bg-[#C4B5FD]/20 transition-colors"
             aria-label="Open menu"
-            aria-expanded={drawerOpen ? 'true' : 'false'}
+            aria-expanded={drawerOpen}
             aria-controls="mobile-drawer"
             onClick={() => setDrawerOpen(true)}
           >
@@ -103,7 +103,7 @@ export function Header() {
           'fixed inset-0 z-[200] bg-black/40 transition-opacity duration-300 lg:hidden',
           drawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
-        aria-hidden={drawerOpen ? 'false' : 'true'}
+        aria-hidden={!drawerOpen}
         onClick={closeDrawer}
       />
 
@@ -115,7 +115,7 @@ export function Header() {
           drawerOpen ? 'translate-x-0' : 'translate-x-full'
         )}
         aria-label="Mobile navigation"
-        aria-hidden={drawerOpen ? 'false' : 'true'}
+        aria-hidden={!drawerOpen}
       >
         {/* Drawer header */}
         <div className="flex items-center justify-between p-5 border-b border-[#C4B5FD]/30">

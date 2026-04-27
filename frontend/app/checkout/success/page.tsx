@@ -20,8 +20,9 @@ interface DownloadResult {
 
 function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }) {
   const { user } = useAuth()
-  const [state, setState]   = useState<'loading' | 'ready' | 'error'>('loading')
-  const [result, setResult] = useState<DownloadResult | null>(null)
+  const [state, setState]     = useState<'loading' | 'ready' | 'error'>('loading')
+  const [result, setResult]   = useState<DownloadResult | null>(null)
+  const [dlLoading, setDlLoading] = useState(false)
 
   useEffect(() => {
     fetch(`/api/downloads/verify?session_id=${encodeURIComponent(sessionId)}&slug=${encodeURIComponent(slug)}`)
@@ -66,6 +67,27 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
   const isPdf      = result!.filename.endsWith('.pdf')
   const fileLabel  = isPdf ? 'Coloring Page' : 'Artwork'
 
+  async function handleDownload() {
+    if (!result) return
+    setDlLoading(true)
+    try {
+      const res     = await fetch(result.downloadUrl)
+      const blob    = await res.blob()
+      const blobUrl = URL.createObjectURL(blob)
+      const a       = document.createElement('a')
+      a.href        = blobUrl
+      a.download    = result.filename
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000)
+    } catch {
+      window.open(result.downloadUrl, '_blank')
+    } finally {
+      setDlLoading(false)
+    }
+  }
+
   return (
     <div className="space-y-6">
 
@@ -106,13 +128,17 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
 
       {/* ── Download button ── */}
       <div className="space-y-2">
-        <a
-          href={result!.downloadUrl}
-          download={result!.filename}
-          className="flex items-center justify-center gap-2 w-full px-8 py-4 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-base transition-colors shadow-sm"
+        <button
+          type="button"
+          onClick={handleDownload}
+          disabled={dlLoading}
+          className="flex items-center justify-center gap-2 w-full px-8 py-4 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] disabled:opacity-60 disabled:cursor-wait text-white font-nunito font-bold text-base transition-colors shadow-sm"
         >
-          ⬇&nbsp; Download {fileLabel}
-        </a>
+          {dlLoading
+            ? <><span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Saving…</>
+            : <>⬇&nbsp; Download {fileLabel}</>
+          }
+        </button>
         <p className="text-center font-nunito text-[#8B7BA8] text-xs">
           Saved as <span className="font-mono">{result!.filename}</span>
           {' · '}

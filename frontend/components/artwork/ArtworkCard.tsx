@@ -30,8 +30,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
   const thumb = artworkThumb(slug)
 
   return (
-    <article
-      role="listitem"
+    <li
       className="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_16px_rgba(155,111,212,0.12)] hover:shadow-[0_12px_40px_rgba(155,111,212,0.24)] transition-shadow duration-200 flex flex-col"
     >
       {/* Thumbnail */}
@@ -88,6 +87,6 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
           )}
         </div>
       </div>
-    </article>
+    </li>
   )
 }

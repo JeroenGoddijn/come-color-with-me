@@ -25,7 +25,7 @@ export function ArtworkGrid({ artworks, columns = 3, priorityCount = 3 }: Props)
   }
 
   return (
-    <div role="list" className={`grid ${colClass[columns]} gap-6`}>
+    <ul className={`list-none p-0 m-0 grid ${colClass[columns]} gap-6`}>
       {artworks.map((artwork, i) => (
         <ArtworkCard
           key={artwork.id}
@@ -33,6 +33,6 @@ export function ArtworkGrid({ artworks, columns = 3, priorityCount = 3 }: Props)
           priority={i < priorityCount}
         />
       ))}
-    </div>
+    </ul>
   )
 }

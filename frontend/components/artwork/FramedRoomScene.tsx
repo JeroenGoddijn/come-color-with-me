@@ -246,15 +246,8 @@ export function FramedRoomScene({ src, alt, slug = '' }: Props) {
       />
       {transform && (
         <div
-          className="absolute pointer-events-none"
-          style={{
-            top: 0,
-            left: 0,
-            width: SRC_W,
-            height: SRC_H,
-            transformOrigin: '0 0',
-            transform,
-          }}
+          className="absolute pointer-events-none top-0 left-0 [transform-origin:0_0]"
+          style={{ width: SRC_W, height: SRC_H, transform }}
         >
           <Image
             src={src}
