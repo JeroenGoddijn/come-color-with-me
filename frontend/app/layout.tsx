@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer'
 import { FlagsProvider } from '@/context/FlagsContext'
 import { AuthProvider } from '@/context/AuthContext'
 import { CartProvider } from '@/context/CartContext'
+import { PostHogProvider } from '@/components/analytics/PostHogProvider'
 
 const bubblegumSans = Bubblegum_Sans({
   weight: '400',
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${bubblegumSans.variable} ${fredoka.variable} ${nunito.variable}`}
     >
       <body className="bg-[#FFF6F9] text-[#3D1F5C] antialiased">
+        <PostHogProvider>
         <AuthProvider>
           <FlagsProvider>
             <CartProvider>
@@ -95,6 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </CartProvider>
           </FlagsProvider>
         </AuthProvider>
+        </PostHogProvider>
       </body>
     </html>
   )
