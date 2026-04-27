@@ -41,11 +41,11 @@ export default function ForgotPasswordPage() {
           <h1 className="font-fredoka font-bold text-2xl text-[#9B6FD4] mb-3">
             Check your inbox!
           </h1>
-          <p className="font-nunito text-[#8B7BA8] text-sm leading-relaxed max-w-[300px] mx-auto">
+          <p className="font-nunito text-[#6B5A94] text-sm leading-relaxed max-w-[300px] mx-auto">
             We sent a password reset link to <strong>{email}</strong>.
             Click it within the next hour to set a new password.
           </p>
-          <p className="font-nunito text-xs text-[#8B7BA8] mt-3">
+          <p className="font-nunito text-xs text-[#6B5A94] mt-3">
             Don&apos;t see it? Check your spam folder.
           </p>
           <div className="mt-8">
@@ -66,7 +66,7 @@ export default function ForgotPasswordPage() {
           <h1 className="font-fredoka font-bold text-2xl text-[#9B6FD4] mb-2">
             Forgot your password?
           </h1>
-          <p className="font-nunito text-[#8B7BA8] text-sm">
+          <p className="font-nunito text-[#6B5A94] text-sm">
             Enter your email and we&apos;ll send you a reset link.
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function ForgotPasswordPage() {
               placeholder="you@example.com"
               required
               autoComplete="email"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#8B7BA8] focus:outline-none focus:border-[#9B6FD4] transition-colors"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#9B6FD4] transition-colors"
             />
           </div>
 
@@ -102,7 +102,7 @@ export default function ForgotPasswordPage() {
             Send Reset Link
           </Button>
 
-          <p className="text-center font-nunito text-sm text-[#8B7BA8]">
+          <p className="text-center font-nunito text-sm text-[#6B5A94]">
             Remembered it?{' '}
             <Link href="/login" className="text-[#9B6FD4] font-semibold hover:text-[#F472B6] transition-colors">
               Back to login

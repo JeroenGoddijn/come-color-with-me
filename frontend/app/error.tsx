@@ -20,7 +20,7 @@ export default function ErrorPage({ error, reset }: Props) {
       <h1 className="font-fredoka font-bold text-3xl text-[#9B6FD4] mb-3">
         Oops! Something went wrong
       </h1>
-      <p className="font-nunito text-[#8B7BA8] max-w-[400px] mb-8 leading-relaxed">
+      <p className="font-nunito text-[#6B5A94] max-w-[400px] mb-8 leading-relaxed">
         We&apos;re sorry — something unexpected happened. Try refreshing the page,
         or go back to the homepage.
       </p>

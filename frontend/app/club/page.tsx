@@ -23,12 +23,12 @@ export default function ClubPage() {
         ✦ Coming Soon
       </div>
 
-      <p className="font-nunito text-[#8B7BA8] text-lg max-w-md mx-auto mb-4 leading-relaxed">
+      <p className="font-nunito text-[#6B5A94] text-lg max-w-md mx-auto mb-4 leading-relaxed">
         Get exclusive coloring pages every month, early access to new artwork,
         and behind-the-scenes peeks at what Amalia is drawing next.
       </p>
 
-      <p className="font-nunito text-[#8B7BA8] text-sm mb-10">
+      <p className="font-nunito text-[#6B5A94] text-sm mb-10">
         Sign up for the newsletter to be first to know when the Club launches.
       </p>
 

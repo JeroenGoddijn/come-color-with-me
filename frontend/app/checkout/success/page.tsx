@@ -38,7 +38,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
     return (
       <div className="flex flex-col items-center gap-4 py-8">
         <div className="w-8 h-8 border-4 border-[#C4B5FD] border-t-[#9B6FD4] rounded-full animate-spin" />
-        <p className="font-nunito text-[#8B7BA8] text-sm">Confirming your purchase…</p>
+        <p className="font-nunito text-[#6B5A94] text-sm">Confirming your purchase…</p>
       </div>
     )
   }
@@ -50,7 +50,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
         <p className="font-fredoka font-semibold text-[#3D1F5C] text-xl">
           Something went wrong
         </p>
-        <p className="font-nunito text-[#8B7BA8] text-sm max-w-xs mx-auto">
+        <p className="font-nunito text-[#6B5A94] text-sm max-w-xs mx-auto">
           Your payment was successful but we couldn&apos;t load your download.
           We&apos;re on it — please email us and we&apos;ll sort it immediately.
         </p>
@@ -97,7 +97,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-2xl mb-1">
           Thank you for your purchase!
         </h1>
-        <p className="font-nunito text-[#8B7BA8] text-sm">
+        <p className="font-nunito text-[#6B5A94] text-sm">
           Your {fileLabel.toLowerCase()} is ready to download.
         </p>
       </div>
@@ -117,7 +117,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
           <p className="font-fredoka font-semibold text-[#3D1F5C] text-base leading-snug">
             {result!.title}
           </p>
-          <p className="font-nunito text-[#8B7BA8] text-xs mt-0.5 font-mono tracking-wide">
+          <p className="font-nunito text-[#6B5A94] text-xs mt-0.5 font-mono tracking-wide">
             Order {result!.orderRef}
           </p>
         </div>
@@ -139,7 +139,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
             : <>⬇&nbsp; Download {fileLabel}</>
           }
         </button>
-        <p className="text-center font-nunito text-[#8B7BA8] text-xs">
+        <p className="text-center font-nunito text-[#6B5A94] text-xs">
           Saved as <span className="font-mono">{result!.filename}</span>
           {' · '}
           <a href={result!.downloadUrl} className="underline">
@@ -183,7 +183,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
           <p className="font-fredoka font-semibold text-[#3D1F5C] text-sm mb-2">
             🖨️ Printing tips
           </p>
-          <ul className="font-nunito text-[#8B7BA8] text-xs space-y-1.5 leading-relaxed">
+          <ul className="font-nunito text-[#6B5A94] text-xs space-y-1.5 leading-relaxed">
             <li>→ Print on <strong>A4 or US Letter</strong> at <strong>100% scale</strong> — turn off any &ldquo;fit to page&rdquo; option</li>
             <li>→ <strong>160 g/m² card stock</strong> handles markers without bleed-through</li>
             <li>→ Any home printer works — colour and black &amp; white both look great</li>
@@ -193,7 +193,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
           <p className="font-fredoka font-semibold text-[#3D1F5C] text-sm mb-2">
             🎨 Best coloring tools
           </p>
-          <p className="font-nunito text-[#8B7BA8] text-xs leading-relaxed">
+          <p className="font-nunito text-[#6B5A94] text-xs leading-relaxed">
             Crayons, coloured pencils, or washable markers all work beautifully.
             Amalia&apos;s personal favourite is <strong>markers</strong>!
           </p>
@@ -202,7 +202,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
           <p className="font-fredoka font-semibold text-[#3D1F5C] text-sm mb-2">
             📸 Share your creation
           </p>
-          <p className="font-nunito text-[#8B7BA8] text-xs leading-relaxed">
+          <p className="font-nunito text-[#6B5A94] text-xs leading-relaxed">
             Finished coloring? We&apos;d love to see it!
             Share on Instagram and tag <strong>@comecolorwithme</strong> — Amalia checks personally.
           </p>
@@ -223,7 +223,7 @@ function PrintSuccess({ slug }: { slug: string }) {
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-2xl mb-1">
           Order placed!
         </h1>
-        <p className="font-nunito text-[#8B7BA8] text-sm max-w-xs mx-auto">
+        <p className="font-nunito text-[#6B5A94] text-sm max-w-xs mx-auto">
           Your museum-quality print is being prepared. You&apos;ll receive a shipping
           confirmation with tracking by email.
         </p>
@@ -237,12 +237,12 @@ function PrintSuccess({ slug }: { slug: string }) {
         ].map(({ icon, label }) => (
           <div key={label} className="bg-[#F5F3FF] rounded-[14px] p-4 flex flex-col items-center gap-2">
             <span className="text-2xl">{icon}</span>
-            <span className="font-nunito text-[#8B7BA8] text-xs leading-snug">{label}</span>
+            <span className="font-nunito text-[#6B5A94] text-xs leading-snug">{label}</span>
           </div>
         ))}
       </div>
 
-      <p className="font-nunito text-[#8B7BA8] text-xs text-center">
+      <p className="font-nunito text-[#6B5A94] text-xs text-center">
         Questions? Email{' '}
         <a href="mailto:hello@comecolorwith.me" className="underline text-[#9B6FD4]">
           hello@comecolorwith.me
@@ -276,7 +276,7 @@ function SuccessContent() {
         )}
 
         {/* Footer nav */}
-        <div className="mt-8 pt-6 border-t border-[#C4B5FD]/20 flex flex-wrap justify-center gap-4 text-sm font-nunito text-[#8B7BA8]">
+        <div className="mt-8 pt-6 border-t border-[#C4B5FD]/20 flex flex-wrap justify-center gap-4 text-sm font-nunito text-[#6B5A94]">
           <Link href="/coloring-pages" className="hover:text-[#9B6FD4] transition-colors">
             More Coloring Pages
           </Link>

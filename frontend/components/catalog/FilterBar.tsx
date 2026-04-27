@@ -60,7 +60,7 @@ function ChipGroup({
 }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="text-xs font-nunito font-semibold text-[#8B7BA8] uppercase tracking-wider whitespace-nowrap">
+      <span className="text-xs font-nunito font-semibold text-[#6B5A94] uppercase tracking-wider whitespace-nowrap">
         {label}
       </span>
       {options.map((opt) => (
@@ -139,7 +139,7 @@ export function FilterBar({
         <button
           type="button"
           onClick={() => router.push(pathname)}
-          className="self-start text-xs font-nunito font-semibold text-[#8B7BA8] hover:text-[#F472B6] transition-colors underline underline-offset-2"
+          className="self-start text-xs font-nunito font-semibold text-[#6B5A94] hover:text-[#F472B6] transition-colors underline underline-offset-2"
         >
           Clear filters
         </button>

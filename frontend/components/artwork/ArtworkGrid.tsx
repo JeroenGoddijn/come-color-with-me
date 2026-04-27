@@ -16,7 +16,7 @@ const colClass: Record<2 | 3 | 4, string> = {
 export function ArtworkGrid({ artworks, columns = 3, priorityCount = 3 }: Props) {
   if (artworks.length === 0) {
     return (
-      <div className="py-16 text-center text-[#8B7BA8] font-nunito">
+      <div className="py-16 text-center text-[#6B5A94] font-nunito">
         <p className="text-4xl mb-3">🎨</p>
         <p className="font-semibold">No artwork found</p>
         <p className="text-sm mt-1">Try adjusting your filters</p>

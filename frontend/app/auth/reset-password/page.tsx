@@ -49,7 +49,7 @@ export default function ResetPasswordPage() {
           <h1 className="font-fredoka font-bold text-2xl text-[#9B6FD4] mb-2">
             Set a new password
           </h1>
-          <p className="font-nunito text-[#8B7BA8] text-sm">
+          <p className="font-nunito text-[#6B5A94] text-sm">
             Choose something strong and memorable.
           </p>
         </div>
@@ -77,7 +77,7 @@ export default function ResetPasswordPage() {
               placeholder="At least 8 characters"
               required
               autoComplete="new-password"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#8B7BA8] focus:outline-none focus:border-[#9B6FD4] transition-colors"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#9B6FD4] transition-colors"
             />
           </div>
 
@@ -93,7 +93,7 @@ export default function ResetPasswordPage() {
               placeholder="••••••••"
               required
               autoComplete="new-password"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#8B7BA8] focus:outline-none focus:border-[#9B6FD4] transition-colors"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#9B6FD4] transition-colors"
             />
           </div>
 

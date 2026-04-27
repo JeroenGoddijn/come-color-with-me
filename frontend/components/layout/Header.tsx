@@ -128,13 +128,14 @@ export function Header() {
             />
             <div>
               <p className="font-['Bubblegum_Sans'] text-[#9B6FD4] text-base leading-tight">Hi there!</p>
-              <span className="text-[#8B7BA8] text-xs font-nunito">Amalia&apos;s Art Studio</span>
+              <span className="text-[#6B5A94] text-xs font-nunito">Amalia&apos;s Art Studio</span>
             </div>
           </div>
           <button
             type="button"
-            className="w-9 h-9 flex items-center justify-center rounded-full text-[#8B7BA8] hover:bg-[#F472B6]/12 hover:text-[#F472B6] transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full text-[#6B5A94] hover:bg-[#F472B6]/12 hover:text-[#F472B6] transition-colors"
             aria-label="Close menu"
+            tabIndex={drawerOpen ? 0 : -1}
             onClick={closeDrawer}
           >
             ✕
@@ -148,6 +149,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               onClick={closeDrawer}
+              tabIndex={drawerOpen ? 0 : -1}
               className="flex items-center gap-3 px-5 py-3.5 font-nunito font-semibold text-[#3D1F5C] hover:bg-[#9B6FD4]/08 hover:text-[#9B6FD4] transition-colors"
             >
               <span className="text-xl w-7 text-center">{link.icon}</span>
@@ -160,6 +162,7 @@ export function Header() {
           <Link
             href="/account"
             onClick={closeDrawer}
+            tabIndex={drawerOpen ? 0 : -1}
             className="flex items-center gap-3 px-5 py-3.5 font-nunito font-semibold text-[#3D1F5C] hover:bg-[#9B6FD4]/08 hover:text-[#9B6FD4] transition-colors"
           >
             <span className="text-xl w-7 text-center">👤</span>
@@ -172,6 +175,7 @@ export function Header() {
           {user ? (
             <button
               type="button"
+              tabIndex={drawerOpen ? 0 : -1}
               onClick={() => { signOut(); closeDrawer() }}
               className="w-full font-nunito font-bold text-white bg-[#9B6FD4] hover:bg-[#8B5CF6] rounded-full py-3 transition-all"
             >
@@ -181,6 +185,7 @@ export function Header() {
             <Link
               href="/login"
               onClick={closeDrawer}
+              tabIndex={drawerOpen ? 0 : -1}
               className="block w-full font-nunito font-bold text-center text-white bg-[#9B6FD4] hover:bg-[#8B5CF6] rounded-full py-3 transition-all"
             >
               Log In

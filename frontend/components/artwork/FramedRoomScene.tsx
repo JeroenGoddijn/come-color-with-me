@@ -254,7 +254,7 @@ export function FramedRoomScene({ src, alt, slug = '' }: Props) {
             alt={alt}
             fill
             sizes="(max-width: 768px) 50vw, 25vw"
-            className="object-fill"
+            className="object-contain"
             onLoad={handleLoad}
             draggable={false}
           />

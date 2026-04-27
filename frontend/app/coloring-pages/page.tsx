@@ -41,7 +41,7 @@ export default async function ColoringPagesPage({ searchParams }: { searchParams
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-4xl md:text-5xl mb-3">
           Free Coloring Pages
         </h1>
-        <p className="font-nunito text-[#8B7BA8] text-lg max-w-xl mx-auto mb-6">
+        <p className="font-nunito text-[#6B5A94] text-lg max-w-xl mx-auto mb-6">
           Drawn by Amalia, age 8. Download, print, and color — completely free.
           No account needed.
         </p>
@@ -59,7 +59,7 @@ export default async function ColoringPagesPage({ searchParams }: { searchParams
       <div className="max-w-7xl mx-auto px-4 py-10">
 
         {/* Trust bar */}
-        <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm font-nunito text-[#8B7BA8]">
+        <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm font-nunito text-[#6B5A94]">
           <span>📐 300 DPI · print-quality</span>
           <span>📜 Personal use included</span>
           <span>📄 A4 + Letter sizes</span>

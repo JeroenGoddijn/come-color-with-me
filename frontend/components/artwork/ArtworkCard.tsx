@@ -34,7 +34,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
       className="bg-white rounded-[20px] overflow-hidden shadow-[0_4px_16px_rgba(155,111,212,0.12)] hover:shadow-[0_12px_40px_rgba(155,111,212,0.24)] transition-shadow duration-200 flex flex-col"
     >
       {/* Thumbnail */}
-      <Link href={`/artwork/${slug}`} aria-label={`View ${title}`} className="block relative aspect-[4/3] bg-[#FFF6F9] overflow-hidden">
+      <Link href={`/artwork/${slug}`} className="block relative aspect-[4/3] bg-[#FFF6F9] overflow-hidden">
         <Image
           src={thumb}
           alt={title}
@@ -63,7 +63,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
 
       {/* Card body */}
       <div className="p-4 flex flex-col flex-1">
-        <p className="text-xs font-nunito font-semibold text-[#8B7BA8] uppercase tracking-wider mb-1">{categoryLabel}</p>
+        <p className="text-xs font-nunito font-semibold text-[#6B5A94] uppercase tracking-wider mb-1">{categoryLabel}</p>
         <h3 className="font-fredoka font-semibold text-[#3D1F5C] text-base mb-3 truncate">{title}</h3>
         <div className={cn('mt-auto flex gap-2', !isFree && !isPremium && 'hidden')}>
           {isFree && downloadUrl && (

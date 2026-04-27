@@ -36,7 +36,7 @@ export function ArtistIntro({ artist }: Props) {
             <h2 id="artist-heading" className="font-fredoka font-bold text-[1.5rem] text-[#3D1F5C] mb-3">
               Hi! I&apos;m <span className="text-[#9B6FD4]">{artist.name}</span> 👋
             </h2>
-            <p className="text-[#8B7BA8] font-nunito text-base leading-relaxed mb-4 max-w-[520px]">
+            <p className="text-[#6B5A94] font-nunito text-base leading-relaxed mb-4 max-w-[520px]">
               {artist.bioShort}
             </p>
             <Link
@@ -51,15 +51,15 @@ export function ArtistIntro({ artist }: Props) {
             <ul className="list-none p-0 m-0 flex gap-8 mt-6 justify-center sm:justify-start">
               <li className="text-center">
                 <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">47+</p>
-                <p className="text-[0.75rem] text-[#8B7BA8] mt-0.5">Drawings</p>
+                <p className="text-[0.75rem] text-[#6B5A94] mt-0.5">Drawings</p>
               </li>
               <li className="text-center">
                 <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">2.4k</p>
-                <p className="text-[0.75rem] text-[#8B7BA8] mt-0.5">Downloads</p>
+                <p className="text-[0.75rem] text-[#6B5A94] mt-0.5">Downloads</p>
               </li>
               <li className="text-center">
                 <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">12</p>
-                <p className="text-[0.75rem] text-[#8B7BA8] mt-0.5">Categories</p>
+                <p className="text-[0.75rem] text-[#6B5A94] mt-0.5">Categories</p>
               </li>
             </ul>
           </div>

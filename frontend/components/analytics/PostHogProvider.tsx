@@ -41,6 +41,7 @@ function PostHogInit() {
       capture_pageleave:         true,
       capture_exceptions:        true,            // JS error tracking — no PII, no consent needed
       disable_session_recording: true,            // enable explicitly when consent UI is added
+      disable_surveys:           true,            // surveys.js is 25 KiB we don't need yet
       loaded: (ph) => {
         // Tag every event with environment so staging/prod can be filtered in one project
         ph.register({ environment: process.env.NEXT_PUBLIC_APP_ENV ?? 'production' })

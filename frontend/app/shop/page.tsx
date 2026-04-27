@@ -44,7 +44,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-4xl md:text-5xl mb-3 relative">
           Premium Art Prints
         </h1>
-        <p className="font-nunito text-[#8B7BA8] text-lg max-w-xl mx-auto mb-6 relative">
+        <p className="font-nunito text-[#6B5A94] text-lg max-w-xl mx-auto mb-6 relative">
           Original artwork by Amalia, age 8. Museum-quality Gelato prints —
           produced locally and shipped to your door.
         </p>
@@ -68,7 +68,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
       <div className="max-w-7xl mx-auto px-4 py-10">
 
         {total > 0 && (
-          <p className="font-nunito text-sm text-[#8B7BA8] mb-6 text-center">
+          <p className="font-nunito text-sm text-[#6B5A94] mb-6 text-center">
             {total} print{total !== 1 ? 's' : ''} available — starting from $19.99
           </p>
         )}
@@ -88,17 +88,17 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
             <div>
               <p className="text-3xl mb-2">🔒</p>
               <p className="font-fredoka font-semibold text-[#3D1F5C] mb-1">Secure checkout</p>
-              <p className="font-nunito text-sm text-[#8B7BA8]">Powered by Stripe</p>
+              <p className="font-nunito text-sm text-[#6B5A94]">Powered by Stripe</p>
             </div>
             <div>
               <p className="text-3xl mb-2">✨</p>
               <p className="font-fredoka font-semibold text-[#3D1F5C] mb-1">Quality guarantee</p>
-              <p className="font-nunito text-sm text-[#8B7BA8]">Reprinted free if not perfect</p>
+              <p className="font-nunito text-sm text-[#6B5A94]">Reprinted free if not perfect</p>
             </div>
             <div>
               <p className="text-3xl mb-2">💌</p>
               <p className="font-fredoka font-semibold text-[#3D1F5C] mb-1">Gift-ready</p>
-              <p className="font-nunito text-sm text-[#8B7BA8]">Add a gift note at checkout</p>
+              <p className="font-nunito text-sm text-[#6B5A94]">Add a gift note at checkout</p>
             </div>
           </div>
         )}
