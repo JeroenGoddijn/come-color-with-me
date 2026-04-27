@@ -76,6 +76,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${bubblegumSans.variable} ${fredoka.variable} ${nunito.variable}`}
     >
+      <head>
+        <link rel="preconnect" href="https://ccwm-backend.onrender.com" />
+        <link rel="preconnect" href="https://eu-assets.i.posthog.com" />
+      </head>
       <body className="bg-[#FFF6F9] text-[#3D1F5C] antialiased">
         <PostHogProvider>
         <AuthProvider>

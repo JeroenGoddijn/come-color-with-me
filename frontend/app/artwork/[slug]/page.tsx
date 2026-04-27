@@ -102,13 +102,13 @@ export default async function ArtworkDetailPage({ params }: Props) {
                 {isFree           && <Badge variant="green">✓ Free</Badge>}
                 {isPremium        && <Badge variant="purple">★ Premium</Badge>}
               </div>
-              <p className="text-xs font-nunito font-semibold text-[#8B7BA8] uppercase tracking-wider mb-1">
+              <p className="text-xs font-nunito font-semibold text-[#6B5A94] uppercase tracking-wider mb-1">
                 {categoryLabel}
               </p>
               <h1 className="font-fredoka font-bold text-[#3D1F5C] text-3xl leading-tight mb-1">
                 {artwork.title}
               </h1>
-              <p className="font-nunito text-[#8B7BA8] text-sm">
+              <p className="font-nunito text-[#6B5A94] text-sm">
                 by Amalia, age 8
               </p>
             </div>
@@ -144,7 +144,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
             </p>
             <div className="mt-4 flex items-center gap-3">
               <span className="text-2xl">🎨</span>
-              <p className="font-nunito text-sm text-[#8B7BA8] italic">
+              <p className="font-nunito text-sm text-[#6B5A94] italic">
                 "Every drawing tells a story." — Amalia, age 8
               </p>
             </div>

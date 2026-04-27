@@ -17,7 +17,7 @@ const config: Config = {
         blush: '#FFF6F9',
         cream: '#FDF4EC',
         plum: '#3D1F5C',
-        muted: '#8B7BA8',
+        muted: '#6B5A94',
         gold: '#F59E0B',
         error: '#F87171',
         success: '#22C55E',

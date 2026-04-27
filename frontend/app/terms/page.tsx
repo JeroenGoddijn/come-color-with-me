@@ -11,7 +11,7 @@ export default function TermsPage() {
     <main className="min-h-screen bg-[#FFF6F9]">
       <div className="max-w-3xl mx-auto px-4 py-16">
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-4xl mb-2">Terms of Service</h1>
-        <p className="font-nunito text-[#8B7BA8] text-sm mb-10">Last updated: April 2026</p>
+        <p className="font-nunito text-[#6B5A94] text-sm mb-10">Last updated: April 2026</p>
 
         <div className="bg-white rounded-[20px] p-8 shadow-sm border border-[#C4B5FD]/20 space-y-8 font-nunito text-[#3D1F5C]/85 leading-relaxed">
 

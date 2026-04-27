@@ -52,7 +52,7 @@ export default function AboutPage() {
         <h1 className="font-['Bubblegum_Sans'] text-[clamp(2.25rem,5vw,3.25rem)] text-[#3D1F5C] mb-2 relative">
           Hi, I&apos;m Amalia!
         </h1>
-        <p className="font-nunito text-[#8B7BA8] text-lg mb-6 relative">
+        <p className="font-nunito text-[#6B5A94] text-lg mb-6 relative">
           Artist · Age 8 · Lover of all things colourful
         </p>
 
@@ -109,7 +109,7 @@ export default function AboutPage() {
                 <span className="text-3xl flex-shrink-0 leading-none mt-0.5" aria-hidden="true">{icon}</span>
                 <div>
                   <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg mb-1">{heading}</p>
-                  <p className="font-nunito text-[#8B7BA8] text-sm leading-relaxed">{body}</p>
+                  <p className="font-nunito text-[#6B5A94] text-sm leading-relaxed">{body}</p>
                 </div>
               </div>
             ))}
@@ -143,7 +143,7 @@ export default function AboutPage() {
           <h2 className="font-fredoka font-bold text-[#3D1F5C] text-2xl">
             Ready to start coloring?
           </h2>
-          <p className="font-nunito text-[#8B7BA8]">
+          <p className="font-nunito text-[#6B5A94]">
             All of Amalia&apos;s coloring pages are free to download and print. No account needed.
           </p>
           <div className="flex flex-wrap justify-center gap-4 pt-2">

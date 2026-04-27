@@ -8,7 +8,7 @@ export default function NotFoundPage() {
       <h1 className="font-fredoka font-bold text-3xl text-[#9B6FD4] mb-3">
         Page not found!
       </h1>
-      <p className="font-nunito text-[#8B7BA8] max-w-[400px] mb-8 leading-relaxed">
+      <p className="font-nunito text-[#6B5A94] max-w-[400px] mb-8 leading-relaxed">
         Looks like this page got lost in Amalia&apos;s art box.
         Let&apos;s get you back to the coloring pages!
       </p>

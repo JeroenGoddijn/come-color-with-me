@@ -40,7 +40,7 @@ export function Hero() {
           </h1>
 
           {/* Sub */}
-          <p className="text-[clamp(1rem,1.5vw,1.125rem)] text-[#8B7BA8] max-w-[520px] mx-auto mb-6 leading-[1.65]">
+          <p className="text-[clamp(1rem,1.5vw,1.125rem)] text-[#6B5A94] max-w-[520px] mx-auto mb-6 leading-[1.65]">
             Free and premium artwork drawn by Amalia — an 8-year-old artist
             sharing her colorful world with kids everywhere.
           </p>
@@ -62,7 +62,7 @@ export function Hero() {
           </div>
 
           {/* Trust signals */}
-          <ul className="list-none p-0 m-0 flex items-center justify-center gap-5 mt-6 text-[0.8125rem] text-[#8B7BA8] font-nunito font-semibold flex-wrap">
+          <ul className="list-none p-0 m-0 flex items-center justify-center gap-5 mt-6 text-[0.8125rem] text-[#6B5A94] font-nunito font-semibold flex-wrap">
             <li>✅ Free downloads, no signup</li>
             <li>🔒 Safe for kids</li>
             <li>🎨 100% hand-drawn</li>

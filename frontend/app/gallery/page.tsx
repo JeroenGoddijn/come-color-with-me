@@ -55,7 +55,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Sear
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-4xl md:text-5xl mb-3">
           Amalia&apos;s Gallery
         </h1>
-        <p className="font-nunito text-[#8B7BA8] text-lg max-w-xl mx-auto">
+        <p className="font-nunito text-[#6B5A94] text-lg max-w-xl mx-auto">
           Original drawings and coloring pages by an 8-year-old artist.
           {meta.total > 0 && ` ${meta.total} piece${meta.total !== 1 ? 's' : ''} and counting.`}
         </p>
@@ -84,7 +84,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Sear
                 ← Previous
               </a>
             )}
-            <span className="font-nunito text-[#8B7BA8] text-sm">
+            <span className="font-nunito text-[#6B5A94] text-sm">
               Page {currentPage}
             </span>
             {meta.hasMore && (

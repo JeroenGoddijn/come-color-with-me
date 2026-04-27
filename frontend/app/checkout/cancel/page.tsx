@@ -7,7 +7,7 @@ export default function CheckoutCancelPage() {
       <h1 className="font-fredoka font-bold text-[#3D1F5C] text-3xl mb-3">
         No worries!
       </h1>
-      <p className="font-nunito text-[#8B7BA8] max-w-sm mb-8 leading-relaxed">
+      <p className="font-nunito text-[#6B5A94] max-w-sm mb-8 leading-relaxed">
         Your checkout was cancelled and nothing was charged.
         You can go back and pick it up whenever you&apos;re ready.
       </p>

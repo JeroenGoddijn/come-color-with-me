@@ -14,7 +14,7 @@ export default function AuthErrorPage() {
         <h1 className="font-fredoka font-bold text-2xl text-[#9B6FD4] mb-3">
           Something went wrong
         </h1>
-        <p className="font-nunito text-[#8B7BA8] text-sm leading-relaxed max-w-[300px] mx-auto mb-8">
+        <p className="font-nunito text-[#6B5A94] text-sm leading-relaxed max-w-[300px] mx-auto mb-8">
           The link you followed may have expired or already been used.
           Request a new one and try again.
         </p>

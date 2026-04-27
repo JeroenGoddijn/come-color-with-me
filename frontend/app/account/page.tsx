@@ -44,7 +44,7 @@ function SignedOut() {
       <h1 className="font-fredoka font-bold text-3xl text-[#9B6FD4] mb-3">
         My Account
       </h1>
-      <p className="font-nunito text-[#8B7BA8] max-w-sm mb-8 leading-relaxed text-[1rem]">
+      <p className="font-nunito text-[#6B5A94] max-w-sm mb-8 leading-relaxed text-[1rem]">
         Log in to see your download history, saved artwork, and order details.
       </p>
       <div className="flex gap-4 flex-wrap justify-center">
@@ -144,7 +144,7 @@ function DownloadHistory() {
         <h2 className="font-fredoka font-bold text-xl text-[#3D1F5C]">
           Download History
         </h2>
-        <span className="font-nunito text-xs text-[#8B7BA8] bg-[#F5F3FF] border border-[#C4B5FD]/30 px-3 py-1 rounded-full">
+        <span className="font-nunito text-xs text-[#6B5A94] bg-[#F5F3FF] border border-[#C4B5FD]/30 px-3 py-1 rounded-full">
           {loading ? '…' : `${downloads.length} download${downloads.length !== 1 ? 's' : ''}`}
         </span>
       </div>
@@ -159,7 +159,7 @@ function DownloadHistory() {
           <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg mb-2">
             No downloads yet
           </p>
-          <p className="font-nunito text-[#8B7BA8] text-sm leading-relaxed max-w-xs mx-auto mb-6">
+          <p className="font-nunito text-[#6B5A94] text-sm leading-relaxed max-w-xs mx-auto mb-6">
             Every coloring page you download will appear here so you can
             find and re-download them any time.
           </p>
@@ -189,7 +189,7 @@ function DownloadHistory() {
                 <p className="font-nunito font-semibold text-[#3D1F5C] text-sm truncate">
                   {d.artwork_title}
                 </p>
-                <p className="font-nunito text-[#8B7BA8] text-xs mt-0.5">
+                <p className="font-nunito text-[#6B5A94] text-xs mt-0.5">
                   {new Date(d.downloaded_at).toLocaleDateString('en-US', {
                     month: 'short', day: 'numeric', year: 'numeric',
                   })}
@@ -235,7 +235,7 @@ function OrderHistory() {
         <h2 className="font-fredoka font-bold text-xl text-[#3D1F5C]">
           Print Orders
         </h2>
-        <span className="font-nunito text-xs text-[#8B7BA8] bg-[#F5F3FF] border border-[#C4B5FD]/30 px-3 py-1 rounded-full">
+        <span className="font-nunito text-xs text-[#6B5A94] bg-[#F5F3FF] border border-[#C4B5FD]/30 px-3 py-1 rounded-full">
           0 orders
         </span>
       </div>
@@ -245,7 +245,7 @@ function OrderHistory() {
         <p className="font-fredoka font-semibold text-[#3D1F5C] text-lg mb-2">
           No orders yet
         </p>
-        <p className="font-nunito text-[#8B7BA8] text-sm leading-relaxed max-w-xs mx-auto mb-6">
+        <p className="font-nunito text-[#6B5A94] text-sm leading-relaxed max-w-xs mx-auto mb-6">
           When you order a premium art print, your order details and
           tracking information will show up here.
         </p>
@@ -292,7 +292,7 @@ function OnboardingGuide() {
       <h2 className="font-fredoka font-bold text-xl text-[#3D1F5C] mb-1">
         Get started
       </h2>
-      <p className="font-nunito text-[#8B7BA8] text-sm mb-6">
+      <p className="font-nunito text-[#6B5A94] text-sm mb-6">
         Here&apos;s what you can do on Come Color With Me.
       </p>
       <div className="grid gap-4 sm:grid-cols-3">
@@ -307,7 +307,7 @@ function OnboardingGuide() {
               <p className="font-fredoka font-semibold text-[#3D1F5C] text-base leading-snug mb-1">
                 {s.title}
               </p>
-              <p className="font-nunito text-[#8B7BA8] text-xs leading-relaxed">
+              <p className="font-nunito text-[#6B5A94] text-xs leading-relaxed">
                 {s.body}
               </p>
             </div>
@@ -360,11 +360,11 @@ function Dashboard({
       {/* Page header */}
       <section className="bg-gradient-to-br from-[#9B6FD4]/10 to-[#F472B6]/8 border-b border-[#C4B5FD]/20 py-12 px-4">
         <div className="max-w-3xl mx-auto">
-          <p className="font-nunito text-[#8B7BA8] text-sm mb-1">Welcome back,</p>
+          <p className="font-nunito text-[#6B5A94] text-sm mb-1">Welcome back,</p>
           <h1 className="font-fredoka font-bold text-[#3D1F5C] text-3xl md:text-4xl mb-1">
             {formattedName} 👋
           </h1>
-          <p className="font-nunito text-[#8B7BA8] text-sm">{email}</p>
+          <p className="font-nunito text-[#6B5A94] text-sm">{email}</p>
         </div>
       </section>
 
@@ -386,7 +386,7 @@ function Dashboard({
             >
               <p className="text-2xl mb-1" aria-hidden="true">{icon}</p>
               <p className="font-fredoka font-bold text-[#3D1F5C] text-2xl leading-none mb-0.5">{value}</p>
-              <p className="font-nunito text-[#8B7BA8] text-xs">{label}</p>
+              <p className="font-nunito text-[#6B5A94] text-xs">{label}</p>
             </div>
           ))}
         </div>
@@ -408,7 +408,7 @@ function Dashboard({
         <div className="bg-white rounded-[20px] p-6 shadow-sm border border-[#C4B5FD]/20 flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="font-fredoka font-semibold text-[#3D1F5C]">Account</p>
-            <p className="font-nunito text-[#8B7BA8] text-sm">{email}</p>
+            <p className="font-nunito text-[#6B5A94] text-sm">{email}</p>
           </div>
           <button
             type="button"
