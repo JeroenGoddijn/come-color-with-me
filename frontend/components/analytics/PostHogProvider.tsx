@@ -39,6 +39,7 @@ function PostHogInit() {
       autocapture:               false,           // opt-in only: no blind click harvesting
       capture_pageview:          false,           // we track manually via PageviewTracker
       capture_pageleave:         true,
+      capture_exceptions:        true,            // JS error tracking — no PII, no consent needed
       disable_session_recording: true,            // enable explicitly when consent UI is added
       loaded: (ph) => {
         // Tag every event with environment so staging/prod can be filtered in one project
