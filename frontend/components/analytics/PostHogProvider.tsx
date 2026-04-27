@@ -41,6 +41,8 @@ function PostHogInit() {
       capture_pageleave:         true,
       disable_session_recording: true,            // enable explicitly when consent UI is added
       loaded: (ph) => {
+        // Tag every event with environment so staging/prod can be filtered in one project
+        ph.register({ environment: process.env.NEXT_PUBLIC_APP_ENV ?? 'production' })
         if (process.env.NODE_ENV === 'development') ph.debug()
       },
     })
