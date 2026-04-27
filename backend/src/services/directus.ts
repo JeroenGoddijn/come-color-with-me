@@ -125,21 +125,13 @@ export function mapArtworkDetail(raw: DirectusArtwork): ArtworkDetail {
 }
 
 export function mapArtworkCard(raw: DirectusArtwork): ArtworkCard {
-  const directusUrl = process.env['DIRECTUS_URL'] ?? 'http://localhost:8055'
-  const thumbnailId = raw.thumbnail_image
-  const previewId = raw.preview_image
-
   return {
     id: raw.id,
     slug: raw.slug,
     title: raw.title,
     artworkType: raw.artwork_type,
-    thumbnail: thumbnailId
-      ? `/assets/artwork/${raw.slug}-thumb.jpg`
-      : '',
-    previewImage: previewId
-      ? `${directusUrl}/assets/${previewId}`
-      : '',
+    thumbnail: `/assets/artwork/${raw.slug}-thumb.jpg`,
+    previewImage: `/assets/artwork/${raw.slug}-preview.jpg`,
     isFree: raw.is_free,
     isPremium: raw.is_premium,
     tags: raw.tags ?? [],
