@@ -24,7 +24,7 @@ const FUN_FACTS = [
   { icon: '🎨', heading: 'Draws every day', body: 'Rain or shine, Amalia finds time to draw — on paper, in notebooks, on napkins.' },
   { icon: '✏️', heading: 'Started with pencils', body: 'Her first drawings were pencil sketches of cats. Now she uses markers, crayons, and watercolours too.' },
   { icon: '💜', heading: 'Purple is her colour', body: 'Ask Amalia her favourite colour and she will tell you in under a second: purple. Every time.' },
-  { icon: '🖊️', heading: 'Signs as "analia"', body: 'Amalia signs her artwork in her own style. The lowercase "analia" is her artist\'s signature.' },
+  { icon: '🖊️', heading: 'Signs as "amalia"', body: 'Amalia signs her artwork in her own style. The lowercase "amalia" is her artist\'s signature.' },
 ]
 
 export default function AboutPage() {
