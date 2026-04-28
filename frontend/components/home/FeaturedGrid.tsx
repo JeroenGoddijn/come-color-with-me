@@ -27,7 +27,7 @@ export function FeaturedGrid({ artworks }: Props) {
           </h2>
           <Link
             href="/gallery"
-            aria-label="View all drawings in gallery"
+            aria-label="View all → drawings in gallery"
             className="font-nunito font-bold text-sm text-[#9B6FD4] hover:text-[#F472B6] flex items-center gap-1 transition-colors"
           >
             View all →

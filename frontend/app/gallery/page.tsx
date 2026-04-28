@@ -70,6 +70,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Sear
 
         {/* Grid */}
         <div className="mt-8">
+          <h2 className="sr-only">Artworks</h2>
           <ArtworkGrid artworks={artworks} columns={3} />
         </div>
 

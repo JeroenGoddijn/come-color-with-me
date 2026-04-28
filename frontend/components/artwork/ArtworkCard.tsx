@@ -70,7 +70,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
             <a
               href={downloadUrl}
               download
-              aria-label={`Download ${title} coloring page for free`}
+              aria-label={`⬇ Download Free — ${title} coloring page`}
               className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-emerald-50 text-emerald-700 font-nunito font-bold text-[0.8125rem] hover:bg-emerald-100 transition-colors"
             >
               ⬇ Download Free
@@ -79,7 +79,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
           {isPremium && !isFree && (
             <Link
               href={artwork.shopUrl ?? `/artwork/${slug}`}
-              aria-label={`Order a print of ${title}`}
+              aria-label={`★ Order Print — ${title}`}
               className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-gradient-to-br from-[#9B6FD4] to-[#F472B6] text-white font-nunito font-bold text-[0.8125rem] hover:opacity-90 transition-opacity"
             >
               ★ Order Print
