@@ -41,7 +41,7 @@ export function ArtistIntro({ artist }: Props) {
             </p>
             <Link
               href="/about"
-              aria-label={`Learn more about ${artist.name}`}
+              aria-label="Learn more about me"
               className="inline-flex items-center gap-1 font-nunito font-bold text-[#9B6FD4] hover:text-[#F472B6] text-sm transition-colors"
             >
               Learn more about me →

@@ -27,7 +27,7 @@ export function JustAddedGrid({ artworks }: Props) {
           </h2>
           <Link
             href="/coloring-pages"
-            aria-label="See all new coloring pages"
+            aria-label="See all new → coloring pages"
             className="font-nunito font-bold text-sm text-[#9B6FD4] hover:text-[#F472B6] flex items-center gap-1 transition-colors"
           >
             See all new →

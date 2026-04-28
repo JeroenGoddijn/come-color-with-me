@@ -35,7 +35,7 @@ export function Header() {
       <header className="sticky top-0 z-50 h-[72px] bg-[rgba(255,246,249,0.92)] backdrop-blur-md border-b border-[#C4B5FD]/30">
         <div className="mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-6">
           {/* Logo */}
-          <Link href="/" aria-label="Come Color With Me – home" className="flex items-center gap-3 flex-shrink-0">
+          <Link href="/" aria-label="Come Color With Me™ – home" className="flex items-center gap-3 flex-shrink-0">
             <Image
               src="/assets/brand/logo-icon.svg"
               alt=""
