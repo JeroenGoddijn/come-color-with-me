@@ -13,11 +13,8 @@ export function errorHandler(
   const isProduction = process.env['NODE_ENV'] === 'production'
 
   // Never expose stack traces in production
-  if (!isProduction) {
-    console.error('[Error]', err.stack ?? err.message)
-  } else {
-    console.error('[Error]', err.message)
-  }
+  const detail = err?.stack ?? err?.message ?? (typeof err === 'object' ? JSON.stringify(err) : String(err))
+  console.error('[Error]', detail)
 
   res.status(status).json({
     success: false,
