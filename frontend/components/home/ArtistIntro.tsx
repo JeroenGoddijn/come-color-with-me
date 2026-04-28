@@ -26,7 +26,7 @@ export function ArtistIntro({ artist }: Props) {
                 className="object-cover"
               />
             </div>
-            <span className="absolute -bottom-1 -right-1 bg-[#F472B6] text-white text-xs font-nunito font-bold px-2 py-0.5 rounded-full shadow-sm">
+            <span className="absolute -bottom-1 -right-1 bg-[#DC186D] text-white text-xs font-nunito font-bold px-2 py-0.5 rounded-full shadow-sm">
               Age {artist.age}
             </span>
           </div>
@@ -34,7 +34,7 @@ export function ArtistIntro({ artist }: Props) {
           {/* Info */}
           <div className="flex-1 text-center sm:text-left">
             <h2 id="artist-heading" className="font-fredoka font-bold text-[1.5rem] text-[#3D1F5C] mb-3">
-              Hi! I&apos;m <span className="text-[#9B6FD4]">{artist.name}</span> 👋
+              Hi! I&apos;m <span className="text-[#8B51D6]">{artist.name}</span> 👋
             </h2>
             <p className="text-[#6B5A94] font-nunito text-base leading-relaxed mb-4 max-w-[520px]">
               {artist.bioShort}
@@ -42,7 +42,7 @@ export function ArtistIntro({ artist }: Props) {
             <Link
               href="/about"
               aria-label="Learn more about me"
-              className="inline-flex items-center gap-1 font-nunito font-bold text-[#9B6FD4] hover:text-[#F472B6] text-sm transition-colors"
+              className="inline-flex items-center gap-1 font-nunito font-bold text-[#8B51D6] hover:text-[#DC186D] text-sm transition-colors"
             >
               Learn more about me →
             </Link>
@@ -50,15 +50,15 @@ export function ArtistIntro({ artist }: Props) {
             {/* Stats — illustrative placeholders, wired to CMS in Sprint 2 */}
             <ul className="list-none p-0 m-0 flex gap-8 mt-6 justify-center sm:justify-start">
               <li className="text-center">
-                <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">47+</p>
+                <p className="font-fredoka font-bold text-[1.25rem] text-[#8B51D6]">47+</p>
                 <p className="text-[0.75rem] text-[#6B5A94] mt-0.5">Drawings</p>
               </li>
               <li className="text-center">
-                <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">2.4k</p>
+                <p className="font-fredoka font-bold text-[1.25rem] text-[#8B51D6]">2.4k</p>
                 <p className="text-[0.75rem] text-[#6B5A94] mt-0.5">Downloads</p>
               </li>
               <li className="text-center">
-                <p className="font-fredoka font-bold text-[1.25rem] text-[#9B6FD4]">12</p>
+                <p className="font-fredoka font-bold text-[1.25rem] text-[#8B51D6]">12</p>
                 <p className="text-[0.75rem] text-[#6B5A94] mt-0.5">Categories</p>
               </li>
             </ul>

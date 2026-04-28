@@ -19,7 +19,7 @@ export function JustAddedGrid({ artworks }: Props) {
           >
             <span
               aria-hidden="true"
-              className="w-9 h-9 bg-gradient-to-br from-[#C4B5FD] to-[#F472B6] rounded-xl flex items-center justify-center text-[1.1rem]"
+              className="w-9 h-9 bg-gradient-to-br from-[#C4B5FD] to-[#DC186D] rounded-xl flex items-center justify-center text-[1.1rem]"
             >
               ✦
             </span>
@@ -28,7 +28,7 @@ export function JustAddedGrid({ artworks }: Props) {
           <Link
             href="/coloring-pages"
             aria-label="See all new → coloring pages"
-            className="font-nunito font-bold text-sm text-[#9B6FD4] hover:text-[#F472B6] flex items-center gap-1 transition-colors"
+            className="font-nunito font-bold text-sm text-[#8B51D6] hover:text-[#DC186D] flex items-center gap-1 transition-colors"
           >
             See all new →
           </Link>

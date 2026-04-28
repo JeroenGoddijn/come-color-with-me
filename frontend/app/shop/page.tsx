@@ -35,10 +35,10 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
     <main className="min-h-screen bg-[#FFF6F9]">
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#9B6FD4]/15 via-[#F472B6]/10 to-[#C4B5FD]/10 border-b border-[#C4B5FD]/25 py-16 px-4 text-center">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#8B51D6]/15 via-[#DC186D]/10 to-[#C4B5FD]/10 border-b border-[#C4B5FD]/25 py-16 px-4 text-center">
         {/* Decorative blobs */}
-        <div aria-hidden className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-[#9B6FD4]/8 blur-3xl" />
-        <div aria-hidden className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full bg-[#F472B6]/10 blur-3xl" />
+        <div aria-hidden className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-[#8B51D6]/8 blur-3xl" />
+        <div aria-hidden className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full bg-[#DC186D]/10 blur-3xl" />
 
         <p className="text-5xl mb-4 relative">🖼️</p>
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-4xl md:text-5xl mb-3 relative">

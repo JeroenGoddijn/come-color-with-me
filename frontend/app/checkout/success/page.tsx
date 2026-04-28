@@ -37,7 +37,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
   if (state === 'loading') {
     return (
       <div className="flex flex-col items-center gap-4 py-8">
-        <div className="w-8 h-8 border-4 border-[#C4B5FD] border-t-[#9B6FD4] rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-[#C4B5FD] border-t-[#8B51D6] rounded-full animate-spin" />
         <p className="font-nunito text-[#6B5A94] text-sm">Confirming your purchase…</p>
       </div>
     )
@@ -56,7 +56,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
         </p>
         <a
           href="mailto:hello@comecolorwith.me?subject=Download%20issue%20after%20purchase"
-          className="inline-block font-nunito font-bold text-sm text-[#9B6FD4] hover:underline"
+          className="inline-block font-nunito font-bold text-sm text-[#8B51D6] hover:underline"
         >
           Contact support →
         </a>
@@ -132,7 +132,7 @@ function DigitalSuccess({ sessionId, slug }: { sessionId: string; slug: string }
           type="button"
           onClick={handleDownload}
           disabled={dlLoading}
-          className="flex items-center justify-center gap-2 w-full px-8 py-4 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] disabled:opacity-60 disabled:cursor-wait text-white font-nunito font-bold text-base transition-colors shadow-sm"
+          className="flex items-center justify-center gap-2 w-full px-8 py-4 rounded-[32px] bg-[#8B51D6] hover:bg-[#7c56b0] disabled:opacity-60 disabled:cursor-wait text-white font-nunito font-bold text-base transition-colors shadow-sm"
         >
           {dlLoading
             ? <><span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Saving…</>
@@ -244,7 +244,7 @@ function PrintSuccess({ slug }: { slug: string }) {
 
       <p className="font-nunito text-[#6B5A94] text-xs text-center">
         Questions? Email{' '}
-        <a href="mailto:hello@comecolorwith.me" className="underline text-[#9B6FD4]">
+        <a href="mailto:hello@comecolorwith.me" className="underline text-[#8B51D6]">
           hello@comecolorwith.me
         </a>
       </p>
@@ -277,13 +277,13 @@ function SuccessContent() {
 
         {/* Footer nav */}
         <div className="mt-8 pt-6 border-t border-[#C4B5FD]/20 flex flex-wrap justify-center gap-4 text-sm font-nunito text-[#6B5A94]">
-          <Link href="/coloring-pages" className="hover:text-[#9B6FD4] transition-colors">
+          <Link href="/coloring-pages" className="hover:text-[#8B51D6] transition-colors">
             More Coloring Pages
           </Link>
-          <Link href="/shop" className="hover:text-[#9B6FD4] transition-colors">
+          <Link href="/shop" className="hover:text-[#8B51D6] transition-colors">
             Shop Art Prints
           </Link>
-          <Link href="/account" className="hover:text-[#9B6FD4] transition-colors">
+          <Link href="/account" className="hover:text-[#8B51D6] transition-colors">
             My Account
           </Link>
         </div>

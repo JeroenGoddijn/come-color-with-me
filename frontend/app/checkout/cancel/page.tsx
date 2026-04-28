@@ -14,13 +14,13 @@ export default function CheckoutCancelPage() {
       <div className="flex flex-wrap gap-4 justify-center">
         <Link
           href="/coloring-pages"
-          className="px-8 py-3 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors shadow-sm"
+          className="px-8 py-3 rounded-[32px] bg-[#8B51D6] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors shadow-sm"
         >
           Browse Coloring Pages
         </Link>
         <Link
           href="/shop"
-          className="px-8 py-3 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#9B6FD4] font-nunito font-bold text-sm transition-colors"
+          className="px-8 py-3 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#8B51D6] font-nunito font-bold text-sm transition-colors"
         >
           Shop Prints
         </Link>

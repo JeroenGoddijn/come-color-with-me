@@ -4,8 +4,8 @@ const PALETTES = [
   {
     id: 'current',
     label: 'Current (failing WCAG AA)',
-    purple: '#9B6FD4',
-    pink: '#F472B6',
+    purple: '#8B51D6',
+    pink: '#DC186D',
     lavender: '#C4B5FD',
     purpleRatio: '3.52:1 ⚠️',
     pinkRatio: '2.50:1 ❌',

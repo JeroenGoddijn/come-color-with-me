@@ -15,11 +15,11 @@ export default function ClubPage() {
         <p className="text-7xl relative">🎨</p>
       </div>
 
-      <h1 className="font-['Bubblegum_Sans'] text-[clamp(2rem,5vw,3rem)] text-[#9B6FD4] mb-3">
+      <h1 className="font-['Bubblegum_Sans'] text-[clamp(2rem,5vw,3rem)] text-[#8B51D6] mb-3">
         Coloring Club
       </h1>
 
-      <div className="inline-flex items-center gap-2 bg-[#F472B6]/10 border border-[#F472B6]/30 text-[#F472B6] font-nunito font-bold text-sm px-4 py-1.5 rounded-full mb-6">
+      <div className="inline-flex items-center gap-2 bg-[#DC186D]/10 border border-[#DC186D]/30 text-[#DC186D] font-nunito font-bold text-sm px-4 py-1.5 rounded-full mb-6">
         ✦ Coming Soon
       </div>
 
@@ -35,13 +35,13 @@ export default function ClubPage() {
       <div className="flex flex-wrap gap-4 justify-center">
         <Link
           href="/coloring-pages"
-          className="px-8 py-3 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors shadow-sm"
+          className="px-8 py-3 rounded-[32px] bg-[#8B51D6] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors shadow-sm"
         >
           Browse Free Coloring Pages
         </Link>
         <Link
           href="/gallery"
-          className="px-8 py-3 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#9B6FD4] font-nunito font-bold text-sm transition-colors"
+          className="px-8 py-3 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#8B51D6] font-nunito font-bold text-sm transition-colors"
         >
           See All Artwork
         </Link>

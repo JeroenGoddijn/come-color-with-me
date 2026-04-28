@@ -38,7 +38,7 @@ export default function ForgotPasswordPage() {
       <div className="min-h-[70vh] flex items-center justify-center px-4 py-16">
         <div className="w-full max-w-[420px] text-center">
           <p className="text-5xl mb-4" aria-hidden="true">📬</p>
-          <h1 className="font-fredoka font-bold text-2xl text-[#9B6FD4] mb-3">
+          <h1 className="font-fredoka font-bold text-2xl text-[#8B51D6] mb-3">
             Check your inbox!
           </h1>
           <p className="font-nunito text-[#6B5A94] text-sm leading-relaxed max-w-[300px] mx-auto">
@@ -63,7 +63,7 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-[420px]">
         <div className="text-center mb-8">
           <p className="text-5xl mb-4" aria-hidden="true">🔑</p>
-          <h1 className="font-fredoka font-bold text-2xl text-[#9B6FD4] mb-2">
+          <h1 className="font-fredoka font-bold text-2xl text-[#8B51D6] mb-2">
             Forgot your password?
           </h1>
           <p className="font-nunito text-[#6B5A94] text-sm">
@@ -94,7 +94,7 @@ export default function ForgotPasswordPage() {
               placeholder="you@example.com"
               required
               autoComplete="email"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#9B6FD4] transition-colors"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#8B51D6] transition-colors"
             />
           </div>
 
@@ -104,7 +104,7 @@ export default function ForgotPasswordPage() {
 
           <p className="text-center font-nunito text-sm text-[#6B5A94]">
             Remembered it?{' '}
-            <Link href="/login" className="text-[#9B6FD4] font-semibold hover:text-[#F472B6] transition-colors">
+            <Link href="/login" className="text-[#8B51D6] font-semibold hover:text-[#DC186D] transition-colors">
               Back to login
             </Link>
           </p>

@@ -56,11 +56,11 @@ export function Footer() {
               Quick Links
             </p>
             <ul className="flex flex-col gap-3 text-sm">
-              <li><Link href="/gallery" className="hover:text-[#F472B6] transition-colors">Gallery</Link></li>
-              <li><Link href="/coloring-pages" className="hover:text-[#F472B6] transition-colors">Free Coloring Pages</Link></li>
-              <li><Link href="/shop" className="hover:text-[#F472B6] transition-colors">Shop Prints</Link></li>
-              <li><Link href="/about" className="hover:text-[#F472B6] transition-colors">About Amalia</Link></li>
-              <li><Link href="/club" className="hover:text-[#F472B6] transition-colors">Coloring Club</Link></li>
+              <li><Link href="/gallery" className="hover:text-[#DC186D] transition-colors">Gallery</Link></li>
+              <li><Link href="/coloring-pages" className="hover:text-[#DC186D] transition-colors">Free Coloring Pages</Link></li>
+              <li><Link href="/shop" className="hover:text-[#DC186D] transition-colors">Shop Prints</Link></li>
+              <li><Link href="/about" className="hover:text-[#DC186D] transition-colors">About Amalia</Link></li>
+              <li><Link href="/club" className="hover:text-[#DC186D] transition-colors">Coloring Club</Link></li>
             </ul>
           </div>
 
@@ -70,9 +70,9 @@ export function Footer() {
               Legal
             </p>
             <ul className="flex flex-col gap-3 text-sm">
-              <li><Link href="/privacy" className="hover:text-[#F472B6] transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-[#F472B6] transition-colors">Terms of Service</Link></li>
-              <li><Link href="/cookies" className="hover:text-[#F472B6] transition-colors">Cookie Policy</Link></li>
+              <li><Link href="/privacy" className="hover:text-[#DC186D] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-[#DC186D] transition-colors">Terms of Service</Link></li>
+              <li><Link href="/cookies" className="hover:text-[#DC186D] transition-colors">Cookie Policy</Link></li>
             </ul>
           </div>
 
@@ -104,7 +104,7 @@ export function Footer() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="px-5 py-2.5 bg-[#F472B6] hover:bg-[#EC4899] text-white font-nunito font-bold text-sm rounded-lg transition-colors whitespace-nowrap disabled:opacity-60"
+                      className="px-5 py-2.5 bg-[#DC186D] hover:bg-[#EC4899] text-white font-nunito font-bold text-sm rounded-lg transition-colors whitespace-nowrap disabled:opacity-60"
                     >
                       {loading ? '…' : 'Join'}
                     </button>
@@ -122,9 +122,9 @@ export function Footer() {
         <div className="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-white/10 text-[0.8125rem]">
           <span>© {year} Come Color With Me™. All rights reserved.</span>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-[#F472B6] transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-[#F472B6] transition-colors">Terms</Link>
-            <Link href="/cookies" className="hover:text-[#F472B6] transition-colors">Cookies</Link>
+            <Link href="/privacy" className="hover:text-[#DC186D] transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-[#DC186D] transition-colors">Terms</Link>
+            <Link href="/cookies" className="hover:text-[#DC186D] transition-colors">Cookies</Link>
           </div>
         </div>
       </div>

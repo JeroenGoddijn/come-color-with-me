@@ -43,8 +43,8 @@ export function Header() {
               height={44}
               priority
             />
-            <span className="font-['Bubblegum_Sans'] text-[1.2rem] text-[#9B6FD4] leading-tight hidden sm:block">
-              Come Color<span className="text-[#F472B6] block">With Me™</span>
+            <span className="font-['Bubblegum_Sans'] text-[1.2rem] text-[#8B51D6] leading-tight hidden sm:block">
+              Come Color<span className="text-[#DC186D] block">With Me™</span>
             </span>
           </Link>
 
@@ -54,7 +54,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-nunito font-semibold text-[0.9375rem] text-[#9B6FD4] px-3 py-2 rounded-lg transition-colors hover:text-[#F472B6] hover:bg-[#F472B6]/08 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9B6FD4] focus-visible:ring-offset-2"
+                className="font-nunito font-semibold text-[0.9375rem] text-[#8B51D6] px-3 py-2 rounded-lg transition-colors hover:text-[#DC186D] hover:bg-[#DC186D]/08 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B51D6] focus-visible:ring-offset-2"
               >
                 {link.label}
               </Link>
@@ -67,14 +67,14 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => signOut()}
-                className="font-nunito font-bold text-sm text-[#9B6FD4] border-2 border-[#C4B5FD] rounded-full px-5 py-2 transition-all hover:bg-[#C4B5FD] hover:text-[#3D1F5C]"
+                className="font-nunito font-bold text-sm text-[#8B51D6] border-2 border-[#C4B5FD] rounded-full px-5 py-2 transition-all hover:bg-[#C4B5FD] hover:text-[#3D1F5C]"
               >
                 Sign Out
               </button>
             ) : (
               <Link
                 href="/login"
-                className="font-nunito font-bold text-sm text-[#9B6FD4] border-2 border-[#C4B5FD] rounded-full px-5 py-2 transition-all hover:bg-[#C4B5FD] hover:text-[#3D1F5C]"
+                className="font-nunito font-bold text-sm text-[#8B51D6] border-2 border-[#C4B5FD] rounded-full px-5 py-2 transition-all hover:bg-[#C4B5FD] hover:text-[#3D1F5C]"
               >
                 Log In
               </Link>
@@ -90,9 +90,9 @@ export function Header() {
             aria-controls="mobile-drawer"
             onClick={() => setDrawerOpen(true)}
           >
-            <span className="block w-6 h-0.5 bg-[#9B6FD4] rounded" />
-            <span className="block w-6 h-0.5 bg-[#9B6FD4] rounded" />
-            <span className="block w-4 h-0.5 bg-[#9B6FD4] rounded self-start ml-1" />
+            <span className="block w-6 h-0.5 bg-[#8B51D6] rounded" />
+            <span className="block w-6 h-0.5 bg-[#8B51D6] rounded" />
+            <span className="block w-4 h-0.5 bg-[#8B51D6] rounded self-start ml-1" />
           </button>
         </div>
       </header>
@@ -127,13 +127,13 @@ export function Header() {
               height={40}
             />
             <div>
-              <p className="font-['Bubblegum_Sans'] text-[#9B6FD4] text-base leading-tight">Hi there!</p>
+              <p className="font-['Bubblegum_Sans'] text-[#8B51D6] text-base leading-tight">Hi there!</p>
               <span className="text-[#6B5A94] text-xs font-nunito">Amalia&apos;s Art Studio</span>
             </div>
           </div>
           <button
             type="button"
-            className="w-9 h-9 flex items-center justify-center rounded-full text-[#6B5A94] hover:bg-[#F472B6]/12 hover:text-[#F472B6] transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full text-[#6B5A94] hover:bg-[#DC186D]/12 hover:text-[#DC186D] transition-colors"
             aria-label="Close menu"
             tabIndex={drawerOpen ? 0 : -1}
             onClick={closeDrawer}
@@ -150,7 +150,7 @@ export function Header() {
               href={link.href}
               onClick={closeDrawer}
               tabIndex={drawerOpen ? 0 : -1}
-              className="flex items-center gap-3 px-5 py-3.5 font-nunito font-semibold text-[#3D1F5C] hover:bg-[#9B6FD4]/08 hover:text-[#9B6FD4] transition-colors"
+              className="flex items-center gap-3 px-5 py-3.5 font-nunito font-semibold text-[#3D1F5C] hover:bg-[#8B51D6]/08 hover:text-[#8B51D6] transition-colors"
             >
               <span className="text-xl w-7 text-center">{link.icon}</span>
               {link.label}
@@ -163,7 +163,7 @@ export function Header() {
             href="/account"
             onClick={closeDrawer}
             tabIndex={drawerOpen ? 0 : -1}
-            className="flex items-center gap-3 px-5 py-3.5 font-nunito font-semibold text-[#3D1F5C] hover:bg-[#9B6FD4]/08 hover:text-[#9B6FD4] transition-colors"
+            className="flex items-center gap-3 px-5 py-3.5 font-nunito font-semibold text-[#3D1F5C] hover:bg-[#8B51D6]/08 hover:text-[#8B51D6] transition-colors"
           >
             <span className="text-xl w-7 text-center">👤</span>
             My Account
@@ -177,7 +177,7 @@ export function Header() {
               type="button"
               tabIndex={drawerOpen ? 0 : -1}
               onClick={() => { signOut(); closeDrawer() }}
-              className="w-full font-nunito font-bold text-white bg-[#9B6FD4] hover:bg-[#8B5CF6] rounded-full py-3 transition-all"
+              className="w-full font-nunito font-bold text-white bg-[#8B51D6] hover:bg-[#8B5CF6] rounded-full py-3 transition-all"
             >
               Sign Out
             </button>
@@ -186,7 +186,7 @@ export function Header() {
               href="/login"
               onClick={closeDrawer}
               tabIndex={drawerOpen ? 0 : -1}
-              className="block w-full font-nunito font-bold text-center text-white bg-[#9B6FD4] hover:bg-[#8B5CF6] rounded-full py-3 transition-all"
+              className="block w-full font-nunito font-bold text-center text-white bg-[#8B51D6] hover:bg-[#8B5CF6] rounded-full py-3 transition-all"
             >
               Log In
             </Link>

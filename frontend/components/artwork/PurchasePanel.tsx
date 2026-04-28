@@ -131,7 +131,7 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
 
       {/* ── CARD: postcard ordering (always shown for card category) ─ */}
       {isCard && (
-        <div className="rounded-[20px] border border-[#F472B6]/30 bg-white p-6 flex flex-col gap-4 shadow-sm">
+        <div className="rounded-[20px] border border-[#DC186D]/30 bg-white p-6 flex flex-col gap-4 shadow-sm">
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-start gap-3">
               <span className="text-2xl" aria-hidden="true">💌</span>
@@ -142,7 +142,7 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
                 </p>
               </div>
             </div>
-            <span className="font-fredoka font-bold text-[#F472B6] text-xl whitespace-nowrap">
+            <span className="font-fredoka font-bold text-[#DC186D] text-xl whitespace-nowrap">
               {selectedVariantInfo.price}
             </span>
           </div>
@@ -157,8 +157,8 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
                 className={[
                   'flex-1 py-2.5 px-3 rounded-xl border-2 font-nunito font-semibold text-sm transition-colors text-center',
                   selectedVariant === key
-                    ? 'border-[#9B6FD4] bg-[#C4B5FD]/15 text-[#9B6FD4]'
-                    : 'border-[#C4B5FD] text-[#9B6FD4] hover:bg-[#C4B5FD]/10',
+                    ? 'border-[#8B51D6] bg-[#C4B5FD]/15 text-[#8B51D6]'
+                    : 'border-[#C4B5FD] text-[#8B51D6] hover:bg-[#C4B5FD]/10',
                 ].join(' ')}
               >
                 <span className="block">{label}</span>
@@ -171,7 +171,7 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
             type="button"
             onClick={handleCardCheckout}
             disabled={cardLoading}
-            className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-gradient-to-br from-[#9B6FD4] to-[#F472B6] hover:opacity-90 text-white font-nunito font-bold text-base transition-opacity shadow-sm disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-gradient-to-br from-[#8B51D6] to-[#DC186D] hover:opacity-90 text-white font-nunito font-bold text-base transition-opacity shadow-sm disabled:opacity-60"
           >
             {cardLoading ? (
               <>
@@ -198,13 +198,13 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
                   </p>
                 </div>
               </div>
-              <span className="font-fredoka font-bold text-[#9B6FD4] text-xl whitespace-nowrap">$2.99</span>
+              <span className="font-fredoka font-bold text-[#8B51D6] text-xl whitespace-nowrap">$2.99</span>
             </div>
             <button
               type="button"
               onClick={handleDigitalCheckout}
               disabled={digitalLoading}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-base transition-colors shadow-sm disabled:opacity-60"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-[#8B51D6] hover:bg-[#7c56b0] text-white font-nunito font-bold text-base transition-colors shadow-sm disabled:opacity-60"
             >
               {digitalLoading ? (
                 <>
@@ -216,7 +216,7 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
           </div>
 
           {/* Path 2 — Physical print */}
-          <div className="rounded-[20px] border border-[#F472B6]/30 bg-white p-6 flex flex-col gap-4 shadow-sm">
+          <div className="rounded-[20px] border border-[#DC186D]/30 bg-white p-6 flex flex-col gap-4 shadow-sm">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-start gap-3">
                 <span className="text-2xl" aria-hidden="true">🖼</span>
@@ -227,7 +227,7 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
                   </p>
                 </div>
               </div>
-              <span className="font-fredoka font-bold text-[#F472B6] text-xl whitespace-nowrap">
+              <span className="font-fredoka font-bold text-[#DC186D] text-xl whitespace-nowrap">
                 {selectedSizeInfo.price}
               </span>
             </div>
@@ -242,8 +242,8 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
                   className={[
                     'flex-1 py-2 px-3 rounded-xl border-2 font-nunito font-semibold text-sm transition-colors',
                     selectedSize === key
-                      ? 'border-[#9B6FD4] bg-[#C4B5FD]/15 text-[#9B6FD4]'
-                      : 'border-[#C4B5FD] text-[#9B6FD4] hover:bg-[#C4B5FD]/10',
+                      ? 'border-[#8B51D6] bg-[#C4B5FD]/15 text-[#8B51D6]'
+                      : 'border-[#C4B5FD] text-[#8B51D6] hover:bg-[#C4B5FD]/10',
                   ].join(' ')}
                 >
                   {label}
@@ -255,7 +255,7 @@ export function PurchasePanel({ slug, title, isFree, isPremium, downloadUrl, tag
               type="button"
               onClick={handlePrintCheckout}
               disabled={printLoading}
-              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-gradient-to-br from-[#9B6FD4] to-[#F472B6] hover:opacity-90 text-white font-nunito font-bold text-base transition-opacity shadow-sm disabled:opacity-60"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-[32px] bg-gradient-to-br from-[#8B51D6] to-[#DC186D] hover:opacity-90 text-white font-nunito font-bold text-base transition-opacity shadow-sm disabled:opacity-60"
             >
               {printLoading ? (
                 <>

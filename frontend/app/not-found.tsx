@@ -5,7 +5,7 @@ export default function NotFoundPage() {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 py-16">
       <p className="text-6xl mb-6" aria-hidden="true">🖍️</p>
-      <h1 className="font-fredoka font-bold text-3xl text-[#9B6FD4] mb-3">
+      <h1 className="font-fredoka font-bold text-3xl text-[#8B51D6] mb-3">
         Page not found!
       </h1>
       <p className="font-nunito text-[#6B5A94] max-w-[400px] mb-8 leading-relaxed">

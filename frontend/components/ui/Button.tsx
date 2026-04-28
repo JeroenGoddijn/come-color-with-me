@@ -12,13 +12,13 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    'bg-[#F472B6] hover:bg-[#ec4899] text-white shadow-sm hover:shadow-md',
+    'bg-[#DC186D] hover:bg-[#ec4899] text-white shadow-sm hover:shadow-md',
   secondary:
-    'bg-[#9B6FD4] hover:bg-[#7c3aed] text-white shadow-sm hover:shadow-md',
+    'bg-[#8B51D6] hover:bg-[#7c3aed] text-white shadow-sm hover:shadow-md',
   ghost:
-    'bg-transparent hover:bg-[#F472B6]/10 text-[#9B6FD4]',
+    'bg-transparent hover:bg-[#DC186D]/10 text-[#8B51D6]',
   outline:
-    'border-2 border-[#9B6FD4] text-[#9B6FD4] hover:bg-[#9B6FD4] hover:text-white',
+    'border-2 border-[#8B51D6] text-[#8B51D6] hover:bg-[#8B51D6] hover:text-white',
 }
 
 const sizeClasses: Record<Size, string> = {
@@ -41,7 +41,7 @@ export function Button({
       {...rest}
       disabled={disabled || loading}
       className={cn(
-        'font-nunito font-700 rounded-[32px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#9B6FD4] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
+        'font-nunito font-700 rounded-[32px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8B51D6] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
         variantClasses[variant],
         sizeClasses[size],
         className

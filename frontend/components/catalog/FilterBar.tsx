@@ -71,8 +71,8 @@ function ChipGroup({
           className={cn(
             'px-3 py-1.5 rounded-full text-xs font-nunito font-semibold transition-all',
             current === opt.value
-              ? 'bg-[#9B6FD4] text-white shadow-sm'
-              : 'bg-white border border-[#C4B5FD]/60 text-[#9B6FD4] hover:border-[#9B6FD4]'
+              ? 'bg-[#8B51D6] text-white shadow-sm'
+              : 'bg-white border border-[#C4B5FD]/60 text-[#8B51D6] hover:border-[#8B51D6]'
           )}
         >
           {opt.label}
@@ -139,7 +139,7 @@ export function FilterBar({
         <button
           type="button"
           onClick={() => router.push(pathname)}
-          className="self-start text-xs font-nunito font-semibold text-[#6B5A94] hover:text-[#F472B6] transition-colors underline underline-offset-2"
+          className="self-start text-xs font-nunito font-semibold text-[#6B5A94] hover:text-[#DC186D] transition-colors underline underline-offset-2"
         >
           Clear filters
         </button>

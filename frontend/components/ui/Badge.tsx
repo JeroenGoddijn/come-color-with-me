@@ -9,8 +9,8 @@ type Props = {
 }
 
 const variantClasses: Record<Variant, string> = {
-  purple: 'bg-[#C4B5FD]/30 text-[#9B6FD4]',
-  pink:   'bg-[#F472B6]/20 text-[#db2777]',
+  purple: 'bg-[#C4B5FD]/30 text-[#8B51D6]',
+  pink:   'bg-[#DC186D]/20 text-[#db2777]',
   green:  'bg-emerald-100 text-emerald-700',
   yellow: 'bg-amber-100 text-amber-700',
   gray:   'bg-gray-100 text-gray-600',

@@ -76,13 +76,13 @@ export default function CookiesPage() {
 
           <section>
             <h2 className="font-fredoka font-bold text-[#3D1F5C] text-xl mb-3">Contact</h2>
-            <p>Questions? Email <a href="mailto:hello@comecolorwith.me" className="text-[#9B6FD4] underline">hello@comecolorwith.me</a>.</p>
+            <p>Questions? Email <a href="mailto:hello@comecolorwith.me" className="text-[#8B51D6] underline">hello@comecolorwith.me</a>.</p>
           </section>
 
         </div>
 
         <div className="mt-8 text-center">
-          <Link href="/" className="font-nunito text-sm text-[#9B6FD4] hover:underline">← Back to home</Link>
+          <Link href="/" className="font-nunito text-sm text-[#8B51D6] hover:underline">← Back to home</Link>
         </div>
       </div>
     </main>

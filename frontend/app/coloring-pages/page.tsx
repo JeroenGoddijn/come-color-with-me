@@ -36,7 +36,7 @@ export default async function ColoringPagesPage({ searchParams }: { searchParams
     <main className="min-h-screen bg-[#FFF6F9]">
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-emerald-50 to-[#F472B6]/10 border-b border-emerald-100 py-14 px-4 text-center">
+      <section className="bg-gradient-to-br from-emerald-50 to-[#DC186D]/10 border-b border-emerald-100 py-14 px-4 text-center">
         <p className="text-5xl mb-4">🖍️</p>
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-4xl md:text-5xl mb-3">
           Free Coloring Pages

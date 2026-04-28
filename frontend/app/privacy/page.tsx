@@ -62,7 +62,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-fredoka font-bold text-[#3D1F5C] text-xl mb-3">5. Third-party services</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Stripe</strong> — payment processing. Subject to <a href="https://stripe.com/privacy" className="text-[#9B6FD4] underline" target="_blank" rel="noopener noreferrer">Stripe&apos;s Privacy Policy</a>.</li>
+              <li><strong>Stripe</strong> — payment processing. Subject to <a href="https://stripe.com/privacy" className="text-[#8B51D6] underline" target="_blank" rel="noopener noreferrer">Stripe&apos;s Privacy Policy</a>.</li>
               <li><strong>Gelato</strong> — print fulfilment. Your shipping address is shared with Gelato solely to fulfil your print order.</li>
               <li><strong>Kit (ConvertKit)</strong> — newsletter delivery. Subject to Kit&apos;s Privacy Policy.</li>
               <li><strong>Supabase</strong> — authentication and data storage. Hosted in the EU.</li>
@@ -76,18 +76,18 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="font-fredoka font-bold text-[#3D1F5C] text-xl mb-3">7. Your rights</h2>
-            <p>You have the right to access, correct, or delete your personal data. Contact us at <a href="mailto:hello@comecolorwith.me" className="text-[#9B6FD4] underline">hello@comecolorwith.me</a>.</p>
+            <p>You have the right to access, correct, or delete your personal data. Contact us at <a href="mailto:hello@comecolorwith.me" className="text-[#8B51D6] underline">hello@comecolorwith.me</a>.</p>
           </section>
 
           <section>
             <h2 className="font-fredoka font-bold text-[#3D1F5C] text-xl mb-3">8. Contact</h2>
-            <p>Questions about this policy? Email us at <a href="mailto:hello@comecolorwith.me" className="text-[#9B6FD4] underline">hello@comecolorwith.me</a>.</p>
+            <p>Questions about this policy? Email us at <a href="mailto:hello@comecolorwith.me" className="text-[#8B51D6] underline">hello@comecolorwith.me</a>.</p>
           </section>
 
         </div>
 
         <div className="mt-8 text-center">
-          <Link href="/" className="font-nunito text-sm text-[#9B6FD4] hover:underline">← Back to home</Link>
+          <Link href="/" className="font-nunito text-sm text-[#8B51D6] hover:underline">← Back to home</Link>
         </div>
       </div>
     </main>

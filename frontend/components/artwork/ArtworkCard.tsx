@@ -55,7 +55,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
         {/* Hover overlay icon */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[#9B6FD4]/0 hover:bg-[#9B6FD4]/10 flex items-center justify-center opacity-0 hover:opacity-100 transition-all duration-200 z-20"
+          className="absolute inset-0 bg-[#8B51D6]/0 hover:bg-[#8B51D6]/10 flex items-center justify-center opacity-0 hover:opacity-100 transition-all duration-200 z-20"
         >
           <span className="text-4xl">{artworkType === 'coloring_page' ? '🖍' : '✨'}</span>
         </div>
@@ -80,7 +80,7 @@ export function ArtworkCard({ artwork, priority = false }: Props) {
             <Link
               href={artwork.shopUrl ?? `/artwork/${slug}`}
               aria-label={`★ Order Print — ${title}`}
-              className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-gradient-to-br from-[#9B6FD4] to-[#F472B6] text-white font-nunito font-bold text-[0.8125rem] hover:opacity-90 transition-opacity"
+              className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-gradient-to-br from-[#8B51D6] to-[#DC186D] text-white font-nunito font-bold text-[0.8125rem] hover:opacity-90 transition-opacity"
             >
               ★ Order Print
             </Link>

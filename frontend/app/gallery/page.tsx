@@ -50,7 +50,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Sear
     <main className="min-h-screen bg-[#FFF6F9]">
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#9B6FD4]/10 to-[#F472B6]/10 border-b border-[#C4B5FD]/20 py-14 px-4 text-center">
+      <section className="bg-gradient-to-br from-[#8B51D6]/10 to-[#DC186D]/10 border-b border-[#C4B5FD]/20 py-14 px-4 text-center">
         <p className="text-5xl mb-4">🎨</p>
         <h1 className="font-fredoka font-bold text-[#3D1F5C] text-4xl md:text-5xl mb-3">
           Amalia&apos;s Gallery
@@ -80,7 +80,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Sear
             {currentPage > 1 && (
               <a
                 href={buildPageUrl(searchParams, currentPage - 1)}
-                className="px-6 py-2.5 rounded-[32px] border-2 border-[#C4B5FD] text-[#9B6FD4] font-nunito font-bold text-sm hover:bg-[#C4B5FD]/10 transition-colors"
+                className="px-6 py-2.5 rounded-[32px] border-2 border-[#C4B5FD] text-[#8B51D6] font-nunito font-bold text-sm hover:bg-[#C4B5FD]/10 transition-colors"
               >
                 ← Previous
               </a>
@@ -91,7 +91,7 @@ export default async function GalleryPage({ searchParams }: { searchParams: Sear
             {meta.hasMore && (
               <a
                 href={buildPageUrl(searchParams, currentPage + 1)}
-                className="px-6 py-2.5 rounded-[32px] bg-[#9B6FD4] text-white font-nunito font-bold text-sm hover:bg-[#7c56b0] transition-colors"
+                className="px-6 py-2.5 rounded-[32px] bg-[#8B51D6] text-white font-nunito font-bold text-sm hover:bg-[#7c56b0] transition-colors"
               >
                 Next →
               </a>

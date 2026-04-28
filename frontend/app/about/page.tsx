@@ -33,9 +33,9 @@ export default function AboutPage() {
     <main className="min-h-screen bg-[#FFF6F9]">
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#9B6FD4]/12 via-[#F472B6]/8 to-[#C4B5FD]/10 border-b border-[#C4B5FD]/25 py-20 px-4 text-center">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#8B51D6]/12 via-[#DC186D]/8 to-[#C4B5FD]/10 border-b border-[#C4B5FD]/25 py-20 px-4 text-center">
         <div aria-hidden className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#C4B5FD]/15 blur-3xl" />
-        <div aria-hidden className="absolute -bottom-12 -right-12 w-60 h-60 rounded-full bg-[#F472B6]/12 blur-3xl" />
+        <div aria-hidden className="absolute -bottom-12 -right-12 w-60 h-60 rounded-full bg-[#DC186D]/12 blur-3xl" />
 
         {/* Avatar */}
         <div className="relative mx-auto mb-6 w-36 h-36 rounded-full bg-[#FFF0FA] border-4 border-[#C4B5FD] shadow-lg flex items-center justify-center overflow-hidden">
@@ -73,7 +73,7 @@ export default function AboutPage() {
 
         {/* ── Amalia's story — in her own words ── */}
         <section className="bg-white rounded-[20px] p-8 md:p-10 shadow-sm border border-[#C4B5FD]/20">
-          <p className="font-['Bubblegum_Sans'] text-[#9B6FD4] text-2xl mb-5">In my own words…</p>
+          <p className="font-['Bubblegum_Sans'] text-[#8B51D6] text-2xl mb-5">In my own words…</p>
           <div className="font-nunito text-[#3D1F5C] text-[1.0625rem] leading-relaxed space-y-4">
             <p>
               I love drawing. I draw cats, dogs, unicorns, houses, cupcakes — basically
@@ -89,7 +89,7 @@ export default function AboutPage() {
               My favourite thing to draw right now is unicorns with butterflies.
               I also really love drawing animals — especially cats. They&apos;re the best. 🐱
             </p>
-            <p className="text-[#9B6FD4] font-semibold">
+            <p className="text-[#8B51D6] font-semibold">
               I hope you enjoy coloring my drawings as much as I enjoy making them! 💜
             </p>
           </div>
@@ -117,7 +117,7 @@ export default function AboutPage() {
         </section>
 
         {/* ── Parent's note ── */}
-        <section className="bg-gradient-to-br from-[#9B6FD4]/8 to-[#F472B6]/8 rounded-[20px] p-8 md:p-10 border border-[#C4B5FD]/25">
+        <section className="bg-gradient-to-br from-[#8B51D6]/8 to-[#DC186D]/8 rounded-[20px] p-8 md:p-10 border border-[#C4B5FD]/25">
           <p className="font-fredoka font-bold text-[#3D1F5C] text-xl mb-4">A note from her dad</p>
           <div className="font-nunito text-[#3D1F5C]/85 text-[1rem] leading-relaxed space-y-3">
             <p>
@@ -149,13 +149,13 @@ export default function AboutPage() {
           <div className="flex flex-wrap justify-center gap-4 pt-2">
             <Link
               href="/coloring-pages"
-              className="px-8 py-3 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors shadow-sm"
+              className="px-8 py-3 rounded-[32px] bg-[#8B51D6] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors shadow-sm"
             >
               Browse Coloring Pages
             </Link>
             <Link
               href="/gallery"
-              className="px-8 py-3 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#9B6FD4] font-nunito font-bold text-sm transition-colors"
+              className="px-8 py-3 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#8B51D6] font-nunito font-bold text-sm transition-colors"
             >
               See All Artwork
             </Link>

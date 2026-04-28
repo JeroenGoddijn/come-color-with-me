@@ -68,7 +68,7 @@ function LoginForm() {
       <div className="w-full max-w-[420px]">
         <div className="text-center mb-8">
           <p className="text-5xl mb-4" aria-hidden="true">🎨</p>
-          <h1 className="font-fredoka font-bold text-2xl text-[#9B6FD4] mb-2">
+          <h1 className="font-fredoka font-bold text-2xl text-[#8B51D6] mb-2">
             Welcome back!
           </h1>
           <p className="font-nunito text-[#6B5A94] text-sm">
@@ -121,7 +121,7 @@ function LoginForm() {
               placeholder="you@example.com"
               required
               autoComplete="email"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#9B6FD4] transition-colors"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#8B51D6] transition-colors"
             />
           </div>
 
@@ -132,7 +132,7 @@ function LoginForm() {
               </label>
               <Link
                 href="/auth/forgot-password"
-                className="font-nunito text-xs text-[#9B6FD4] hover:text-[#F472B6] transition-colors"
+                className="font-nunito text-xs text-[#8B51D6] hover:text-[#DC186D] transition-colors"
               >
                 Forgot password?
               </Link>
@@ -145,7 +145,7 @@ function LoginForm() {
               placeholder="••••••••"
               required
               autoComplete="current-password"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#9B6FD4] transition-colors"
+              className="w-full px-4 py-3 rounded-xl border-2 border-[#C4B5FD]/50 text-[#3D1F5C] font-nunito text-sm placeholder:text-[#6B5A94] focus:outline-none focus:border-[#8B51D6] transition-colors"
             />
           </div>
 
@@ -155,7 +155,7 @@ function LoginForm() {
 
           <p className="text-center font-nunito text-sm text-[#6B5A94]">
             Don&apos;t have an account?{' '}
-            <Link href="/register" className="text-[#9B6FD4] font-semibold hover:text-[#F472B6] transition-colors">
+            <Link href="/register" className="text-[#8B51D6] font-semibold hover:text-[#DC186D] transition-colors">
               Create one free
             </Link>
           </p>

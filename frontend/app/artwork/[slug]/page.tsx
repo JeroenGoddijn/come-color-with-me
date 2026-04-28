@@ -81,7 +81,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
         {/* Back link */}
         <Link
           href={isPremium ? '/shop' : '/coloring-pages'}
-          className="inline-flex items-center gap-1.5 text-sm font-nunito font-semibold text-[#9B6FD4] hover:text-[#7c56b0] mb-8 transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm font-nunito font-semibold text-[#8B51D6] hover:text-[#7c56b0] mb-8 transition-colors"
         >
           ← {isPremium ? 'Back to Shop' : 'Back to Coloring Pages'}
         </Link>

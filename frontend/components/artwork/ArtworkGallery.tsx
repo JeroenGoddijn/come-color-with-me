@@ -56,7 +56,7 @@ export function ArtworkGallery({ images, title, slug }: Props) {
               aria-label={`View ${img.label}`}
               className={`relative flex-1 aspect-[4/3] rounded-[12px] overflow-hidden border-2 transition-all duration-150 ${
                 i === active
-                  ? 'border-[#9B6FD4] shadow-[0_0_0_3px_rgba(155,111,212,0.2)]'
+                  ? 'border-[#8B51D6] shadow-[0_0_0_3px_rgba(155,111,212,0.2)]'
                   : 'border-transparent opacity-60 hover:opacity-90'
               }`}
             >

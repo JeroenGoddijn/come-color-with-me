@@ -41,7 +41,7 @@ function SignedOut() {
   return (
     <main className="min-h-screen bg-[#FFF6F9] flex flex-col items-center justify-center text-center px-4 py-20">
       <p className="text-6xl mb-6" aria-hidden="true">🎨</p>
-      <h1 className="font-fredoka font-bold text-3xl text-[#9B6FD4] mb-3">
+      <h1 className="font-fredoka font-bold text-3xl text-[#8B51D6] mb-3">
         My Account
       </h1>
       <p className="font-nunito text-[#6B5A94] max-w-sm mb-8 leading-relaxed text-[1rem]">
@@ -50,13 +50,13 @@ function SignedOut() {
       <div className="flex gap-4 flex-wrap justify-center">
         <Link
           href="/login"
-          className="px-8 py-3 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors shadow-sm"
+          className="px-8 py-3 rounded-[32px] bg-[#8B51D6] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors shadow-sm"
         >
           Log In
         </Link>
         <Link
           href="/register"
-          className="px-8 py-3 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#9B6FD4] font-nunito font-bold text-sm transition-colors"
+          className="px-8 py-3 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#8B51D6] font-nunito font-bold text-sm transition-colors"
         >
           Create Account
         </Link>
@@ -70,7 +70,7 @@ function SignedOut() {
 function Loading() {
   return (
     <main className="min-h-screen bg-[#FFF6F9] flex items-center justify-center">
-      <div className="w-9 h-9 border-4 border-[#C4B5FD] border-t-[#9B6FD4] rounded-full animate-spin" />
+      <div className="w-9 h-9 border-4 border-[#C4B5FD] border-t-[#8B51D6] rounded-full animate-spin" />
     </main>
   )
 }
@@ -151,7 +151,7 @@ function DownloadHistory() {
 
       {loading ? (
         <div className="flex justify-center py-10">
-          <div className="w-7 h-7 border-4 border-[#C4B5FD] border-t-[#9B6FD4] rounded-full animate-spin" />
+          <div className="w-7 h-7 border-4 border-[#C4B5FD] border-t-[#8B51D6] rounded-full animate-spin" />
         </div>
       ) : downloads.length === 0 ? (
         <div className="text-center py-10">
@@ -165,7 +165,7 @@ function DownloadHistory() {
           </p>
           <Link
             href="/coloring-pages"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[32px] bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[32px] bg-[#8B51D6] hover:bg-[#7c56b0] text-white font-nunito font-bold text-sm transition-colors"
           >
             Browse Free Coloring Pages
           </Link>
@@ -204,7 +204,7 @@ function DownloadHistory() {
                   type="button"
                   disabled={downloading.has(d.id)}
                   onClick={() => handleRedownload(d)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#9B6FD4] hover:bg-[#7c56b0] text-white font-nunito font-bold text-xs transition-colors disabled:opacity-50 disabled:cursor-wait"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#8B51D6] hover:bg-[#7c56b0] text-white font-nunito font-bold text-xs transition-colors disabled:opacity-50 disabled:cursor-wait"
                 >
                   {downloading.has(d.id)
                     ? <span className="w-3 h-3 border-2 border-white/40 border-t-white rounded-full animate-spin inline-block" />
@@ -213,7 +213,7 @@ function DownloadHistory() {
                 </button>
                 <Link
                   href={`/artwork/${d.artwork_slug}`}
-                  className="font-nunito font-bold text-xs text-[#9B6FD4] hover:text-[#7c56b0] transition-colors whitespace-nowrap"
+                  className="font-nunito font-bold text-xs text-[#8B51D6] hover:text-[#7c56b0] transition-colors whitespace-nowrap"
                 >
                   View →
                 </Link>
@@ -251,7 +251,7 @@ function OrderHistory() {
         </p>
         <Link
           href="/shop"
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#9B6FD4] font-nunito font-bold text-sm transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#8B51D6] font-nunito font-bold text-sm transition-colors"
         >
           Browse Art Prints
         </Link>
@@ -288,7 +288,7 @@ function OnboardingGuide() {
   ]
 
   return (
-    <div className="bg-gradient-to-br from-[#9B6FD4]/5 to-[#F472B6]/5 rounded-[20px] p-8 border border-[#C4B5FD]/20">
+    <div className="bg-gradient-to-br from-[#8B51D6]/5 to-[#DC186D]/5 rounded-[20px] p-8 border border-[#C4B5FD]/20">
       <h2 className="font-fredoka font-bold text-xl text-[#3D1F5C] mb-1">
         Get started
       </h2>
@@ -300,7 +300,7 @@ function OnboardingGuide() {
           <Link
             key={s.href}
             href={s.href}
-            className="group bg-white rounded-[16px] p-5 border border-[#C4B5FD]/20 shadow-sm hover:shadow-md hover:border-[#9B6FD4]/30 transition-all flex flex-col gap-3"
+            className="group bg-white rounded-[16px] p-5 border border-[#C4B5FD]/20 shadow-sm hover:shadow-md hover:border-[#8B51D6]/30 transition-all flex flex-col gap-3"
           >
             <span className="text-3xl">{s.icon}</span>
             <div>
@@ -311,7 +311,7 @@ function OnboardingGuide() {
                 {s.body}
               </p>
             </div>
-            <span className="font-nunito font-bold text-xs text-[#9B6FD4] group-hover:text-[#F472B6] transition-colors mt-auto">
+            <span className="font-nunito font-bold text-xs text-[#8B51D6] group-hover:text-[#DC186D] transition-colors mt-auto">
               {s.cta} →
             </span>
           </Link>
@@ -358,7 +358,7 @@ function Dashboard({
     <main className="min-h-screen bg-[#FFF6F9]">
 
       {/* Page header */}
-      <section className="bg-gradient-to-br from-[#9B6FD4]/10 to-[#F472B6]/8 border-b border-[#C4B5FD]/20 py-12 px-4">
+      <section className="bg-gradient-to-br from-[#8B51D6]/10 to-[#DC186D]/8 border-b border-[#C4B5FD]/20 py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <p className="font-nunito text-[#6B5A94] text-sm mb-1">Welcome back,</p>
           <h1 className="font-fredoka font-bold text-[#3D1F5C] text-3xl md:text-4xl mb-1">
@@ -413,7 +413,7 @@ function Dashboard({
           <button
             type="button"
             onClick={onSignOut}
-            className="px-5 py-2 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#9B6FD4] font-nunito font-bold text-sm transition-colors"
+            className="px-5 py-2 rounded-[32px] border-2 border-[#C4B5FD] hover:bg-[#C4B5FD]/10 text-[#8B51D6] font-nunito font-bold text-sm transition-colors"
           >
             Sign Out
           </button>

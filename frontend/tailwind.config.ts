@@ -8,8 +8,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        purple: '#9B6FD4',
-        pink: '#F472B6',
+        purple: '#8B51D6',
+        pink: '#DC186D',
         lavender: '#C4B5FD',
         mint: '#6EE7B7',
         peach: '#FDBA74',
